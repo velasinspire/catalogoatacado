@@ -14,20 +14,8 @@ const cardQtys = {};
 let currentPurchaseType = 'inspire'; // padrão global (carrinho)
 let modalPurchaseType   = null;      // seleção no modal
 
-const PURCHASE_RULES = {
-  inspire: {
-    label:          'Inspire',
-    orderMin:       1000,
-    productMinQty:  null,   // usa o minQty de cada produto
-    fragMinQty:     null,   // usa o fragranceMinQty de cada produto
-  },
-  whitelabel: {
-    label:          'White Label',
-    orderMin:       2000,
-    productMinQty:  50,
-    fragMinQty:     10,
-  }
-};
+// Preenchido dinamicamente a partir de data/config.json (purchaseRules)
+let PURCHASE_RULES = {};
 
 // ——— DEFINIR TIPO DE COMPRA (carrinho) ———
 function setPurchaseType(type) {
@@ -40,9 +28,9 @@ function setPurchaseType(type) {
 
   // Atualizar texto de regra
   const rules = PURCHASE_RULES[type];
-  const ruleText = type === 'inspire'
-    ? `Pedido mínimo R$ ${rules.orderMin.toLocaleString('pt-BR')},00 · Mín. 3 un./fragrância`
-    : `Pedido mínimo R$ ${rules.orderMin.toLocaleString('pt-BR')},00 · Mín. 50 un./produto · 10 un./fragrância`;
+  const ruleText = rules.productMinQty
+    ? `Pedido mínimo R$ ${rules.orderMin.toLocaleString('pt-BR')},00 · Mín. ${rules.productMinQty} un./produto · ${rules.fragMinQty} un./fragrância`
+    : `Pedido mínimo R$ ${rules.orderMin.toLocaleString('pt-BR')},00 · Mín. conforme cada produto`;
   document.getElementById('cpt-rule-text').textContent = ruleText;
 
   // Atualizar nota do rodapé do carrinho
@@ -140,7 +128,8 @@ Promise.all([
   .then(([config, data]) => {
     WHATSAPP_NUMBER = config.whatsappNumber;
     IMAGE_BASE_PATH = config.imageBasePath;
-    ORDER_MIN_VALUE = config.orderMinValue;
+    PURCHASE_RULES  = config.purchaseRules;
+    ORDER_MIN_VALUE = PURCHASE_RULES.inspire.orderMin;
 
     if (config.heroDesc) {
       const el = document.getElementById('hero-desc');
