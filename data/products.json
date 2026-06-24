@@ -49,31 +49,7 @@
       "Sweet Hugs"
     ]
   },
-{
-    "id": 30,
-    "name": "COLOCAR OUTRO PROD DOPAMINA",
-    "detail": "60ml · Frasco de vidro · Válvula luxo",
-    "image": "Dopamina Spray.jpg",
-    "minQty": 10,
-    "hasFragrance": true,
-    "fragranceMinQty": 3,
-    "isKit": false,
-    "tag": null,
-    "priceTiers": [
-      { "label": "10 a 29 un.", "min": 10, "max": 29,  "price": 29.80 },
-      { "label": "30 a 99 un.", "min": 30, "max": 99,  "price": 28.50 },
-      { "label": "100+ un.",    "min": 100, "max": null, "price": 25.30 }
-    ],
-    "extras": [],
-    "fragrances": [
-      "Berry & Cream",
-      "Lemonberry Twist",
-      "Moo Moo Magic",
-      "Sunny Mood",
-      "Sweet But Sour",
-      "Sweet Hugs"
-    ]
-  },
+
   {
     "id": 3,
     "name": "Giardino - Saquinho de algodão + vela + fósforo",
