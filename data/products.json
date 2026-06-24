@@ -283,28 +283,6 @@
     ]
   },
   {
-    "id": 13,
-    "name": "Sweet",
-    "detail": "Pavio de madeira · 330gr · Queima: 60 a 72h · A 14cm × D 9cm",
-    "image": "Vela Sweet.jpg",
-    "minQty": 10,
-    "hasFragrance": true,
-    "fragranceMinQty": 3,
-    "isKit": false,
-    "tag": null,
-    "priceTiers": [
-      { "label": "10 a 29 un.", "min": 10, "max": 29,  "price": 96.20 },
-      { "label": "30 a 99 un.", "min": 30, "max": 99,  "price": 95.50 },
-      { "label": "100+ un.",    "min": 100, "max": null, "price": 92.90 }
-    ],
-    "extras": [],
-    "fragrances": [
-      "Gengibre + Laranja",
-      "Baunilha + Lavanda",
-      "Jasmin + Patchouli"
-    ]
-  },
-  {
     "id": 14,
     "name": "Barra Aromática",
     "detail": "45gr · 12 quadrados com perfumação de 5 a 6h cada · Utilização: rechaud ou difusor elétrico · 6 × 13 × 1,5cm",
@@ -441,7 +419,7 @@
     "id": 20,
     "name": "Mini Vela 40gr",
     "detail": "Pavio de algodão · 40gr · Queima: 8 a 12h · A 6cm × D 4,5cm",
-    "image": "Mini vela 40gr.jpg",
+    "image": "Mini vela 40gr nova.jpg",
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
@@ -514,7 +492,7 @@
     "id": 23,
     "name": "Renovador de Lençóis",
     "detail": "500ml · Frasco PET · Válvula branca · A 20cm × D 7cm",
-    "image": "Renovador de Lençóis.jpg",
+    "image": "Agua lencol.jpeg",
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
@@ -536,15 +514,21 @@
     "detail": "Mínimo de 10 por modelo escolhido · Modelos: Você é Especial, Confie no Processo, Com Amor, Pra Sempre, Feliz Aniversário",
     "image": "Cartão abre e fecha.jpg",
     "minQty": 10,
-    "hasFragrance": false,
-    "fragranceMinQty": null,
+    "hasFragrance": true,
+    "fragranceMinQty": 10,
     "isKit": false,
     "tag": null,
     "priceTiers": [
       { "label": "Acima de 10 un.", "min": 10, "max": null, "price": 3.90 }
     ],
     "extras": [],
-    "fragrances": []
+    "fragrances": [
+      "Sol - confie no processo", "Buquê florido - você é especial", 
+      "Llemniscata - para sempre!", "Flores e borboleta - feliz aniversário",
+      "Espada de São Jorge - com amor", "Xadrez verde claro e laço",
+      "Outonal", "Flor amarela - obrigada por me inspirar", 
+      "Bicicleta com cestas de flores", "Spitz Alemão"
+    ]
   },
   {
     "id": 25,
@@ -609,22 +593,7 @@
     ],
     "extras": [],
     "fragrances": []
-  },
-  {
-    "id": 29,
-    "name": "Rechaud para Wax Melts",
-    "detail": "Produzido em cerâmica na cor areia · Acompanha suporte para vela rechaud · A 10cm × L 8,5cm × C 6cm",
-    "image": "rechaud-wax.jpeg",
-    "minQty": 5,
-    "hasFragrance": false,
-    "fragranceMinQty": null,
-    "isKit": false,
-    "tag": "🏠 Decor",
-    "priceTiers": [
-      { "label": "Acima de 5 un.", "min": 5, "max": null, "price": 59.90 }
-    ],
-    "extras": [],
-    "fragrances": []
   }
+ 
 
 ]
