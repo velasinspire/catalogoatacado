@@ -188,7 +188,7 @@
           <p class="qty-derived-hint" id="qty-derived-hint" style="display:none">Controlada pela soma das fragrâncias abaixo</p>
           <div class="qty-control">
             <button class="qty-btn" id="modal-qty-dec">−</button>
-            <span class="qty-value" id="modal-qty-val">1</span>
+            <input type="number" class="qty-value qty-input" id="modal-qty-val" value="1" min="1" inputmode="numeric" onfocus="this.select()" onkeydown="if(event.key==='Enter') this.blur()" />
             <button class="qty-btn" id="modal-qty-inc">+</button>
           </div>
           <span class="modal-active-price" id="modal-active-price"></span>

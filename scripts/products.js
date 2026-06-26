@@ -167,16 +167,20 @@ function updateTotalQtyDisplay(product) {
   const qtyDec       = document.getElementById('modal-qty-dec');
   const qtyInc       = document.getElementById('modal-qty-inc');
 
-  qtyVal.textContent = modalTotalQty;
+  qtyVal.value = modalTotalQty;
 
   if (hasFragrance) {
     qtyDec.onclick = () => decrementLastFragrance(product);
     qtyInc.style.display = 'none';
     qtyDec.title = 'Remove uma unidade da última fragrância adicionada';
+    qtyVal.disabled = true;
+    qtyVal.onchange = null;
   } else {
     qtyInc.style.display = '';
     qtyDec.onclick = () => changeModalTotalQtyDirect(product, -1);
     qtyInc.onclick = () => changeModalTotalQtyDirect(product,  1);
+    qtyVal.disabled = false;
+    qtyVal.onchange = () => setModalTotalQtyFromInput(product);
   }
 }
 
@@ -186,7 +190,22 @@ function changeModalTotalQtyDirect(product, delta) {
   const newTotal = modalTotalQty + delta;
   if (newTotal < minQty) return;
   modalTotalQty = newTotal;
-  document.getElementById('modal-qty-val').textContent = modalTotalQty;
+  document.getElementById('modal-qty-val').value = modalTotalQty;
+  renderModalTiers(product, modalTotalQty);
+  updateModalActivePrice(product);
+  updateAddModalButton(product);
+}
+
+function setModalTotalQtyFromInput(product) {
+  const qtyVal = document.getElementById('modal-qty-val');
+  const rules  = PURCHASE_RULES[currentPurchaseType] || PURCHASE_RULES.inspire;
+  const minQty = rules.productMinQty || product.minQty;
+
+  let value = parseInt(qtyVal.value, 10);
+  if (isNaN(value) || value < minQty) value = minQty;
+
+  modalTotalQty = value;
+  qtyVal.value  = modalTotalQty;
   renderModalTiers(product, modalTotalQty);
   updateModalActivePrice(product);
   updateAddModalButton(product);
@@ -236,7 +255,10 @@ function renderModalFragrances(product) {
         <div class="fragrance-qty-ctrl">
           <button class="frag-qty-btn" onclick="changeFragranceQty('${f}', -1)"
                   ${!canDec ? 'disabled' : ''}>−</button>
-          <span class="frag-qty-val ${qty > 0 ? 'frag-qty-val--set' : ''}">${qty}</span>
+          <input type="number" class="frag-qty-val frag-qty-input ${qty > 0 ? 'frag-qty-val--set' : ''}"
+                 value="${qty}" min="0" inputmode="numeric"
+                 onfocus="this.select()" onkeydown="if(event.key==='Enter') this.blur()"
+                 onchange="setFragranceQtyFromInput('${f}', this.value)" />
           <button class="frag-qty-btn" onclick="changeFragranceQty('${f}', 1)">+</button>
         </div>
         ${belowMin ? `<span class="frag-warning">⚠ mín. ${fragMin} un.</span>` : ''}
@@ -287,7 +309,29 @@ function changeFragranceQty(fragrance, delta) {
   }
 
   modalTotalQty = modalAllocated();
-  document.getElementById('modal-qty-val').textContent = modalTotalQty;
+  document.getElementById('modal-qty-val').value = modalTotalQty;
+
+  renderModalTiers(p, modalTotalQty);
+  renderModalFragrances(p);
+  updateModalActivePrice(p);
+  updateAddModalButton(p);
+}
+
+function setFragranceQtyFromInput(fragrance, value) {
+  const p = products.find(x => x.id === modalProductId);
+  if (!p) return;
+
+  let newQty = parseInt(value, 10);
+  if (isNaN(newQty) || newQty < 0) newQty = 0;
+
+  if (newQty === 0) {
+    delete modalFragrances[fragrance];
+  } else {
+    modalFragrances[fragrance] = newQty;
+  }
+
+  modalTotalQty = modalAllocated();
+  document.getElementById('modal-qty-val').value = modalTotalQty;
 
   renderModalTiers(p, modalTotalQty);
   renderModalFragrances(p);

@@ -297,6 +297,11 @@ img { max-width: 100%; display: block; }
 }
 .cart-item-qty-btn:hover { background: var(--linen-dark); }
 .cart-item-qty-val { font-weight: 600; font-size: 14px; min-width: 22px; text-align: center; }
+.cart-item-qty-input {
+  border: none; background: transparent; font-family: inherit; padding: 0; -moz-appearance: textfield;
+}
+.cart-item-qty-input::-webkit-outer-spin-button, .cart-item-qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.cart-item-qty-input:focus { outline: none; background: var(--linen); border-radius: 4px; }
 .cart-item-price { font-weight: 700; font-size: 14px; color: var(--ink); }
 .badge-tier {
   display: inline-flex; align-items: center; gap: 4px;
@@ -447,6 +452,12 @@ img { max-width: 100%; display: block; }
 }
 .qty-btn:hover { background: var(--linen); }
 .qty-value { font-size: 15px; font-weight: 600; min-width: 36px; text-align: center; color: var(--ink); }
+.qty-input {
+  border: none; background: transparent; font-family: inherit; padding: 0; -moz-appearance: textfield;
+}
+.qty-input::-webkit-outer-spin-button, .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.qty-input:focus { outline: none; background: var(--linen); border-radius: 6px; }
+.qty-input:disabled { cursor: default; }
 
 .modal-active-price {
   font-size: 13px; color: var(--sage-dark); font-weight: 500;
@@ -616,6 +627,11 @@ img { max-width: 100%; display: block; }
   color: var(--sage-dark);
   font-weight: 700;
 }
+.frag-qty-input {
+  border: none; background: transparent; font-family: inherit; padding: 0; -moz-appearance: textfield;
+}
+.frag-qty-input::-webkit-outer-spin-button, .frag-qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.frag-qty-input:focus { outline: none; background: var(--linen); border-radius: 6px; }
 
 /* Aviso de mínimo por fragrância */
 .frag-warning {

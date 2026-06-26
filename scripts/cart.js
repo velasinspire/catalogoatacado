@@ -47,6 +47,21 @@ function changeCartQty(key, delta) {
   renderCart();
 }
 
+function setCartQtyFromInput(key, value) {
+  if (!cart[key]) return;
+  const product = cart[key].product;
+  let newQty = parseInt(value, 10);
+
+  if (isNaN(newQty) || newQty <= 0) {
+    if (confirm(`Deseja remover "${product.name}" do pedido?`)) {
+      delete cart[key];
+    }
+  } else {
+    cart[key].quantity = newQty;
+  }
+  renderCart();
+}
+
 function removeFromCart(key) {
   delete cart[key];
   renderCart();
@@ -184,7 +199,9 @@ function renderCart() {
       <div class="cart-item-footer">
         <div class="cart-item-qty-ctrl">
           <button class="cart-item-qty-btn" onclick="changeCartQty('${key}', -1)">−</button>
-          <span class="cart-item-qty-val">${quantity}</span>
+          <input type="number" class="cart-item-qty-val cart-item-qty-input" value="${quantity}" min="1" inputmode="numeric"
+                 onfocus="this.select()" onkeydown="if(event.key==='Enter') this.blur()"
+                 onchange="setCartQtyFromInput('${key}', this.value)" />
           <button class="cart-item-qty-btn" onclick="changeCartQty('${key}', 1)">+</button>
         </div>
         <span class="cart-item-price">${formatCurrency(subtotal)}</span>
