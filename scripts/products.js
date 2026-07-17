@@ -10,6 +10,12 @@ function getActiveTier(product, qty) {
   return product.priceTiers[0];
 }
 
+function getProductImages(product) {
+  return Array.isArray(product.images) && product.images.length
+    ? product.images
+    : [product.image];
+}
+
 function renderProducts() {
   const grid = document.getElementById('products-grid');
   grid.innerHTML = '';
@@ -20,7 +26,7 @@ function renderProducts() {
     card.style.animationDelay = `${i * 0.05}s`;
     card.onclick = () => openProductModal(p.id);
 
-    const imgSrc    = IMAGE_BASE_PATH + p.image;
+    const imgSrc    = IMAGE_BASE_PATH + getProductImages(p)[0];
     const tiersHTML = p.priceTiers.map(t => `
       <div class="card-tier">
         <span>${t.label}</span>
@@ -62,6 +68,64 @@ function renderProducts() {
 let modalProductId  = null;
 let modalTotalQty   = 0;
 let modalFragrances = {};
+let modalGalleryImages = [];
+let modalGalleryIndex  = 0;
+let modalGalleryTouchX = null;
+
+function renderModalGallery(product) {
+  modalGalleryImages = getProductImages(product).map(image => IMAGE_BASE_PATH + image);
+  modalGalleryIndex = 0;
+
+  const track = document.getElementById('modal-gallery-track');
+  track.innerHTML = modalGalleryImages.map((src, index) => `
+    <button class="modal-gallery-slide" type="button"
+            onclick="openImgModal(this.querySelector('img').src, this.querySelector('img').alt)"
+            aria-label="Ampliar foto ${index + 1} de ${modalGalleryImages.length}">
+      <img src="${src}" alt="${product.name} — foto ${index + 1}" loading="${index === 0 ? 'eager' : 'lazy'}"
+           onerror="this.src='https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=600&q=80'" />
+    </button>
+  `).join('');
+
+  document.getElementById('modal-gallery-dots').innerHTML = modalGalleryImages.map((_, index) => `
+    <button class="modal-gallery-dot" type="button" onclick="goToModalGalleryImage(${index})"
+            aria-label="Ir para foto ${index + 1}"></button>
+  `).join('');
+
+  const gallery = document.getElementById('modal-gallery');
+  gallery.classList.toggle('modal-img-wrap--single', modalGalleryImages.length === 1);
+  updateModalGallery();
+}
+
+function updateModalGallery() {
+  document.getElementById('modal-gallery-track').style.transform =
+    `translateX(-${modalGalleryIndex * 100}%)`;
+
+  document.querySelectorAll('.modal-gallery-dot').forEach((dot, index) => {
+    dot.classList.toggle('active', index === modalGalleryIndex);
+    dot.setAttribute('aria-current', index === modalGalleryIndex ? 'true' : 'false');
+  });
+}
+
+function goToModalGalleryImage(index) {
+  if (!modalGalleryImages.length) return;
+  modalGalleryIndex = (index + modalGalleryImages.length) % modalGalleryImages.length;
+  updateModalGallery();
+}
+
+function changeModalGalleryImage(direction) {
+  goToModalGalleryImage(modalGalleryIndex + direction);
+}
+
+function handleModalGalleryTouchStart(event) {
+  modalGalleryTouchX = event.changedTouches[0].clientX;
+}
+
+function handleModalGalleryTouchEnd(event) {
+  if (modalGalleryTouchX === null || modalGalleryImages.length < 2) return;
+  const distance = event.changedTouches[0].clientX - modalGalleryTouchX;
+  modalGalleryTouchX = null;
+  if (Math.abs(distance) >= 45) changeModalGalleryImage(distance < 0 ? 1 : -1);
+}
 
 function modalAllocated() {
   return Object.values(modalFragrances).reduce((s, v) => s + v, 0);
@@ -77,12 +141,7 @@ function openProductModal(productId, highlightField) {
   modalPurchaseType = currentPurchaseType; // herda o tipo atual
   modalTotalQty   = p.hasFragrance && p.fragrances.length > 0 ? 0 : p.minQty;
 
-  const imgSrc = IMAGE_BASE_PATH + p.image;
-  document.getElementById('modal-img').src = imgSrc;
-  document.getElementById('modal-img').onerror = function () {
-    this.src = 'https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=600&q=80';
-  };
-  document.getElementById('modal-img').alt    = p.name;
+  renderModalGallery(p);
   document.getElementById('modal-tag').textContent    = p.tag || '';
   document.getElementById('modal-name').textContent   = p.name;
   document.getElementById('modal-detail').textContent = p.detail;

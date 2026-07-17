@@ -114,6 +114,22 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.modal-close')
     .addEventListener('click', () => closeProductModal());
 
+  document.getElementById('modal-gallery-prev')
+    .addEventListener('click', () => changeModalGalleryImage(-1));
+  document.getElementById('modal-gallery-next')
+    .addEventListener('click', () => changeModalGalleryImage(1));
+  document.getElementById('modal-gallery')
+    .addEventListener('touchstart', handleModalGalleryTouchStart, { passive: true });
+  document.getElementById('modal-gallery')
+    .addEventListener('touchend', handleModalGalleryTouchEnd, { passive: true });
+
+  document.addEventListener('keydown', event => {
+    if (!document.getElementById('product-modal-overlay').classList.contains('open')) return;
+    if (document.getElementById('img-modal').classList.contains('open')) return;
+    if (event.key === 'ArrowLeft') changeModalGalleryImage(-1);
+    if (event.key === 'ArrowRight') changeModalGalleryImage(1);
+  });
+
   document.getElementById('img-modal')
     .addEventListener('click', closeImgModal);
   document.querySelector('.img-modal-close')

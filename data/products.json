@@ -4,6 +4,15 @@
     "name": "Dopamina",
     "detail": "Pavio de algodão · 70gr · Queima: 15 a 20h",
     "image": "kit-dopamina.jpg",
+    "images": [
+      "kit-dopamina.jpg",
+      "Dopamina Sunny Mood.jpg",
+      "Dopamina Sweet But Sour.jpg",
+      "Dopamina Moo Moo Magic.jpg",
+      "Dopamina Lemonberry Twist.jpg",
+      "Dopamina Sweet Hugs.jpg",
+      "Dopamina Berry and Cream.jpg"
+    ],
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
@@ -29,6 +38,16 @@
     "name": "Dopamina Spray",
     "detail": "60ml · Frasco de vidro · Válvula luxo",
     "image": "Dopamina Spray.jpg",
+    "images": [
+      "Dopamina Spray.jpg",
+      "Dopamina Spray Moo Moo Magic 1.jpg",
+      "Dopamina Spray Berry and Cream.jpg",
+      "Dopamina Spray Lemonberry Twist.jpg",
+      "Dopamina Spray Moo Moo Magic 2.jpg",
+      "Dopamina Spray Sunny Mood.jpg",
+      "Dopamina Spray Sweet Hugs.jpg",
+      "Dopamina Spray Sweet But Sour.jpg"
+    ],
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
@@ -55,6 +74,16 @@
     "name": "Giardino - Saquinho de algodão + vela + fósforo",
     "detail": "Pavio de madeira · 180gr · Queima: 35 a 48h · A 8,5cm × D 8cm · Acompanha saquinho 100% algodão + fósforo",
     "image": "Giardino saquinho.jpg",
+    "images": [
+      "Giardino saquinho.jpg",
+      "Giardino Colecao 1.jpg",
+      "Giardino Colecao 2.jpg",
+      "Giardino Colecao 3.jpg",
+      "Giardino Colecao 4.jpg",
+      "Giardino Colecao 5.jpg",
+      "Giardino Colecao 6.jpg",
+      "Giardino Colecao 7.jpg"
+    ],
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
@@ -77,6 +106,14 @@
     "name": "Box Giardino - 3 mini velas 60 gr",
     "detail": "3 velas 60gr · Pavio de algodão · Queima: 8 a 12h cada · A 5,5cm × L 20cm × C 9,5cm · 1 vela de cada fragrância da coleção",
     "image": "kit Giardino.jpg",
+    "images": [
+      "kit Giardino.jpg",
+      "Box Giardino 1.jpg",
+      "Box Giardino 2.jpg",
+      "Box Giardino 3.jpg",
+      "Box Giardino 4.jpg",
+      "Box Giardino 5.jpg"
+    ],
     "minQty": 5,
     "hasFragrance": false,
     "fragranceMinQty": null,
@@ -569,6 +606,45 @@
     ],
     "extras": [],
     "fragrances": []
+  },
+  {
+    "id": 29,
+    "name": "Refil Home Spray · Coleção Nature · 1 Litro",
+    "detail": "Refil de 1 litro para reabastecer o frasco original do Home Spray Inspire · Fragrâncias de alta performance · Frasco plástico · ",
+    "image": "Refil Home Spray Nature 1 Litro.png",
+    "minQty": 10,
+    "hasFragrance": true,
+    "fragranceMinQty": 3,
+    "isKit": false,
+    "tag": "♻️ Refil",
+    "priceTiers": [
+      { "label": "Acima de 10 un.", "min": 10, "max": null, "price": 165.00 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Alecrim", "Baunilha", "Canela", "Chá Branco", "Flor de Figo",
+      "Flor de Cerejeira", "Lavanda", "Limão Siciliano", "Pêssego", "Verbena"
+    ]
+  },
+  {
+    "id": 30,
+    "name": "Refil 1 Litro · Difusor de Varetas",
+    "detail": "Refil aromatizador para renovar e manter a perfumação do ambiente · Embalagem PET âmbar de 1 litro · Acompanha jogo de varetas",
+    "image": "Refil Difusor de Varetas 1 Litro.jpeg",
+    "minQty": 10,
+    "hasFragrance": true,
+    "fragranceMinQty": 3,
+    "isKit": false,
+    "tag": "♻️ Refil",
+    "priceTiers": [
+      { "label": "Acima de 10 un.", "min": 10, "max": null, "price": 180.00 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Gengibre da Índia", "Pimenta Rosa", "Vinho", "Pitanga Preta",
+      "Limão Siciliano", "Flor de Cerejeira", "Flor de Figo", "Chá Branco",
+      "Canela", "Baunilha", "Alecrim"
+    ]
   }
  
 
