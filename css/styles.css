@@ -93,7 +93,8 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   overflow: visible;
 }
 .hero-since text {
-  fill: #C99758;
+  fill: var(--brand-gold);
+  color: var(--brand-gold);
   font-family: 'Jost', sans-serif;
   font-size: 17px;
   font-weight: 300;
