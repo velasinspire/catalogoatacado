@@ -33,43 +33,44 @@ function renderProducts() {
     const tiersHTML = p.priceTiers.map((t, tierIndex) => `
       <div class="card-tier${tierIndex === p.priceTiers.length - 1 && p.priceTiers.length > 1 ? ' card-tier--best' : ''}">
         <span>${t.label}</span>
-        <span class="card-tier-price">${formatCurrency(t.price)}${tierIndex === p.priceTiers.length - 1 && p.priceTiers.length > 1 ? '<small>Melhor preço</small>' : ''}</span>
+        <span class="card-tier-price">${formatCurrency(t.price)}</span>
       </div>
     `).join('');
 
     const fragranceNote = p.hasFragrance && p.fragrances.length > 0
-      ? `<span class="card-minqty"><span class="card-note-icon card-note-icon--leaf" aria-hidden="true"></span><span><strong>Fragrâncias</strong>${p.fragrances.length} opções · mín. ${p.fragranceMinQty} un. por opção</span></span>`
+      ? `<span class="card-minqty"><span class="card-note-icon card-note-icon--leaf" aria-hidden="true"></span><span><strong>Fragrâncias: ${p.fragrances.length} opções</strong><small>Mín. ${p.fragranceMinQty} un. por opção</small></span></span>`
       : '';
 
     card.innerHTML = `
-      <div class="card-image-wrap">
-        <img src="${imgSrc}" alt="${p.name}" loading="lazy"
-             onerror="this.src='https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=600&q=80'" />
-        ${p.tag ? `<span class="card-badge">${p.tag}</span>` : ''}
+      <div class="card-media">
+        <div class="card-image-wrap">
+          <img src="${imgSrc}" alt="${p.name}" loading="lazy"
+               onerror="this.src='https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=600&q=80'" />
+          ${p.tag ? `<span class="card-badge">${p.tag}</span>` : ''}
+        </div>
+        <div class="card-notes">
+          <span class="card-minqty"><span class="card-note-icon card-note-icon--box" aria-hidden="true"></span><span><strong>Mínimo: ${p.minQty} unidades</strong><small>Por produto</small></span></span>
+          ${fragranceNote}
+        </div>
       </div>
       <div class="card-body">
         <div class="card-info">
           <h3 class="card-name">${p.name}</h3>
           <div class="card-detail">${detailHTML}</div>
+          <div class="card-info-actions">
+            <button class="btn-card-details" type="button">Ver detalhes do produto</button>
+            ${productImages.length > 1 ? `<span class="card-photo-count">${productImages.length} fotos disponíveis</span>` : ''}
+          </div>
         </div>
         <div class="card-commerce">
           <span class="card-section-label">Preço por quantidade</span>
           <div class="card-tiers">${tiersHTML}</div>
-          <div class="card-notes">
-            <span class="card-minqty"><span class="card-note-icon card-note-icon--box" aria-hidden="true"></span><span><strong>Pedido mínimo</strong>${p.minQty} unidade${p.minQty > 1 ? 's' : ''} no total</span></span>
-            ${fragranceNote}
-          </div>
-        </div>
-        <div class="card-actions">
-          <span class="card-section-label">Monte seu pedido</span>
           <button class="btn-open-modal">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
               <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
             </svg>
             Adicionar ao pedido
           </button>
-          <button class="btn-card-details" type="button">Ver detalhes do produto</button>
-          ${productImages.length > 1 ? `<span class="card-photo-count">${productImages.length} fotos disponíveis</span>` : ''}
         </div>
       </div>
     `;
