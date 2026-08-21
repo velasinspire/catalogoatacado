@@ -38,5 +38,5 @@ function closeImgModal() {
 
 // ——— TECLADO ———
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeImgModal(); closeCart(); closeProductModal(); }
+  if (e.key === 'Escape') { closeImgModal(); closeCart(); closeProductModal(); closeProductDetails(); }
 });

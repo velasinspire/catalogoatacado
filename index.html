@@ -175,6 +175,36 @@
     <span class="fab-badge" id="fab-badge">0</span>
   </button>
 
+  <!-- MODAL EDITORIAL — DETALHES DO PRODUTO -->
+  <div class="details-modal-overlay" id="details-modal-overlay">
+    <article class="details-modal" role="dialog" aria-modal="true" aria-labelledby="details-modal-name">
+      <button class="details-modal-close" id="details-modal-close" type="button" aria-label="Fechar detalhes">✕</button>
+      <div class="details-modal-gallery">
+        <div class="details-modal-main-image">
+          <img id="details-modal-main-image" src="" alt="">
+        </div>
+        <div class="details-modal-thumbs" id="details-modal-thumbs"></div>
+      </div>
+      <div class="details-modal-content">
+        <span class="details-modal-tag" id="details-modal-tag"></span>
+        <h2 id="details-modal-name"></h2>
+        <div class="details-modal-summary" id="details-modal-summary"></div>
+        <div class="details-modal-section" id="details-modal-benefits" hidden></div>
+        <div class="details-modal-section" id="details-modal-usage" hidden></div>
+        <div class="details-modal-section" id="details-modal-care" hidden></div>
+        <div class="details-modal-tip" id="details-modal-tip" hidden></div>
+        <div class="details-modal-technical">
+          <h4>Características</h4>
+          <p id="details-modal-technical"></p>
+        </div>
+        <button class="details-modal-add" id="details-modal-add" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="15" height="15"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Adicionar ao pedido
+        </button>
+      </div>
+    </article>
+  </div>
+
   <!-- MODAL PRODUTO -->
   <div class="product-modal-overlay" id="product-modal-overlay">
     <div class="product-modal" id="product-modal">

@@ -7,6 +7,7 @@ let WHATSAPP_NUMBER = '';
 let IMAGE_BASE_PATH = '';
 let ORDER_MIN_VALUE = 0;
 let products = [];
+let productDetails = {};
 const cardQtys = {};
 
 // ——— TIPO DE COMPRA ———
@@ -111,6 +112,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('product-modal-overlay')
     .addEventListener('click', closeProductModal);
 
+  document.getElementById('details-modal-overlay')
+    .addEventListener('click', closeProductDetails);
+
+  document.getElementById('details-modal-close')
+    .addEventListener('click', () => closeProductDetails());
+
   document.querySelector('.modal-close')
     .addEventListener('click', () => closeProductModal());
 
@@ -140,12 +147,14 @@ document.addEventListener('DOMContentLoaded', () => {
 Promise.all([
   fetch('data/config.json').then(r => r.json()),
   fetch('data/products.json').then(r => r.json()),
+  fetch('data/product-details.json').then(r => r.json()),
 ])
-  .then(([config, data]) => {
+  .then(([config, data, details]) => {
     WHATSAPP_NUMBER = config.whatsappNumber;
     IMAGE_BASE_PATH = config.imageBasePath;
     PURCHASE_RULES  = config.purchaseRules;
     ORDER_MIN_VALUE = PURCHASE_RULES.inspire.orderMin;
+    productDetails = details;
 
     if (config.heroDesc) {
       const el = document.getElementById('hero-desc');

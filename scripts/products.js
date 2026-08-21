@@ -24,7 +24,6 @@ function renderProducts() {
     const card = document.createElement('div');
     card.className = 'product-card';
     card.style.animationDelay = `${i * 0.05}s`;
-    card.onclick = () => openProductModal(p.id);
 
     const productImages = getProductImages(p);
     const imgSrc = IMAGE_BASE_PATH + productImages[0];
@@ -43,7 +42,8 @@ function renderProducts() {
 
     card.innerHTML = `
       <div class="card-media">
-        <div class="card-image-wrap">
+        <div class="card-image-wrap" role="button" tabindex="0" aria-label="Ver detalhes de ${p.name}"
+             onclick="openProductDetails(${p.id})" onkeydown="if(event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openProductDetails(${p.id}); }">
           <img src="${imgSrc}" alt="${p.name}" loading="lazy"
                onerror="this.src='https://images.unsplash.com/photo-1602523961358-f9f03dd557db?w=600&q=80'" />
           ${p.tag ? `<span class="card-badge">${p.tag}</span>` : ''}
@@ -58,14 +58,14 @@ function renderProducts() {
           <h3 class="card-name">${p.name}</h3>
           <div class="card-detail">${detailHTML}</div>
           <div class="card-info-actions">
-            <button class="btn-card-details" type="button">Ver detalhes do produto</button>
+            <button class="btn-card-details" type="button" onclick="openProductDetails(${p.id})">Ver detalhes do produto</button>
             ${productImages.length > 1 ? `<span class="card-photo-count">${productImages.length} fotos disponíveis</span>` : ''}
           </div>
         </div>
         <div class="card-commerce">
           <span class="card-section-label">Preço por quantidade</span>
           <div class="card-tiers">${tiersHTML}</div>
-          <button class="btn-open-modal">
+          <button class="btn-open-modal" onclick="openProductModal(${p.id})">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
               <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
             </svg>
@@ -76,6 +76,82 @@ function renderProducts() {
     `;
     grid.appendChild(card);
   });
+}
+
+// ================================================
+// MODAL EDITORIAL — DETALHES DO PRODUTO
+// ================================================
+function openProductDetails(productId) {
+  const product = products.find(item => item.id === productId);
+  if (!product) return;
+
+  const content = productDetails[String(productId)] || {};
+  const images = getProductImages(product);
+  const description = Array.isArray(content.description) && content.description.length
+    ? content.description
+    : [product.detail];
+
+  document.getElementById('details-modal-tag').textContent = product.tag || 'Inspire';
+  document.getElementById('details-modal-name').textContent = content.title || product.name;
+  document.getElementById('details-modal-summary').innerHTML = description
+    .map(paragraph => `<p>${paragraph}</p>`).join('');
+  document.getElementById('details-modal-technical').textContent = product.detail;
+
+  const benefits = document.getElementById('details-modal-benefits');
+  benefits.innerHTML = content.benefits?.length
+    ? `<h4>${content.benefitsTitle || 'Benefícios'}</h4><ul>${content.benefits.map(item => `<li>${item}</li>`).join('')}</ul>`
+    : '';
+  benefits.hidden = !content.benefits?.length;
+
+  const usage = document.getElementById('details-modal-usage');
+  const usageContent = Array.isArray(content.usage)
+    ? content.usage.map(item => `<p class="details-usage-item"><strong>${item.label}</strong><span>${item.text}</span></p>`).join('')
+    : `<p>${content.usage || ''}</p>`;
+  usage.innerHTML = content.usage ? `<h4>Modo de uso</h4>${usageContent}` : '';
+  usage.hidden = !content.usage;
+
+  const care = document.getElementById('details-modal-care');
+  care.innerHTML = content.care?.length
+    ? `<h4>Cuidados</h4><ul>${content.care.map(item => `<li>${item}</li>`).join('')}</ul>`
+    : '';
+  care.hidden = !content.care?.length;
+
+  const tip = document.getElementById('details-modal-tip');
+  tip.innerHTML = content.tip ? `<strong>Dica Inspire</strong><span>${content.tip}</span>` : '';
+  tip.hidden = !content.tip;
+
+  const mainImage = document.getElementById('details-modal-main-image');
+  mainImage.src = IMAGE_BASE_PATH + images[0];
+  mainImage.alt = product.name;
+  document.getElementById('details-modal-thumbs').innerHTML = images.length > 1
+    ? images.map((image, index) => `
+        <button type="button" class="details-thumb${index === 0 ? ' active' : ''}"
+                onclick="selectDetailsImage(this, '${IMAGE_BASE_PATH + image}', '${product.name}')">
+          <img src="${IMAGE_BASE_PATH + image}" alt="${product.name} — foto ${index + 1}">
+        </button>`).join('')
+    : '';
+
+  const addButton = document.getElementById('details-modal-add');
+  addButton.onclick = () => {
+    closeProductDetails();
+    openProductModal(product.id);
+  };
+
+  document.getElementById('details-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function selectDetailsImage(button, src, alt) {
+  document.getElementById('details-modal-main-image').src = src;
+  document.getElementById('details-modal-main-image').alt = alt;
+  document.querySelectorAll('.details-thumb').forEach(thumb => thumb.classList.remove('active'));
+  button.classList.add('active');
+}
+
+function closeProductDetails(event) {
+  if (event && event.target !== document.getElementById('details-modal-overlay')) return;
+  document.getElementById('details-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 // ================================================
