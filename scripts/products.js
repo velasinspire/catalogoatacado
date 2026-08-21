@@ -26,16 +26,19 @@ function renderProducts() {
     card.style.animationDelay = `${i * 0.05}s`;
     card.onclick = () => openProductModal(p.id);
 
-    const imgSrc    = IMAGE_BASE_PATH + getProductImages(p)[0];
-    const tiersHTML = p.priceTiers.map(t => `
-      <div class="card-tier">
+    const productImages = getProductImages(p);
+    const imgSrc = IMAGE_BASE_PATH + productImages[0];
+    const detailHTML = p.detail.split('·').map(item => item.trim()).filter(Boolean)
+      .map(item => `<span>${item}</span>`).join('');
+    const tiersHTML = p.priceTiers.map((t, tierIndex) => `
+      <div class="card-tier${tierIndex === p.priceTiers.length - 1 && p.priceTiers.length > 1 ? ' card-tier--best' : ''}">
         <span>${t.label}</span>
-        <span class="card-tier-price">${formatCurrency(t.price)}</span>
+        <span class="card-tier-price">${formatCurrency(t.price)}${tierIndex === p.priceTiers.length - 1 && p.priceTiers.length > 1 ? '<small>Melhor preço</small>' : ''}</span>
       </div>
     `).join('');
 
     const fragranceNote = p.hasFragrance && p.fragrances.length > 0
-      ? `<span class="card-minqty">🌿 ${p.fragrances.length} opções · mín. ${p.fragranceMinQty} un./fragrância</span>`
+      ? `<span class="card-minqty"><span class="card-note-icon card-note-icon--leaf" aria-hidden="true"></span><span><strong>Fragrâncias</strong>${p.fragrances.length} opções · mín. ${p.fragranceMinQty} un. por opção</span></span>`
       : '';
 
     card.innerHTML = `
@@ -45,17 +48,29 @@ function renderProducts() {
         ${p.tag ? `<span class="card-badge">${p.tag}</span>` : ''}
       </div>
       <div class="card-body">
-        <h3 class="card-name">${p.name}</h3>
-        <p class="card-detail">${p.detail}</p>
-        <div class="card-tiers">${tiersHTML}</div>
-        <span class="card-minqty">📦 Mín. ${p.minQty} unidade${p.minQty > 1 ? 's' : ''} no total</span>
-        ${fragranceNote}
-        <button class="btn-open-modal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
-            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-          </svg>
-          Adicionar ao pedido
-        </button>
+        <div class="card-info">
+          <h3 class="card-name">${p.name}</h3>
+          <div class="card-detail">${detailHTML}</div>
+        </div>
+        <div class="card-commerce">
+          <span class="card-section-label">Preço por quantidade</span>
+          <div class="card-tiers">${tiersHTML}</div>
+          <div class="card-notes">
+            <span class="card-minqty"><span class="card-note-icon card-note-icon--box" aria-hidden="true"></span><span><strong>Pedido mínimo</strong>${p.minQty} unidade${p.minQty > 1 ? 's' : ''} no total</span></span>
+            ${fragranceNote}
+          </div>
+        </div>
+        <div class="card-actions">
+          <span class="card-section-label">Monte seu pedido</span>
+          <button class="btn-open-modal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
+              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+            </svg>
+            Adicionar ao pedido
+          </button>
+          <button class="btn-card-details" type="button">Ver detalhes do produto</button>
+          ${productImages.length > 1 ? `<span class="card-photo-count">${productImages.length} fotos disponíveis</span>` : ''}
+        </div>
       </div>
     `;
     grid.appendChild(card);

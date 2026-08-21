@@ -155,7 +155,15 @@ Promise.all([
     const minEl = document.getElementById('order-progress-min');
     if (minEl) minEl.textContent = `Mín: ${formatCurrency(ORDER_MIN_VALUE)}`;
 
-    products = data;
+    const requestedOrder = [
+      9, 11, 12, 23, 10, 30, 29, 16, 15, 3, 1, 2,
+      14, 19, 22, 21, 20, 18, 17, 6, 7, 8, 25, 26, 27, 28, 24
+    ];
+
+    const orderIndex = new Map(requestedOrder.map((id, index) => [id, index]));
+    products = data
+      .filter(product => ![4, 5].includes(product.id))
+      .sort((a, b) => (orderIndex.get(a.id) ?? 999) - (orderIndex.get(b.id) ?? 999));
     renderProducts();
     renderCart();
 
