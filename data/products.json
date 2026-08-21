@@ -276,7 +276,7 @@
   {
     "id": 12,
     "name": "Difusor 250ml",
-    "detail": "Frasco de vidro · Válvula dourada · 250ml · A 15,5cm × D 4,5cm",
+    "detail": "250ml · Frasco de vidro · Acompanha 5 varetas · A 15,5cm × D 4,5cm",
     "image": "Difusor Nature.jpg",
     "minQty": 10,
     "hasFragrance": true,
@@ -524,7 +524,7 @@
   {
     "id": 24,
     "name": "Cartão Afetivo Abre e Fecha",
-    "detail": "Mínimo de 10 por modelo escolhido · Modelos: Você é Especial, Confie no Processo, Com Amor, Pra Sempre, Feliz Aniversário",
+    "detail": "A 9,5cm × L fechado 7cm × L aberto 14cm · Interior em branco · Embalagem individual · Mínimo de 10 por modelo",
     "image": "Cartão abre e fecha.jpg",
     "minQty": 10,
     "hasFragrance": true,
@@ -578,7 +578,7 @@
   {
     "id": 27,
     "name": "Fósforo Extra Grande",
-    "detail": "Fósforo de tamanho extra grande, ideal para acender velas com segurança",
+    "detail": "Tamanho extragrande · Lixa integrada à embalagem · Ideal para velas em recipientes fundos",
     "image": "Fósforos.jpg",
     "minQty": 10,
     "hasFragrance": false,
@@ -594,7 +594,7 @@
   {
     "id": 28,
     "name": "Cesto Pão Nosso de Cada Dia",
-    "detail": "Decoração · Acompanha toalha de algodão listrado · A 7,5cm × L 30cm × C 25cm",
+    "detail": "Madeira · Peça artesanal · Acompanha toalha de algodão listrado · A 7,5cm × L 30cm × C 25cm",
     "image": "Cesto de pão.jpg",
     "minQty": 5,
     "hasFragrance": false,
@@ -610,7 +610,7 @@
   {
     "id": 29,
     "name": "Refil Home Spray · Coleção Nature · 1 Litro",
-    "detail": "Refil de 1 litro para reabastecer o frasco original do Home Spray Inspire · Fragrâncias de alta performance · Frasco plástico · ",
+    "detail": "1 litro · Rende até 8 abastecimentos de 120ml · Fragrâncias de alta performance · Frasco plástico",
     "image": "Refil Home Spray Nature 1 Litro.png",
     "minQty": 10,
     "hasFragrance": true,
@@ -629,7 +629,7 @@
   {
     "id": 30,
     "name": "Refil 1 Litro · Difusor de Varetas",
-    "detail": "Refil aromatizador para renovar e manter a perfumação do ambiente · Embalagem PET âmbar de 1 litro · Acompanha jogo de varetas",
+    "detail": "1 litro · Embalagem PET âmbar · Rende até 4 abastecimentos de 250ml · Acompanha 5 varetas",
     "image": "Refil Difusor de Varetas 1 Litro.jpeg",
     "minQty": 10,
     "hasFragrance": true,
