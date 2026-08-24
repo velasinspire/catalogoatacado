@@ -612,13 +612,13 @@
     "name": "Refil Home Spray · Coleção Nature · 1 Litro",
     "detail": "1 litro · Rende até 8 abastecimentos de 120ml · Fragrâncias de alta performance · Frasco plástico",
     "image": "Refil Home Spray Nature 1 Litro.png",
-    "minQty": 10,
+    "minQty": 5,
     "hasFragrance": true,
-    "fragranceMinQty": 3,
+    "fragranceMinQty": 1,
     "isKit": false,
     "tag": "♻️ Refil",
     "priceTiers": [
-      { "label": "Acima de 10 un.", "min": 10, "max": null, "price": 165.00 }
+      { "label": "Acima de 5 un.", "min": 5, "max": null, "price": 165.00 }
     ],
     "extras": [],
     "fragrances": [
@@ -631,13 +631,13 @@
     "name": "Refil 1 Litro · Difusor de Varetas",
     "detail": "1 litro · Embalagem PET âmbar · Rende até 4 abastecimentos de 250ml · Acompanha 5 varetas",
     "image": "Refil Difusor de Varetas 1 Litro.jpeg",
-    "minQty": 10,
+    "minQty": 5,
     "hasFragrance": true,
-    "fragranceMinQty": 3,
+    "fragranceMinQty": 1,
     "isKit": false,
     "tag": "♻️ Refil",
     "priceTiers": [
-      { "label": "Acima de 10 un.", "min": 10, "max": null, "price": 180.00 }
+      { "label": "Acima de 5 un.", "min": 5, "max": null, "price": 180.00 }
     ],
     "extras": [],
     "fragrances": [
