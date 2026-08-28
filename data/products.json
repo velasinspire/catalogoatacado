@@ -296,6 +296,34 @@
     ]
   },
   {
+    "id": 13,
+    "name": "Sabonetes Frutas",
+    "detail": "Mini sabonetes artesanais · Vendidos por peso · Moldados e pintados à mão",
+    "image": "Sabonetes Frutas 1.jpeg",
+    "images": [
+      "Sabonetes Frutas 1.jpeg",
+      "Sabonetes Frutas 2.jpeg",
+      "Sabonetes Frutas 3.jpeg",
+      "Sabonetes Frutas 4.jpeg"
+    ],
+    "minQty": 1,
+    "hasFragrance": true,
+    "fragranceMinQty": 0.25,
+    "isKit": false,
+    "measurement": "weight",
+    "quantityStep": 0.25,
+    "tag": "🧼 Artesanal",
+    "priceTiers": [
+      { "label": "A partir de 1 kg", "min": 1, "max": null, "price": 240.00 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Sortidas", "Abacaxi", "Banana", "Bergamota", "Cereja",
+      "Coco", "Framboesa", "Limão Siciliano", "Maçã", "Mamão",
+      "Maracujá", "Morango", "Pêssego", "Pêra", "Uva"
+    ]
+  },
+  {
     "id": 14,
     "name": "Barra Aromática",
     "detail": "45gr · 12 quadrados com perfumação de 5 a 6h cada · Utilização: rechaud ou difusor elétrico · 6 × 13 × 1,5cm",
@@ -340,6 +368,22 @@
     ]
   },
   {
+    "id": 34,
+    "name": "Difusor Elétrico de Cerâmica Inspire",
+    "detail": "Difusor de tomada · Cerâmica · Bivolt · Botão liga e desliga · Compatível com essências e barras aromáticas",
+    "image": "Difusor Elétrico de Cerâmica Inspire.jpg",
+    "minQty": 10,
+    "hasFragrance": false,
+    "fragranceMinQty": null,
+    "isKit": false,
+    "tag": "🛠 Acessório",
+    "priceTiers": [
+      { "label": "Acima de 10 un.", "min": 10, "max": null, "price": 84.90 }
+    ],
+    "extras": [],
+    "fragrances": []
+  },
+  {
     "id": 16,
     "name": "Mandalas",
     "detail": "3 pavios de algodão · 310gr · Queima: 72 a 90h · A 5cm × D 13cm · Clássica",
@@ -359,6 +403,57 @@
       "Chá Branco (lata branca)",
       "Limão Siciliano (lata verde)",
       "Vinho (lata vermelha)"
+    ]
+  },
+  {
+    "id": 31,
+    "name": "Pretty Girls Read Books",
+    "detail": "Vela aromática · 180gr · Fragrância Lima & Flor de Lótus · Estampa exclusiva da coleção Litterae",
+    "image": "Pretty Girls Read Books 2.jpeg",
+    "images": [
+      "Pretty Girls Read Books 2.jpeg",
+      "Pretty Girls Read Books 1.jpeg",
+      "Pretty Girls Read Books 3.png"
+    ],
+    "minQty": 10,
+    "hasFragrance": true,
+    "fragranceMinQty": 3,
+    "isKit": false,
+    "tag": null,
+    "priceTiers": [
+      { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 61.20 },
+      { "label": "30 a 99 un.", "min": 30, "max": 99, "price": 60.50 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 58.20 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Lima & Flor de Lótus"
+    ]
+  },
+  {
+    "id": 32,
+    "name": "Books Are My Love Language",
+    "detail": "Vela aromática · 180gr · Fragrância Manga & Laranja Doce · Estampa exclusiva da coleção Litterae",
+    "image": "Books Are My Love Language 2.jpeg",
+    "images": [
+      "Books Are My Love Language 2.jpeg",
+      "Books Are My Love Language 1.jpeg",
+      "Books Are My Love Language 3.jpeg",
+      "Books Are My Love Language 4.png"
+    ],
+    "minQty": 10,
+    "hasFragrance": true,
+    "fragranceMinQty": 3,
+    "isKit": false,
+    "tag": null,
+    "priceTiers": [
+      { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 61.20 },
+      { "label": "30 a 99 un.", "min": 30, "max": 99, "price": 60.50 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 58.20 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Manga & Laranja Doce"
     ]
   },
   {
@@ -404,6 +499,33 @@
       "Gengibre",
       "Limão Siciliano",
       "Vinho"
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Chás Inspire",
+    "detail": "Aproximadamente 50gr cada · 3 opções de blends · Ervas naturais e aromáticas · Podem ser apreciados quentes ou gelados",
+    "image": "Chás Inspire Trio 1.jpg",
+    "images": [
+      "Chás Inspire Trio 1.jpg",
+      "Chás Inspire Trio 2.jpg",
+      "Chá Para Acalmar.jpg",
+      "Chá Para Energizar.jpg",
+      "Chá Para Renovar.jpg"
+    ],
+    "minQty": 10,
+    "hasFragrance": true,
+    "fragranceMinQty": 3,
+    "isKit": false,
+    "tag": null,
+    "priceTiers": [
+      { "label": "Acima de 10 un.", "min": 10, "max": null, "price": 35.00 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Para Acalmar",
+      "Para Energizar",
+      "Para Renovar"
     ]
   },
   {

@@ -65,17 +65,18 @@ function setModalPurchaseType(type) {
   rulesInfo.classList.add(type === 'inspire' ? 'mpt-rules-info--inspire' : 'mpt-rules-info--wl');
 
   const p = products.find(x => x.id === modalProductId);
-  const effectiveMinQty  = rules.productMinQty  || (p ? p.minQty          : '—');
-  const effectiveFragMin = rules.fragMinQty      || (p ? p.fragranceMinQty : '—');
+  const minimums = p ? getEffectiveMinimums(p) : { minQty: '—', fragMin: '—' };
+  const effectiveMinQty  = minimums.minQty;
+  const effectiveFragMin = minimums.fragMin;
 
-  document.getElementById('mpt-rule-minqty-text').textContent  = `Mínimo por produto: ${effectiveMinQty} un.`;
-  document.getElementById('mpt-rule-fragqty-text').textContent = `Mínimo por fragrância: ${effectiveFragMin} un.`;
+  document.getElementById('mpt-rule-minqty-text').textContent  = `Mínimo por produto: ${p ? formatProductQty(p, effectiveMinQty) : effectiveMinQty}`;
+  document.getElementById('mpt-rule-fragqty-text').textContent = `Mínimo por fragrância: ${p ? formatProductQty(p, effectiveFragMin) : effectiveFragMin}`;
   document.getElementById('mpt-rule-minorder-text').textContent = `Pedido mínimo: R$ ${rules.orderMin.toLocaleString('pt-BR')},00`;
 
   // Atualizar label de fragrância no modal
   if (p && p.hasFragrance && p.fragrances.length) {
     document.getElementById('modal-fragrance-min-label').textContent =
-      `· mín. ${effectiveFragMin} un. por fragrância`;
+      `· mín. ${formatProductQty(p, effectiveFragMin)} por fragrância`;
   }
 
   // Atualizar botão adicionar
@@ -165,8 +166,8 @@ Promise.all([
     if (minEl) minEl.textContent = `Mín: ${formatCurrency(ORDER_MIN_VALUE)}`;
 
     const requestedOrder = [
-      9, 11, 12, 23, 10, 30, 29, 16, 15, 3, 1, 2,
-      14, 19, 22, 21, 20, 18, 17, 6, 7, 8, 25, 26, 27, 28, 24
+      9, 11, 12, 13, 23, 10, 30, 29, 16, 15, 31, 32, 3, 1, 2,
+      14, 34, 19, 22, 21, 20, 18, 17, 33, 6, 7, 8, 25, 26, 27, 28, 24
     ];
 
     const orderIndex = new Map(requestedOrder.map((id, index) => [id, index]));

@@ -10,6 +10,28 @@ function getActiveTier(product, qty) {
   return product.priceTiers[0];
 }
 
+function isWeightProduct(product) {
+  return product.measurement === 'weight';
+}
+
+function getQuantityStep(product) {
+  return product.quantityStep || 1;
+}
+
+function formatProductQty(product, qty) {
+  if (!isWeightProduct(product)) return `${qty} un.`;
+  if (qty < 1) return `${Math.round(qty * 1000)} g`;
+  return `${qty.toLocaleString('pt-BR', { maximumFractionDigits: 2 })} kg`;
+}
+
+function getEffectiveMinimums(product) {
+  const rules = PURCHASE_RULES[currentPurchaseType] || PURCHASE_RULES.inspire;
+  return {
+    minQty: isWeightProduct(product) ? product.minQty : (rules.productMinQty || product.minQty),
+    fragMin: isWeightProduct(product) ? product.fragranceMinQty : (rules.fragMinQty || product.fragranceMinQty)
+  };
+}
+
 function getProductImages(product) {
   return Array.isArray(product.images) && product.images.length
     ? product.images
@@ -37,7 +59,7 @@ function renderProducts() {
     `).join('');
 
     const fragranceNote = p.hasFragrance && p.fragrances.length > 0
-      ? `<span class="card-minqty"><span class="card-note-icon card-note-icon--leaf" aria-hidden="true"></span><span><strong>Fragrâncias: ${p.fragrances.length} opções</strong><small>Mín. ${p.fragranceMinQty} un. por opção</small></span></span>`
+      ? `<span class="card-minqty"><span class="card-note-icon card-note-icon--leaf" aria-hidden="true"></span><span><strong>Fragrâncias: ${p.fragrances.length} opções</strong><small>Mín. ${formatProductQty(p, p.fragranceMinQty)} por opção</small></span></span>`
       : '';
 
     card.innerHTML = `
@@ -49,7 +71,7 @@ function renderProducts() {
           ${p.tag ? `<span class="card-badge">${p.tag}</span>` : ''}
         </div>
         <div class="card-notes">
-          <span class="card-minqty"><span class="card-note-icon card-note-icon--box" aria-hidden="true"></span><span><strong>Mínimo: ${p.minQty} unidades</strong><small>Por produto</small></span></span>
+          <span class="card-minqty"><span class="card-note-icon card-note-icon--box" aria-hidden="true"></span><span><strong>Mínimo: ${formatProductQty(p, p.minQty)}</strong><small>Por produto</small></span></span>
           ${fragranceNote}
         </div>
       </div>
@@ -238,7 +260,7 @@ function openProductModal(productId, highlightField) {
   document.getElementById('modal-name').textContent   = p.name;
   document.getElementById('modal-detail').textContent = p.detail;
   document.getElementById('modal-minqty').textContent =
-    `📦 Mínimo de ${p.minQty} unidade${p.minQty > 1 ? 's' : ''} no total`;
+    `📦 Mínimo de ${formatProductQty(p, p.minQty)} no total`;
 
   // Reset seletor de tipo no modal — pré-seleciona o tipo do carrinho
   document.getElementById('mpt-inspire').classList.toggle('mpt-btn--active', currentPurchaseType === 'inspire');
@@ -258,10 +280,9 @@ function openProductModal(productId, highlightField) {
 
   if (hasFragrance) {
     fragranceWrap.style.display = 'flex';
-    const rules = PURCHASE_RULES[currentPurchaseType] || PURCHASE_RULES.inspire;
-    const fragMin = rules.fragMinQty || p.fragranceMinQty;
+    const { fragMin } = getEffectiveMinimums(p);
     document.getElementById('modal-fragrance-min-label').textContent =
-      `· mín. ${fragMin} un. por fragrância`;
+      `· mín. ${formatProductQty(p, fragMin)} por fragrância`;
     document.getElementById('qty-derived-hint').style.display = 'block';
   } else {
     fragranceWrap.style.display = 'none';
@@ -319,11 +340,12 @@ function updateTotalQtyDisplay(product) {
   const qtyInc       = document.getElementById('modal-qty-inc');
 
   qtyVal.value = modalTotalQty;
+  qtyVal.step = getQuantityStep(product);
 
   if (hasFragrance) {
     qtyDec.onclick = () => decrementLastFragrance(product);
     qtyInc.style.display = 'none';
-    qtyDec.title = 'Remove uma unidade da última fragrância adicionada';
+    qtyDec.title = `Remove ${formatProductQty(product, getQuantityStep(product))} da última fragrância adicionada`;
     qtyVal.disabled = true;
     qtyVal.onchange = null;
   } else {
@@ -336,8 +358,7 @@ function updateTotalQtyDisplay(product) {
 }
 
 function changeModalTotalQtyDirect(product, delta) {
-  const rules = PURCHASE_RULES[currentPurchaseType] || PURCHASE_RULES.inspire;
-  const minQty = rules.productMinQty || product.minQty;
+  const { minQty } = getEffectiveMinimums(product);
   const newTotal = modalTotalQty + delta;
   if (newTotal < minQty) return;
   modalTotalQty = newTotal;
@@ -352,7 +373,7 @@ function setModalTotalQtyFromInput(product) {
   const rules  = PURCHASE_RULES[currentPurchaseType] || PURCHASE_RULES.inspire;
   const minQty = rules.productMinQty || product.minQty;
 
-  let value = parseInt(qtyVal.value, 10);
+  let value = parseFloat(qtyVal.value);
   if (isNaN(value) || value < minQty) value = minQty;
 
   modalTotalQty = value;
@@ -366,7 +387,7 @@ function decrementLastFragrance(product) {
   const keys = Object.keys(modalFragrances);
   if (keys.length === 0) return;
   const last = keys[keys.length - 1];
-  changeFragranceQty(last, -1);
+  changeFragranceQty(last, -getQuantityStep(product));
 }
 
 function renderModalTiers(product, qty) {
@@ -386,14 +407,14 @@ function updateModalActivePrice(product) {
   if (qty === 0) { el.textContent = ''; return; }
   const tier     = getActiveTier(product, qty);
   const subtotal = tier.price * qty;
-  el.textContent = `${formatCurrency(tier.price)}/un · Subtotal: ${formatCurrency(subtotal)}`;
+  el.textContent = `${formatCurrency(tier.price)}/${isWeightProduct(product) ? 'kg' : 'un'} · Subtotal: ${formatCurrency(subtotal)}`;
 }
 
 function renderModalFragrances(product) {
   if (!product.hasFragrance || !product.fragrances.length) return;
   const container = document.getElementById('modal-fragrances');
-  const rules = PURCHASE_RULES[currentPurchaseType] || PURCHASE_RULES.inspire;
-  const fragMin = rules.fragMinQty || product.fragranceMinQty;
+  const { fragMin } = getEffectiveMinimums(product);
+  const step = getQuantityStep(product);
 
   container.innerHTML = product.fragrances.map(f => {
     const qty      = modalFragrances[f] || 0;
@@ -404,15 +425,15 @@ function renderModalFragrances(product) {
       <div class="fragrance-row ${qty > 0 ? 'fragrance-row--active' : ''}">
         <span class="fragrance-name">${f}</span>
         <div class="fragrance-qty-ctrl">
-          <button class="frag-qty-btn" onclick="changeFragranceQty('${f}', -1)"
+          <button class="frag-qty-btn" onclick="changeFragranceQty('${f}', -${step})"
                   ${!canDec ? 'disabled' : ''}>−</button>
           <input type="number" class="frag-qty-val frag-qty-input ${qty > 0 ? 'frag-qty-val--set' : ''}"
-                 value="${qty}" min="0" inputmode="numeric"
+                 value="${qty}" min="0" step="${step}" inputmode="decimal"
                  onfocus="this.select()" onkeydown="if(event.key==='Enter') this.blur()"
                  onchange="setFragranceQtyFromInput('${f}', this.value)" />
-          <button class="frag-qty-btn" onclick="changeFragranceQty('${f}', 1)">+</button>
+          <button class="frag-qty-btn" onclick="changeFragranceQty('${f}', ${step})">+</button>
         </div>
-        ${belowMin ? `<span class="frag-warning">⚠ mín. ${fragMin} un.</span>` : ''}
+        ${belowMin ? `<span class="frag-warning">⚠ mín. ${formatProductQty(product, fragMin)}</span>` : ''}
       </div>
     `;
   }).join('');
@@ -428,20 +449,19 @@ function renderModalBalance(product) {
     document.getElementById('modal-fragrances').after(balanceEl);
   }
 
-  const rules  = PURCHASE_RULES[currentPurchaseType] || PURCHASE_RULES.inspire;
-  const minQty = rules.productMinQty || product.minQty;
+  const { minQty } = getEffectiveMinimums(product);
   const total   = modalTotalQty;
   const missing = Math.max(0, minQty - total);
 
   if (total === 0) {
     balanceEl.className   = 'modal-balance modal-balance--pending';
-    balanceEl.textContent = `Adicione fragrâncias para compor as ${minQty} unidades mínimas`;
+    balanceEl.textContent = `Adicione fragrâncias para compor o mínimo de ${formatProductQty(product, minQty)}`;
   } else if (missing > 0) {
     balanceEl.className   = 'modal-balance modal-balance--pending';
-    balanceEl.textContent = `Faltam ${missing} unidade${missing > 1 ? 's' : ''} para atingir o mínimo de ${minQty}`;
+    balanceEl.textContent = `Faltam ${formatProductQty(product, missing)} para atingir o mínimo de ${formatProductQty(product, minQty)}`;
   } else {
     balanceEl.className   = 'modal-balance modal-balance--ok';
-    balanceEl.textContent = `✓ ${total} unidade${total > 1 ? 's' : ''} selecionada${total > 1 ? 's' : ''}`;
+    balanceEl.textContent = `✓ ${formatProductQty(product, total)} selecionado${isWeightProduct(product) ? 's' : total > 1 ? 's' : ''}`;
   }
 }
 
@@ -472,7 +492,7 @@ function setFragranceQtyFromInput(fragrance, value) {
   const p = products.find(x => x.id === modalProductId);
   if (!p) return;
 
-  let newQty = parseInt(value, 10);
+  let newQty = parseFloat(value);
   if (isNaN(newQty) || newQty < 0) newQty = 0;
 
   if (newQty === 0) {
@@ -491,13 +511,11 @@ function setFragranceQtyFromInput(fragrance, value) {
 }
 
 function validateFragrances(product) {
-  const rules    = PURCHASE_RULES[currentPurchaseType] || PURCHASE_RULES.inspire;
-  const minQty   = rules.productMinQty  || product.minQty;
-  const fragMin  = rules.fragMinQty     || product.fragranceMinQty;
+  const { minQty, fragMin } = getEffectiveMinimums(product);
 
   if (!product.hasFragrance || !product.fragrances.length) {
     if (modalTotalQty < minQty) {
-      return { valid: false, reason: `Mínimo de ${minQty} unidades` };
+      return { valid: false, reason: `Mínimo de ${formatProductQty(product, minQty)}` };
     }
     return { valid: true };
   }
@@ -512,7 +530,7 @@ function validateFragrances(product) {
     if (qty < fragMin) {
       return {
         valid: false,
-        reason: `"${name}": mín. ${fragMin} un. (tem ${qty})`
+        reason: `"${name}": mín. ${formatProductQty(product, fragMin)} (tem ${formatProductQty(product, qty)})`
       };
     }
   }
@@ -521,7 +539,7 @@ function validateFragrances(product) {
     const diff = minQty - modalTotalQty;
     return {
       valid: false,
-      reason: `Faltam ${diff} un. para o mínimo de ${minQty}`
+      reason: `Faltam ${formatProductQty(product, diff)} para o mínimo de ${formatProductQty(product, minQty)}`
     };
   }
 
@@ -540,7 +558,7 @@ function updateAddModalButton(product) {
     const typeName = PURCHASE_RULES[currentPurchaseType]?.label || '';
     btn.innerHTML = `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      Adicionar ${modalTotalQty} un. — ${typeName}
+      Adicionar ${formatProductQty(product, modalTotalQty)} — ${typeName}
     `;
     const hasFragrance = product.hasFragrance && product.fragrances.length > 0;
     btn.onclick = hasFragrance

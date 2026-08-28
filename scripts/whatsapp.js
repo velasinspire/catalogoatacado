@@ -54,7 +54,7 @@ function openWhatsApp(event) {
     const subtotal      = tier.price * quantity;
     const fragranceNote = fragrance ? ` · Fragrância: ${fragrance}` : '';
     lines.push(
-      `• *${product.name}* (${quantity}un${fragranceNote}) — ${formatCurrency(subtotal)} _(${tier.label} · ${formatCurrency(tier.price)}/un)_`
+      `• *${product.name}* (${formatProductQty(product, quantity)}${fragranceNote}) — ${formatCurrency(subtotal)} _(${tier.label} · ${formatCurrency(tier.price)}/${isWeightProduct(product) ? 'kg' : 'un'})_`
     );
   });
 

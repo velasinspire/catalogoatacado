@@ -50,7 +50,7 @@ function changeCartQty(key, delta) {
 function setCartQtyFromInput(key, value) {
   if (!cart[key]) return;
   const product = cart[key].product;
-  let newQty = parseInt(value, 10);
+  let newQty = parseFloat(value);
 
   if (isNaN(newQty) || newQty <= 0) {
     if (confirm(`Deseja remover "${product.name}" do pedido?`)) {
@@ -100,22 +100,22 @@ function validateCart() {
     const hasFragrances = product.hasFragrance && product.fragrances.length > 0;
 
     // Mínimos efetivos: White Label sobrescreve os padrões do produto
-    const effectiveMinQty  = rules.productMinQty  || product.minQty;
-    const effectiveFragMin = rules.fragMinQty      || product.fragranceMinQty;
+    const effectiveMinQty  = isWeightProduct(product) ? product.minQty : (rules.productMinQty || product.minQty);
+    const effectiveFragMin = isWeightProduct(product) ? product.fragranceMinQty : (rules.fragMinQty || product.fragranceMinQty);
 
     if (hasFragrances) {
       const totalQty = Object.values(fragrances).reduce((s, v) => s + v, 0);
 
       if (totalQty < effectiveMinQty) {
         messages.push(
-          `Quantidade total insuficiente: ${totalQty} un. (mínimo ${effectiveMinQty} un.)`
+          `Quantidade total insuficiente: ${formatProductQty(product, totalQty)} (mínimo ${formatProductQty(product, effectiveMinQty)})`
         );
       }
 
       Object.entries(fragrances).forEach(([name, qty]) => {
         if (qty < effectiveFragMin) {
           messages.push(
-            `Fragrância "${name}": ${qty} un. (mínimo ${effectiveFragMin} un./fragrância)`
+            `Fragrância "${name}": ${formatProductQty(product, qty)} (mínimo ${formatProductQty(product, effectiveFragMin)}/fragrância)`
           );
         }
       });
@@ -124,7 +124,7 @@ function validateCart() {
       const totalQty = totalDirect || 0;
       if (totalQty < effectiveMinQty) {
         messages.push(
-          `Quantidade insuficiente: ${totalQty} un. (mínimo ${effectiveMinQty} un.)`
+          `Quantidade insuficiente: ${formatProductQty(product, totalQty)} (mínimo ${formatProductQty(product, effectiveMinQty)})`
         );
       }
     }
@@ -194,15 +194,15 @@ function renderCart() {
       </div>
       <div class="cart-item-sub">
         ${fragrance ? `🌿 ${fragrance}` : ''}
-        <span class="badge-tier">${tier.label} · ${formatCurrency(tier.price)}/un</span>
+        <span class="badge-tier">${tier.label} · ${formatCurrency(tier.price)}/${isWeightProduct(product) ? 'kg' : 'un'}</span>
       </div>
       <div class="cart-item-footer">
         <div class="cart-item-qty-ctrl">
-          <button class="cart-item-qty-btn" onclick="changeCartQty('${key}', -1)">−</button>
-          <input type="number" class="cart-item-qty-val cart-item-qty-input" value="${quantity}" min="1" inputmode="numeric"
+          <button class="cart-item-qty-btn" onclick="changeCartQty('${key}', -${getQuantityStep(product)})">−</button>
+          <input type="number" class="cart-item-qty-val cart-item-qty-input" value="${quantity}" min="${getQuantityStep(product)}" step="${getQuantityStep(product)}" inputmode="${isWeightProduct(product) ? 'decimal' : 'numeric'}"
                  onfocus="this.select()" onkeydown="if(event.key==='Enter') this.blur()"
                  onchange="setCartQtyFromInput('${key}', this.value)" />
-          <button class="cart-item-qty-btn" onclick="changeCartQty('${key}', 1)">+</button>
+          <button class="cart-item-qty-btn" onclick="changeCartQty('${key}', ${getQuantityStep(product)})">+</button>
         </div>
         <span class="cart-item-price">${formatCurrency(subtotal)}</span>
       </div>
