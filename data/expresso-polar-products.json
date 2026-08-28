@@ -76,29 +76,6 @@
     "fragrances": []
   },
   {
-    "id": 1004,
-    "name": "Caixa com 3 Velas Expresso Polar",
-    "detail": "3 velas de 60 g · Uma de cada fragrância · Caixa presenteável",
-    "image": "expresso-polar/Tezza-6880.jpg",
-    "images": [
-      "expresso-polar/Tezza-6880.jpg",
-      "expresso-polar/Tezza-0175.jpg",
-      "expresso-polar/Tezza-0883.jpg"
-    ],
-    "minQty": 10,
-    "hasFragrance": false,
-    "fragranceMinQty": 0,
-    "isKit": true,
-    "tag": "Kit de Natal",
-    "priceTiers": [
-      { "label": "10 a 49 caixas", "min": 10, "max": 49, "price": 98.20 },
-      { "label": "50 a 99 caixas", "min": 50, "max": 99, "price": 90.40 },
-      { "label": "100+ caixas", "min": 100, "max": null, "price": 88.60 }
-    ],
-    "extras": [],
-    "fragrances": []
-  },
-  {
     "id": 1005,
     "name": "Caixa com 3 Velas de 30 g Expresso Polar",
     "detail": "3 velas de 30 g · Uma de cada fragrância · Caixa com alça",
