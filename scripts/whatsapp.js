@@ -8,7 +8,7 @@ function openWhatsApp(event) {
   const entries = Object.values(cart);
 
   if (entries.length === 0) {
-    const text = 'Olá! Gostaria de saber mais sobre os produtos do Catálogo Atacado 2026 da Velas Inspire 🌿';
+    const text = `Olá! Gostaria de saber mais sobre os produtos do ${CATALOG_NAME} da Velas Inspire 🌿`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
     return;
   }
@@ -43,10 +43,14 @@ function openWhatsApp(event) {
 
   // ——— MONTAR MENSAGEM ———
   const typeName = PURCHASE_RULES[currentPurchaseType]?.label || 'Inspire';
+  const catalogsInOrder = new Set(entries.map(({ product }) => product.catalog || 'main'));
+  const orderCatalogName = catalogsInOrder.size > 1
+    ? 'Linha regular + Expresso Polar'
+    : CATALOG_NAME;
 
   const lines = [
     `*Olá! Gostaria de fazer um pedido — Velas Inspire* 🌿\n`,
-    `*Catálogo Atacado 2026 · ${typeName}*\n`,
+    `*${orderCatalogName} · ${typeName}*\n`,
   ];
 
   entries.forEach(({ product, quantity, fragrance }) => {

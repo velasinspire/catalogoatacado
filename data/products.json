@@ -214,6 +214,19 @@
     "name": "Nature",
     "detail": "Pavio e tampa de madeira · 200gr · Queima: 48 a 52h · A 9,5cm × D 8,5cm · Artes exclusivas da artista Shenay Walls · Campeã de vendas",
     "image": "Vela Nature.jpg",
+    "images": [
+      "Vela Nature.jpg",
+      "NATURE ALECRIM.jpg",
+      "NATURE BAUNILHA.jpg",
+      "NATURE CANELA.jpg",
+      "NATURE CHÁ BRANCO.jpg",
+      "NATURE FLOR DE CEREJEIRA.jpg",
+      "NATURE FLOR DE FIGO.jpg",
+      "NATURE GENGIBRE.jpg",
+      "NATURE LAVANDA.jpg",
+      "NATURE PIMENTA ROSA.jpg",
+      "NATURE PITANGA PRETA.jpg"
+    ],
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
@@ -233,9 +246,13 @@
   },
   {
     "id": 10,
-    "name": "Refil Nature",
+    "name": "Refil Nature e Âmbar",
     "detail": "Consumo consciente · Pavio de madeira · 180gr · Queima: 35 a 48h",
     "image": "Refil Nature.jpg",
+    "images": [
+      "Refil Nature.jpg",
+      "Refil Nature e Ambar - Vinho.jpg"
+    ],
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
@@ -248,7 +265,10 @@
     "fragrances": [
       "Alecrim", "Baunilha", "Canela", "Chá Branco",
       "Flor de Cerejeira", "Flor de Figo", "Gengibre da Índia",
-      "Lavanda", "Limão Siciliano", "Pimenta Rosa", "Pitanga Preta"
+      "Lavanda", "Limão Siciliano", "Pimenta Rosa", "Pitanga Preta",
+      "Aconchego (Especiarias)",
+      "Ok, But First Coffee (Café)",
+      "Vinho É Poesia (Vinho)"
     ]
   },
   {
@@ -327,7 +347,12 @@
     "id": 14,
     "name": "Barra Aromática",
     "detail": "45gr · 12 quadrados com perfumação de 5 a 6h cada · Utilização: rechaud ou difusor elétrico · 6 × 13 × 1,5cm",
-    "image": "Barras aromaticas2.jpg",
+    "image": "Barra aromática nova 3.jpeg",
+    "images": [
+      "Barra aromática nova 3.jpeg",
+      "Barra aromática nova 2.jpeg",
+      "Barra aromática nova 1.jpeg"
+    ],
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
@@ -372,13 +397,13 @@
     "name": "Difusor Elétrico de Cerâmica Inspire",
     "detail": "Difusor de tomada · Cerâmica · Bivolt · Botão liga e desliga · Compatível com essências e barras aromáticas",
     "image": "Difusor Elétrico de Cerâmica Inspire.jpg",
-    "minQty": 10,
+    "minQty": 5,
     "hasFragrance": false,
     "fragranceMinQty": null,
     "isKit": false,
     "tag": "🛠 Acessório",
     "priceTiers": [
-      { "label": "Acima de 10 un.", "min": 10, "max": null, "price": 84.90 }
+      { "label": "5+ un.", "min": 5, "max": null, "price": 84.90 }
     ],
     "extras": [],
     "fragrances": []
@@ -388,6 +413,14 @@
     "name": "Mandalas",
     "detail": "3 pavios de algodão · 310gr · Queima: 72 a 90h · A 5cm × D 13cm · Clássica",
     "image": "Mandalas.jpg",
+    "images": [
+      "Mandalas.jpg",
+      "Mandalas galeria 1.jpg",
+      "Mandalas galeria 2.jpg",
+      "Mandalas galeria 3.jpg",
+      "Mandalas galeria 4.jpg",
+      "Mandalas galeria 5.jpg"
+    ],
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
@@ -460,7 +493,13 @@
     "id": 17,
     "name": "Sais · Escalda Pés",
     "detail": "Produzidos com óleo essencial · Não produz espuma · A 14cm × L 9cm · 60gr",
-    "image": "Sais de banho.jpg",
+    "image": "Sais Escalda Pes - Energizar.jpg",
+    "images": [
+      "Sais Escalda Pes - Energizar.jpg",
+      "Sais Escalda Pes - Renovar.jpg",
+      "Sais Escalda Pes - Acalmar.jpg",
+      "Sais Escalda Pes - Trio.jpg"
+    ],
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
@@ -532,7 +571,13 @@
     "id": 19,
     "name": "Paletas",
     "detail": "Pavio e tampa de madeira · 100gr · Queima: 20 a 26h · A 5cm × D 7cm",
-    "image": "Paletas.jpg",
+    "image": "Paletas - Trio.jpg",
+    "images": [
+      "Paletas - Trio.jpg",
+      "Paletas - Baunilha e Patchouli.jpg",
+      "Paletas - Jasmim e Bergamota.jpg",
+      "Paletas - Lavanda e Limao Siciliano.jpg"
+    ],
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
@@ -647,7 +692,17 @@
     "id": 24,
     "name": "Cartão Afetivo Abre e Fecha",
     "detail": "A 9,5cm × L fechado 7cm × L aberto 14cm · Interior em branco · Embalagem individual · Mínimo de 10 por modelo",
-    "image": "Cartão abre e fecha.jpg",
+    "image": "Cartao Afetivo - Voce e Especial.jpg",
+    "images": [
+      "Cartao Afetivo - Voce e Especial.jpg",
+      "Cartao Afetivo - Para Sempre.jpg",
+      "Cartao Afetivo - Make a Wish.jpg",
+      "Cartao Afetivo - Jesus Nasceu.jpg",
+      "Cartao Afetivo - Ho Ho Ho.jpg",
+      "Cartao Afetivo - Desejos de Natal.jpg",
+      "Cartao Afetivo - Confie no Processo.jpg",
+      "Cartao Afetivo - Com Amor.jpg"
+    ],
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 10,

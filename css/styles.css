@@ -1420,6 +1420,62 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 .footer-sub { font-size: 11.5px; margin-top: 4px; opacity: 0.7; }
 
+/* ——— EXPRESSO POLAR ——— */
+.polar-banner {
+  position: relative; isolation: isolate; display: grid; grid-template-columns: 1.12fr .88fr;
+  min-height: 330px; max-width: 1180px; margin: 42px auto 18px; overflow: hidden;
+  color: #fff8e9; text-decoration: none; background: #17372f;
+  border-radius: 28px; box-shadow: 0 22px 55px rgba(28, 48, 40, .18);
+}
+.polar-banner::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(circle at 78% 20%, rgba(236,196,114,.22), transparent 24%), linear-gradient(120deg, #0f302a, #285448); }
+.polar-banner__copy { padding: 54px 20px 48px 64px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+.polar-banner__eyebrow, .polar-hero__eyebrow { color: #e9c47d; font: 500 11px/1.2 'Jost',sans-serif; letter-spacing: .24em; text-transform: uppercase; }
+.polar-banner__copy strong { margin: 7px 0 8px; font: 600 clamp(48px,6vw,78px)/.9 'Cormorant Garamond',serif; letter-spacing: -.03em; }
+.polar-banner__text { max-width: 430px; font-size: 15px; line-height: 1.65; color: rgba(255,248,233,.76); }
+.polar-banner__cta { margin-top: 24px; padding-bottom: 5px; border-bottom: 1px solid #e9c47d; color: #e9c47d; font-size: 13px; font-weight: 600; letter-spacing: .04em; }
+.polar-banner__scene { position: relative; align-self: end; height: 100%; }
+.polar-banner__scene svg { position: absolute; right: 0; bottom: 0; width: 110%; overflow: visible; }
+.polar-banner__mountains { fill: #eef0df; opacity: .94; }
+.polar-banner__train { fill: #a83a32; stroke: #f3d38b; stroke-width: 3; }
+.polar-banner__train circle { fill: #18342e; }
+.polar-banner__steam { fill: none; stroke-linecap: round; }
+.polar-banner__moon { position: absolute; top: 42px; right: 58px; width: 70px; height: 70px; border-radius: 50%; background: #f1d596; box-shadow: 0 0 35px rgba(241,213,150,.28); }
+.polar-banner__snow { position: absolute; color: #f1d596; opacity: .8; font-size: 22px; }
+.polar-banner__snow--one { left: 48%; top: 30px; }.polar-banner__snow--two { left: 55%; top: 90px; font-size: 14px; }
+.polar-banner__rail { position: absolute; left: 47%; right: 0; bottom: 13px; border-bottom: 3px double rgba(27,51,45,.7); }
+.polar-banner:hover .polar-banner__train { transform: translateX(-12px); }.polar-banner__train { transition: transform .55s ease; }
+
+.polar-page { margin: 0; background: #f4f0e6; color: #17372f; }
+.polar-header { height: 72px; padding: 0 clamp(20px,5vw,72px); display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; background: #12352e; color: #fff8e9; }
+.polar-header a { color: inherit; text-decoration: none; font: 500 12px 'Jost',sans-serif; letter-spacing: .06em; }
+.polar-brand { font: 600 25px 'Cormorant Garamond',serif !important; }.polar-rules { justify-self: end; }.polar-back { display: flex; gap: 8px; }
+.polar-hero { position: relative; min-height: min(760px, calc(100vh - 72px)); display: grid; grid-template-columns: .9fr 1.1fr; overflow: hidden; background: radial-gradient(circle at 75% 14%, #426d5d 0, #173f36 34%, #0d2d28 75%); color: #fff8e9; }
+.polar-hero__content { z-index: 2; padding: 12vh 20px 80px clamp(28px,8vw,130px); align-self: center; }
+.polar-hero h1 { margin: 12px 0 22px; font: 600 clamp(76px,10vw,145px)/.66 'Cormorant Garamond',serif; letter-spacing: -.055em; }.polar-hero h1 em { color: #efcf8e; font-weight: 400; }
+.polar-hero__content p { max-width: 460px; color: rgba(255,248,233,.72); line-height: 1.75; font-size: 16px; }
+.polar-hero__button { display: inline-block; margin-top: 24px; padding: 13px 0 6px; border-bottom: 1px solid #efcf8e; color: #efcf8e; text-decoration: none; font: 600 12px 'Jost',sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.polar-hero__art { position: relative; min-height: 540px; align-self: end; }.polar-hero__art svg { position: absolute; width: min(850px,110%); right: -4%; bottom: 0; }
+.polar-hero__moon { position: absolute; width: 165px; height: 165px; right: 18%; top: 12%; border-radius: 50%; background: #f0d492; box-shadow: 0 0 80px rgba(240,212,146,.26); }
+.polar-hero__mountain { fill: #e8eadb; }.polar-hero__mountain--back { fill: #76917e; opacity: .55; }.polar-hero__train { fill: #a93932; stroke: #efcf8e; stroke-width: 5; }.polar-hero__train circle { fill: #14362f; }.polar-hero__steam,.polar-hero__track { fill: none; stroke: #efcf8e; stroke-width: 5; stroke-linecap: round; }
+.polar-intro { max-width: 780px; margin: 0 auto; padding: 110px 24px 130px; text-align: center; }.polar-intro>span { color: #a93932; text-transform: uppercase; letter-spacing: .22em; font-size: 11px; font-weight: 600; }.polar-intro h2 { margin: 12px 0; font: 600 clamp(42px,6vw,68px)/1 'Cormorant Garamond',serif; }.polar-intro>p { max-width: 600px; margin: auto; color: #65746e; line-height: 1.7; }
+.polar-awaiting { max-width: 520px; margin: 45px auto 0; padding: 24px 28px; display: flex; gap: 18px; align-items: center; text-align: left; border: 1px solid #d8cdb8; border-radius: 16px; background: rgba(255,255,255,.42); }.polar-awaiting__icon { color: #a93932; font-size: 28px; }.polar-awaiting strong { font: 600 21px 'Cormorant Garamond',serif; }.polar-awaiting p { margin: 3px 0 0; color: #718078; font-size: 13px; }
+.polar-footer { padding: 34px 24px; display: flex; justify-content: center; gap: 18px; color: rgba(255,248,233,.7); background: #0d2d28; font-size: 12px; }.polar-footer strong { color: #fff8e9; }
+.catalog-empty-state { grid-column: 1 / -1; max-width: 620px; width: 100%; margin: 16px auto 50px; padding: 54px 34px; text-align: center; border: 1px solid var(--linen-dark); border-radius: var(--radius); background: var(--white); }
+.catalog-empty-state>span { color: #a93932; font-size: 28px; }.catalog-empty-state h3 { margin: 8px 0 6px; font: 600 30px 'Cormorant Garamond',serif; }.catalog-empty-state p { max-width: 460px; margin: auto; color: var(--stone); line-height: 1.65; font-size: 14px; }
+body[data-catalog="christmas"] .hero { background: var(--ink); }
+body[data-catalog="christmas"] .btn-hero { background: #a93932; }
+body[data-catalog="christmas"] .brand-eyebrow,
+body[data-catalog="christmas"] .brand-name { color: var(--brand-gold); }
+.christmas-hero-title {
+  margin: 8px 0 12px;
+  color: var(--brand-gold);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 46px);
+  font-weight: 400;
+  line-height: 1.05;
+}
+.christmas-hero-copy { max-width: 570px; margin-bottom: 26px; }
+
 /* ——— ANIMATIONS ——— */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(18px); }
@@ -1510,4 +1566,12 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   .btn-header-rules span { display: none; }
   .rules-types-grid,
   .rules-payment-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .polar-banner { margin: 24px 16px 8px; grid-template-columns: 1fr; min-height: 520px; }
+  .polar-banner__copy { padding: 40px 30px 230px; }.polar-banner__scene { position: absolute; inset: auto 0 0; height: 240px; }.polar-banner__scene svg { width: 100%; }.polar-banner__moon { top: 12px; }
+  .polar-header { grid-template-columns: 1fr auto; }.polar-rules { display: none; }.polar-back span { display: none; }
+  .polar-hero { grid-template-columns: 1fr; min-height: 820px; }.polar-hero__content { padding: 75px 28px 330px; }.polar-hero h1 { font-size: clamp(72px,24vw,110px); }.polar-hero__art { position: absolute; inset: auto 0 0; width: 100%; min-height: 390px; }.polar-hero__art svg { width: 115%; right: -8%; }.polar-hero__moon { width: 120px; height: 120px; top: 5%; }
+  .polar-intro { padding: 80px 22px 90px; }.polar-footer { flex-direction: column; align-items: center; gap: 4px; }
 }

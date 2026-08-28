@@ -3,6 +3,39 @@
 // ================================================
 
 const cart = {};
+const CART_STORAGE_KEY = 'velas-inspire-shared-cart-v1';
+
+function loadCart() {
+  try {
+    const savedCart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY) || '{}');
+    if (!savedCart || typeof savedCart !== 'object' || Array.isArray(savedCart)) return;
+
+    Object.keys(cart).forEach(key => delete cart[key]);
+    Object.entries(savedCart).forEach(([key, entry]) => {
+      if (!entry?.product || !Number.isFinite(Number(entry.quantity))) return;
+      const latestProduct = products.find(product =>
+        product.id === entry.product.id &&
+        product.catalog === entry.product.catalog
+      );
+      cart[key] = {
+        ...entry,
+        product: latestProduct || entry.product,
+        quantity: Number(entry.quantity)
+      };
+    });
+    saveCart();
+  } catch (error) {
+    console.warn('Não foi possível restaurar o carrinho salvo.', error);
+  }
+}
+
+function saveCart() {
+  try {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  } catch (error) {
+    console.warn('Não foi possível salvar o carrinho.', error);
+  }
+}
 
 function cartKey(productId, fragrance) {
   return fragrance ? `${productId}__${fragrance}` : `${productId}`;
@@ -24,6 +57,8 @@ function addToCart(productId, qty, fragrance, purchaseType) {
     };
   }
 
+  saveCart();
+
   document.getElementById('product-modal-overlay').classList.remove('open');
   document.body.style.overflow = '';
 
@@ -44,6 +79,7 @@ function changeCartQty(key, delta) {
   } else {
     cart[key].quantity = newQty;
   }
+  saveCart();
   renderCart();
 }
 
@@ -59,11 +95,13 @@ function setCartQtyFromInput(key, value) {
   } else {
     cart[key].quantity = newQty;
   }
+  saveCart();
   renderCart();
 }
 
 function removeFromCart(key) {
   delete cart[key];
+  saveCart();
   renderCart();
 }
 

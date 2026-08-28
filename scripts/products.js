@@ -42,6 +42,16 @@ function renderProducts() {
   const grid = document.getElementById('products-grid');
   grid.innerHTML = '';
 
+  if (!products.length) {
+    grid.innerHTML = `
+      <div class="catalog-empty-state">
+        <span aria-hidden="true">✦</span>
+        <h3>Produtos em preparação</h3>
+        <p>Os itens da coleção Expresso Polar serão exibidos aqui com fotos, preços e opções para o seu pedido.</p>
+      </div>`;
+    return;
+  }
+
   products.forEach((p, i) => {
     const card = document.createElement('div');
     card.className = 'product-card';

@@ -1,0 +1,254 @@
+[
+  {
+    "id": 1001,
+    "name": "Home Spray Expresso Polar",
+    "detail": "120 ml · Frasco de vidro · Válvula dourada",
+    "image": "expresso-polar/Tezza-7215.jpg",
+    "images": [
+      "expresso-polar/Tezza-7215.jpg",
+      "expresso-polar/Tezza-5701.jpg",
+      "expresso-polar/Tezza-3057.jpg",
+      "expresso-polar/Tezza-5459.jpg",
+      "expresso-polar/Tezza-8470.jpg"
+    ],
+    "minQty": 15,
+    "hasFragrance": true,
+    "fragranceMinQty": 5,
+    "isKit": false,
+    "tag": "Coleção de Natal",
+    "priceTiers": [
+      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 36.20 },
+      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 34.50 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 32.20 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Ho Ho Ho",
+      "Jingle Bells",
+      "Noite Feliz"
+    ]
+  },
+  {
+    "id": 1002,
+    "name": "Vela Expresso Polar",
+    "detail": "Vela aromática · 180 g · Edição especial de Natal",
+    "image": "expresso-polar/Tezza-1921.jpg",
+    "images": [
+      "expresso-polar/Tezza-1921.jpg",
+      "expresso-polar/Tezza-2613.jpg",
+      "expresso-polar/Tezza-4190.jpg",
+      "expresso-polar/Tezza-5506.jpg"
+    ],
+    "minQty": 15,
+    "hasFragrance": true,
+    "fragranceMinQty": 5,
+    "isKit": false,
+    "tag": "Coleção de Natal",
+    "priceTiers": [
+      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 58.50 },
+      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 57.20 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 56.20 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Ho Ho Ho",
+      "Jingle Bells",
+      "Noite Feliz"
+    ]
+  },
+  {
+    "id": 1003,
+    "name": "Caixa Oval com Fita",
+    "detail": "Embalagem presenteável · Acompanha fita · Enviada desmontada",
+    "image": "expresso-polar/Tezza-4649.jpg",
+    "images": [
+      "expresso-polar/Tezza-4649.jpg"
+    ],
+    "minQty": 10,
+    "hasFragrance": false,
+    "fragranceMinQty": 0,
+    "isKit": false,
+    "tag": "Embalagem",
+    "priceTiers": [
+      { "label": "10+ un.", "min": 10, "max": null, "price": 11.50 }
+    ],
+    "extras": [],
+    "fragrances": []
+  },
+  {
+    "id": 1004,
+    "name": "Caixa com 3 Velas Expresso Polar",
+    "detail": "3 velas de 60 g · Uma de cada fragrância · Caixa presenteável",
+    "image": "expresso-polar/Tezza-6880.jpg",
+    "images": [
+      "expresso-polar/Tezza-6880.jpg",
+      "expresso-polar/Tezza-0175.jpg",
+      "expresso-polar/Tezza-0883.jpg"
+    ],
+    "minQty": 10,
+    "hasFragrance": false,
+    "fragranceMinQty": 0,
+    "isKit": true,
+    "tag": "Kit de Natal",
+    "priceTiers": [
+      { "label": "10 a 49 caixas", "min": 10, "max": 49, "price": 98.20 },
+      { "label": "50 a 99 caixas", "min": 50, "max": 99, "price": 90.40 },
+      { "label": "100+ caixas", "min": 100, "max": null, "price": 88.60 }
+    ],
+    "extras": [],
+    "fragrances": []
+  },
+  {
+    "id": 1005,
+    "name": "Caixa com 3 Velas de 30 g Expresso Polar",
+    "detail": "3 velas de 30 g · Uma de cada fragrância · Caixa com alça",
+    "image": "expresso-polar/Tezza-8747.jpg",
+    "images": [
+      "expresso-polar/Tezza-8747.jpg",
+      "expresso-polar/Tezza-0639.jpg"
+    ],
+    "minQty": 10,
+    "hasFragrance": false,
+    "fragranceMinQty": 0,
+    "isKit": true,
+    "tag": "Kit de Natal",
+    "priceTiers": [
+      { "label": "10 a 49 caixas", "min": 10, "max": 49, "price": 61.20 },
+      { "label": "50 a 99 caixas", "min": 50, "max": 99, "price": 59.90 },
+      { "label": "100+ caixas", "min": 100, "max": null, "price": 56.80 }
+    ],
+    "extras": [],
+    "fragrances": []
+  },
+  {
+    "id": 1006,
+    "name": "Kit Expresso Polar em Caixa de Madeira",
+    "detail": "Vela de 100 g · Home Spray de 30 ml · Caixa de madeira",
+    "image": "expresso-polar/Tezza-6887.jpg",
+    "images": [
+      "expresso-polar/Tezza-6887.jpg",
+      "expresso-polar/Tezza-6332.jpg"
+    ],
+    "minQty": 10,
+    "hasFragrance": true,
+    "fragranceMinQty": 3,
+    "isKit": true,
+    "tag": "Kit de Natal",
+    "priceTiers": [
+      { "label": "10 a 49 kits", "min": 10, "max": 49, "price": 82.50 },
+      { "label": "50 a 99 kits", "min": 50, "max": 99, "price": 80.90 },
+      { "label": "100+ kits", "min": 100, "max": null, "price": 77.50 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Ho Ho Ho",
+      "Jingle Bells",
+      "Noite Feliz"
+    ]
+  },
+  {
+    "id": 1007,
+    "name": "Kit Expresso Polar em Caixa Texturizada",
+    "detail": "Vela de 40 g · Home Spray PET de 30 ml · Caixa texturizada",
+    "image": "expresso-polar/Tezza-1462.jpg",
+    "images": [
+      "expresso-polar/Tezza-1462.jpg",
+      "expresso-polar/Tezza-3956.jpg",
+      "expresso-polar/Tezza-2567.jpg"
+    ],
+    "minQty": 10,
+    "hasFragrance": true,
+    "fragranceMinQty": 5,
+    "isKit": true,
+    "tag": "Kit de Natal",
+    "priceTiers": [
+      { "label": "10 a 49 kits", "min": 10, "max": 49, "price": 35.50 },
+      { "label": "50 a 99 kits", "min": 50, "max": 99, "price": 34.30 },
+      { "label": "100+ kits", "min": 100, "max": null, "price": 32.20 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Ho Ho Ho",
+      "Jingle Bells",
+      "Noite Feliz"
+    ]
+  },
+  {
+    "id": 1008,
+    "name": "Vela Copinho Expresso Polar",
+    "detail": "Vela aromática · 60 g · Copinho avulso",
+    "image": "expresso-polar/Tezza-8346.jpg",
+    "images": [
+      "expresso-polar/Tezza-8346.jpg"
+    ],
+    "minQty": 15,
+    "hasFragrance": true,
+    "fragranceMinQty": 5,
+    "isKit": false,
+    "tag": "Coleção de Natal",
+    "priceTiers": [
+      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 25.90 },
+      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 24.90 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 23.50 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Ho Ho Ho",
+      "Jingle Bells",
+      "Noite Feliz"
+    ]
+  },
+  {
+    "id": 1009,
+    "name": "Mini Vela Latinha Expresso Polar",
+    "detail": "Vela aromática · 15 g · Latinha com tampa",
+    "image": "expresso-polar/Tezza-4833.jpg",
+    "images": [
+      "expresso-polar/Tezza-4833.jpg",
+      "expresso-polar/Tezza-5378.jpg"
+    ],
+    "minQty": 30,
+    "hasFragrance": true,
+    "fragranceMinQty": 20,
+    "isKit": false,
+    "tag": "Coleção de Natal",
+    "priceTiers": [
+      { "label": "30 a 99 un.", "min": 30, "max": 99, "price": 7.90 },
+      { "label": "100 a 299 un.", "min": 100, "max": 299, "price": 6.90 },
+      { "label": "300 a 499 un.", "min": 300, "max": 499, "price": 6.20 },
+      { "label": "500+ un.", "min": 500, "max": null, "price": 5.50 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Ho Ho Ho",
+      "Jingle Bells",
+      "Noite Feliz"
+    ]
+  },
+  {
+    "id": 1010,
+    "name": "Mini Spray com Tag Expresso Polar",
+    "detail": "Home Spray · 10 ml · Frasco com tag",
+    "image": "expresso-polar/Tezza-4847.jpg",
+    "images": [
+      "expresso-polar/Tezza-4847.jpg",
+      "expresso-polar/mini-spray-10ml.jpeg"
+    ],
+    "minQty": 20,
+    "hasFragrance": true,
+    "fragranceMinQty": 10,
+    "isKit": false,
+    "tag": "Lembrança de Natal",
+    "priceTiers": [
+      { "label": "20 a 49 un.", "min": 20, "max": 49, "price": 10.50 },
+      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 9.80 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 8.50 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Ho Ho Ho",
+      "Jingle Bells",
+      "Noite Feliz"
+    ]
+  }
+]

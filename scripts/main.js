@@ -9,6 +9,8 @@ let ORDER_MIN_VALUE = 0;
 let products = [];
 let productDetails = {};
 const cardQtys = {};
+const IS_CHRISTMAS_CATALOG = document.body.dataset.catalog === 'christmas';
+const CATALOG_NAME = IS_CHRISTMAS_CATALOG ? 'Expresso Polar' : 'Catálogo Atacado 2026';
 
 // ——— TIPO DE COMPRA ———
 // 'inspire' | 'whitelabel' | null (não selecionado no modal)
@@ -88,7 +90,17 @@ function navigateToProduct(productId) {
   closeCart();
   setTimeout(() => {
     const p = products.find(x => x.id === productId);
-    if (p) openProductModal(p.id);
+    if (p) {
+      openProductModal(p.id);
+      return;
+    }
+
+    const savedEntry = Object.values(cart).find(entry => entry.product.id === productId);
+    if (!savedEntry) return;
+    const targetPage = savedEntry.product.catalog === 'christmas'
+      ? 'expresso-polar.html'
+      : 'index.html';
+    window.location.href = `${targetPage}#catalogo`;
   }, 400);
 }
 
@@ -147,8 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ——— CARREGAR DADOS E INICIALIZAR ———
 Promise.all([
   fetch('data/config.json').then(r => r.json()),
-  fetch('data/products.json').then(r => r.json()),
-  fetch('data/product-details.json').then(r => r.json()),
+  fetch(IS_CHRISTMAS_CATALOG ? 'data/expresso-polar-products.json' : 'data/products.json').then(r => r.json()),
+  fetch(IS_CHRISTMAS_CATALOG ? 'data/expresso-polar-details.json' : 'data/product-details.json').then(r => r.json()),
 ])
   .then(([config, data, details]) => {
     WHATSAPP_NUMBER = config.whatsappNumber;
@@ -157,7 +169,7 @@ Promise.all([
     ORDER_MIN_VALUE = PURCHASE_RULES.inspire.orderMin;
     productDetails = details;
 
-    if (config.heroDesc) {
+    if (config.heroDesc && !IS_CHRISTMAS_CATALOG) {
       const el = document.getElementById('hero-desc');
       if (el) el.textContent = config.heroDesc;
     }
@@ -171,9 +183,16 @@ Promise.all([
     ];
 
     const orderIndex = new Map(requestedOrder.map((id, index) => [id, index]));
-    products = data
-      .filter(product => ![4, 5].includes(product.id))
-      .sort((a, b) => (orderIndex.get(a.id) ?? 999) - (orderIndex.get(b.id) ?? 999));
+    products = (IS_CHRISTMAS_CATALOG
+      ? data
+      : data
+          .filter(product => ![4, 5].includes(product.id))
+          .sort((a, b) => (orderIndex.get(a.id) ?? 999) - (orderIndex.get(b.id) ?? 999)))
+      .map(product => ({
+        ...product,
+        catalog: IS_CHRISTMAS_CATALOG ? 'christmas' : 'main'
+      }));
+    loadCart();
     renderProducts();
     renderCart();
 
