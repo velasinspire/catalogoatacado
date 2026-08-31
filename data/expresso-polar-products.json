@@ -17,9 +17,9 @@
     "isKit": false,
     "tag": "Coleção de Natal",
     "priceTiers": [
-      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 36.20 },
-      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 34.50 },
-      { "label": "100+ un.", "min": 100, "max": null, "price": 32.20 }
+      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 42.20 },
+      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 40.50 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 38.40 }
     ],
     "extras": [],
     "fragrances": [
@@ -45,9 +45,9 @@
     "isKit": false,
     "tag": "Coleção de Natal",
     "priceTiers": [
-      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 58.50 },
-      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 57.20 },
-      { "label": "100+ un.", "min": 100, "max": null, "price": 56.20 }
+      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 63.40 },
+      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 60.50 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 58.20 }
     ],
     "extras": [],
     "fragrances": [
@@ -84,15 +84,15 @@
       "expresso-polar/Tezza-8747.jpg",
       "expresso-polar/Tezza-0639.jpg"
     ],
-    "minQty": 10,
+    "minQty": 15,
     "hasFragrance": false,
     "fragranceMinQty": 0,
     "isKit": true,
     "tag": "Kit de Natal",
     "priceTiers": [
-      { "label": "10 a 49 caixas", "min": 10, "max": 49, "price": 61.20 },
-      { "label": "50 a 99 caixas", "min": 50, "max": 99, "price": 59.90 },
-      { "label": "100+ caixas", "min": 100, "max": null, "price": 56.80 }
+      { "label": "15 a 49 caixas", "min": 15, "max": 49, "price": 65.20 },
+      { "label": "50 a 99 caixas", "min": 50, "max": 99, "price": 62.40 },
+      { "label": "100+ caixas", "min": 100, "max": null, "price": 59.90 }
     ],
     "extras": [],
     "fragrances": []
@@ -106,15 +106,15 @@
       "expresso-polar/Tezza-6887.jpg",
       "expresso-polar/Tezza-6332.jpg"
     ],
-    "minQty": 10,
+    "minQty": 15,
     "hasFragrance": true,
     "fragranceMinQty": 3,
     "isKit": true,
     "tag": "Kit de Natal",
     "priceTiers": [
-      { "label": "10 a 49 kits", "min": 10, "max": 49, "price": 82.50 },
-      { "label": "50 a 99 kits", "min": 50, "max": 99, "price": 80.90 },
-      { "label": "100+ kits", "min": 100, "max": null, "price": 77.50 }
+      { "label": "15 a 49 kits", "min": 15, "max": 49, "price": 89.90 },
+      { "label": "50 a 99 kits", "min": 50, "max": 99, "price": 84.50 },
+      { "label": "100+ kits", "min": 100, "max": null, "price": 81.20 }
     ],
     "extras": [],
     "fragrances": [
@@ -133,15 +133,15 @@
       "expresso-polar/Tezza-3956.jpg",
       "expresso-polar/Tezza-2567.jpg"
     ],
-    "minQty": 10,
+    "minQty": 15,
     "hasFragrance": true,
     "fragranceMinQty": 5,
     "isKit": true,
     "tag": "Kit de Natal",
     "priceTiers": [
-      { "label": "10 a 49 kits", "min": 10, "max": 49, "price": 35.50 },
-      { "label": "50 a 99 kits", "min": 50, "max": 99, "price": 34.30 },
-      { "label": "100+ kits", "min": 100, "max": null, "price": 32.20 }
+      { "label": "15 a 49 kits", "min": 15, "max": 49, "price": 42.20 },
+      { "label": "50 a 99 kits", "min": 50, "max": 99, "price": 40.50 },
+      { "label": "100+ kits", "min": 100, "max": null, "price": 39.20 }
     ],
     "extras": [],
     "fragrances": [
@@ -164,9 +164,9 @@
     "isKit": false,
     "tag": "Coleção de Natal",
     "priceTiers": [
-      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 25.90 },
-      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 24.90 },
-      { "label": "100+ un.", "min": 100, "max": null, "price": 23.50 }
+      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 27.50 },
+      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 25.40 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 23.90 }
     ],
     "extras": [],
     "fragrances": [
@@ -184,16 +184,17 @@
       "expresso-polar/Tezza-4833.jpg",
       "expresso-polar/Tezza-5378.jpg"
     ],
-    "minQty": 30,
+    "minQty": 15,
     "hasFragrance": true,
     "fragranceMinQty": 20,
     "isKit": false,
     "tag": "Coleção de Natal",
     "priceTiers": [
-      { "label": "30 a 99 un.", "min": 30, "max": 99, "price": 7.90 },
+      { "label": "15 a 99 un.", "min": 15, "max": 99, "price": 7.90 },
       { "label": "100 a 299 un.", "min": 100, "max": 299, "price": 6.90 },
       { "label": "300 a 499 un.", "min": 300, "max": 499, "price": 6.20 },
-      { "label": "500+ un.", "min": 500, "max": null, "price": 5.50 }
+      { "label": "500 a 999 un.", "min": 500, "max": 999, "price": 5.50 },
+      { "label": "1000+ un.", "min": 1000, "max": null, "price": 5.20 }
     ],
     "extras": [],
     "fragrances": [
@@ -211,15 +212,15 @@
       "expresso-polar/Tezza-4847.jpg",
       "expresso-polar/mini-spray-10ml.jpeg"
     ],
-    "minQty": 20,
+    "minQty": 15,
     "hasFragrance": true,
     "fragranceMinQty": 10,
     "isKit": false,
     "tag": "Lembrança de Natal",
     "priceTiers": [
-      { "label": "20 a 49 un.", "min": 20, "max": 49, "price": 10.50 },
-      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 9.80 },
-      { "label": "100+ un.", "min": 100, "max": null, "price": 8.50 }
+      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 12.50 },
+      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 11.40 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 9.20 }
     ],
     "extras": [],
     "fragrances": [
