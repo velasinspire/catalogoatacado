@@ -184,5 +184,38 @@
       "Evitar contato direto com olhos, pele, móveis e tecidos.",
       "Manter longe de fontes de calor e luz solar direta."
     ]
+  },
+  "1011": {
+    "title": "Caixa Postal do Noel – Grande",
+    "description": [
+      "Entregue seus presentes de uma forma linda, especial e cheia de encanto.",
+      "A Caixa Postal do Noel transforma qualquer presente em uma experiência inesquecível. Perfeita para kits maiores, ela combina estrutura firme, acabamento kraft e ilustrações inspiradas em cartões postais do Polo Norte.",
+      "O fechamento com cordão dá o toque final de charme, enquanto o design vintage cria um clima afetivo que transforma qualquer presente em memória."
+    ],
+    "benefitsTitle": "Destaques",
+    "benefits": [
+      "Estrutura rígida e resistente.",
+      "Design postal vintage com selos ilustrados.",
+      "Espaço para dedicatória.",
+      "Capacidade para kits grandes e volumosos, como duplas de velas, velas com Home Spray, caixas especiais e combinações completas da coleção Expresso Polar.",
+      "Estética perfeita para presentes de Natal."
+    ]
+  },
+  "1012": {
+    "title": "Sacola Postal do Noel",
+    "description": [
+      "Entregue seus presentes de uma forma linda e especial.",
+      "A Sacola Postal do Noel é o toque final perfeito para transformar qualquer presente em um momento especial. Charmosa, festiva e cheia de detalhes, ela deixa sua entrega ainda mais inesquecível.",
+      "Com design inspirado em cartões postais do Polo Norte, ela combina estética kraft, selos ilustrados e detalhes festivos que trazem o clima acolhedor que todo presente merece.",
+      "Perfeita para acomodar kits, velas, Home Sprays e combinações especiais, ela valoriza qualquer composição e deixa o momento da entrega ainda mais emocionante."
+    ],
+    "benefitsTitle": "Destaques",
+    "benefits": [
+      "Acabamento kraft com estética postal vintage.",
+      "Detalhes ilustrados que remetem ao Polo Norte.",
+      "Amarração charmosa para fechamento.",
+      "Espaço para escrever o nome da pessoa presenteada.",
+      "Estrutura resistente para acomodar diferentes tipos de kits."
+    ]
   }
 }

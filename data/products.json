@@ -375,6 +375,15 @@
     "name": "Ambar",
     "detail": "Pavio e tampa de madeira · 200gr · Queima: 48 a 52h · A 8,5cm × D 8cm · Mais vendida",
     "image": "ÂMBAR.jpg",
+    "images": [
+      "ÂMBAR.jpg",
+      "ambar-galeria-1.jpeg",
+      "ambar-galeria-2.jpeg",
+      "ambar-galeria-3.jpeg",
+      "ambar-galeria-4.jpeg",
+      "ambar-galeria-5.jpeg",
+      "ambar-galeria-6.jpeg"
+    ],
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,

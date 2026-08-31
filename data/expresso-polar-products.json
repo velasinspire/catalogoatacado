@@ -57,25 +57,6 @@
     ]
   },
   {
-    "id": 1003,
-    "name": "Caixa Oval com Fita",
-    "detail": "Embalagem presenteável · Acompanha fita · Enviada desmontada",
-    "image": "expresso-polar/Tezza-4649.jpg",
-    "images": [
-      "expresso-polar/Tezza-4649.jpg"
-    ],
-    "minQty": 10,
-    "hasFragrance": false,
-    "fragranceMinQty": 0,
-    "isKit": false,
-    "tag": "Embalagem",
-    "priceTiers": [
-      { "label": "10+ un.", "min": 10, "max": null, "price": 11.50 }
-    ],
-    "extras": [],
-    "fragrances": []
-  },
-  {
     "id": 1005,
     "name": "Caixa com 3 Velas de 30 g Expresso Polar",
     "detail": "3 velas de 30 g · Uma de cada fragrância · Caixa com alça",
@@ -228,5 +209,62 @@
       "Jingle Bells",
       "Noite Feliz"
     ]
+  },
+  {
+    "id": 1003,
+    "name": "Caixa Oval com Fita",
+    "detail": "Embalagem presenteável · Acompanha fita · Enviada desmontada",
+    "image": "expresso-polar/Tezza-4649.jpg",
+    "images": [
+      "expresso-polar/Tezza-4649.jpg"
+    ],
+    "minQty": 10,
+    "hasFragrance": false,
+    "fragranceMinQty": 0,
+    "isKit": false,
+    "tag": "Embalagem",
+    "priceTiers": [
+      { "label": "10+ un.", "min": 10, "max": null, "price": 11.50 }
+    ],
+    "extras": [],
+    "fragrances": []
+  },
+  {
+    "id": 1012,
+    "name": "Sacola Postal do Noel",
+    "detail": "Sacola resistente · Acabamento kraft · Amarração para fechamento",
+    "image": "expresso-polar/Tezza-9550.jpg",
+    "images": [
+      "expresso-polar/Tezza-9550.jpg"
+    ],
+    "minQty": 10,
+    "hasFragrance": false,
+    "fragranceMinQty": 0,
+    "isKit": false,
+    "tag": "Embalagem",
+    "priceTiers": [
+      { "label": "10+ un.", "min": 10, "max": null, "price": 16.90 }
+    ],
+    "extras": [],
+    "fragrances": []
+  },
+  {
+    "id": 1011,
+    "name": "Caixa Postal do Noel – Grande",
+    "detail": "Caixa rígida · Acabamento kraft · Fechamento com cordão",
+    "image": "expresso-polar/caixa-postal-noel-grande.jpeg",
+    "images": [
+      "expresso-polar/caixa-postal-noel-grande.jpeg"
+    ],
+    "minQty": 10,
+    "hasFragrance": false,
+    "fragranceMinQty": 0,
+    "isKit": false,
+    "tag": "Embalagem",
+    "priceTiers": [
+      { "label": "10+ un.", "min": 10, "max": null, "price": 18.90 }
+    ],
+    "extras": [],
+    "fragrances": []
   }
 ]
