@@ -152,8 +152,9 @@ function validateCart() {
 
       Object.entries(fragrances).forEach(([name, qty]) => {
         if (qty < effectiveFragMin) {
+          const optionLabel = product.optionLabel || 'Fragrância';
           messages.push(
-            `Fragrância "${name}": ${formatProductQty(product, qty)} (mínimo ${formatProductQty(product, effectiveFragMin)}/fragrância)`
+            `${optionLabel} "${name}": ${formatProductQty(product, qty)} (mínimo ${formatProductQty(product, effectiveFragMin)}/${optionLabel.toLowerCase()})`
           );
         }
       });

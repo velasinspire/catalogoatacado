@@ -56,7 +56,7 @@ function openWhatsApp(event) {
   entries.forEach(({ product, quantity, fragrance }) => {
     const tier          = getActiveTier(product, quantity);
     const subtotal      = tier.price * quantity;
-    const fragranceNote = fragrance ? ` · Fragrância: ${fragrance}` : '';
+    const fragranceNote = fragrance ? ` · ${product.optionLabel || 'Fragrância'}: ${fragrance}` : '';
     lines.push(
       `• *${product.name}* (${formatProductQty(product, quantity)}${fragranceNote}) — ${formatCurrency(subtotal)} _(${tier.label} · ${formatCurrency(tier.price)}/${isWeightProduct(product) ? 'kg' : 'un'})_`
     );

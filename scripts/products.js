@@ -32,6 +32,13 @@ function getEffectiveMinimums(product) {
   };
 }
 
+function getOptionLabels(product) {
+  return {
+    singular: product.optionLabel || 'Fragrância',
+    plural: product.optionLabelPlural || 'Fragrâncias'
+  };
+}
+
 function getProductImages(product) {
   return Array.isArray(product.images) && product.images.length
     ? product.images
@@ -68,8 +75,9 @@ function renderProducts() {
       </div>
     `).join('');
 
+    const optionLabels = getOptionLabels(p);
     const fragranceNote = p.hasFragrance && p.fragrances.length > 0
-      ? `<span class="card-minqty"><span class="card-note-icon card-note-icon--leaf" aria-hidden="true"></span><span><strong>Fragrâncias: ${p.fragrances.length} opções</strong><small>Mín. ${formatProductQty(p, p.fragranceMinQty)} por opção</small></span></span>`
+      ? `<span class="card-minqty"><span class="card-note-icon card-note-icon--leaf" aria-hidden="true"></span><span><strong>${optionLabels.plural}: ${p.fragrances.length} opções</strong><small>Mín. ${formatProductQty(p, p.fragranceMinQty)} por opção</small></span></span>`
       : '';
 
     card.innerHTML = `
@@ -291,8 +299,10 @@ function openProductModal(productId, highlightField) {
   if (hasFragrance) {
     fragranceWrap.style.display = 'flex';
     const { fragMin } = getEffectiveMinimums(p);
+    const optionLabels = getOptionLabels(p);
+    document.getElementById('modal-option-label').textContent = optionLabels.singular;
     document.getElementById('modal-fragrance-min-label').textContent =
-      `· mín. ${formatProductQty(p, fragMin)} por fragrância`;
+      `· mín. ${formatProductQty(p, fragMin)} por ${optionLabels.singular.toLowerCase()}`;
     document.getElementById('qty-derived-hint').style.display = 'block';
   } else {
     fragranceWrap.style.display = 'none';
@@ -355,7 +365,7 @@ function updateTotalQtyDisplay(product) {
   if (hasFragrance) {
     qtyDec.onclick = () => decrementLastFragrance(product);
     qtyInc.style.display = 'none';
-    qtyDec.title = `Remove ${formatProductQty(product, getQuantityStep(product))} da última fragrância adicionada`;
+    qtyDec.title = `Remove ${formatProductQty(product, getQuantityStep(product))} da última ${getOptionLabels(product).singular.toLowerCase()} adicionada`;
     qtyVal.disabled = true;
     qtyVal.onchange = null;
   } else {
@@ -465,7 +475,7 @@ function renderModalBalance(product) {
 
   if (total === 0) {
     balanceEl.className   = 'modal-balance modal-balance--pending';
-    balanceEl.textContent = `Adicione fragrâncias para compor o mínimo de ${formatProductQty(product, minQty)}`;
+    balanceEl.textContent = `Adicione ${getOptionLabels(product).plural.toLowerCase()} para compor o mínimo de ${formatProductQty(product, minQty)}`;
   } else if (missing > 0) {
     balanceEl.className   = 'modal-balance modal-balance--pending';
     balanceEl.textContent = `Faltam ${formatProductQty(product, missing)} para atingir o mínimo de ${formatProductQty(product, minQty)}`;
@@ -533,7 +543,7 @@ function validateFragrances(product) {
   const entries = Object.entries(modalFragrances);
 
   if (entries.length === 0) {
-    return { valid: false, reason: 'Adicione ao menos uma fragrância' };
+    return { valid: false, reason: `Adicione ao menos uma ${getOptionLabels(product).singular.toLowerCase()}` };
   }
 
   for (const [name, qty] of entries) {

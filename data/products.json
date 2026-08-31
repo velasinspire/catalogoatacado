@@ -378,9 +378,9 @@
     "images": [
       "ÂMBAR.jpg",
       "ambar-galeria-1.jpeg",
+      "ambar-galeria-4.jpeg",
       "ambar-galeria-2.jpeg",
       "ambar-galeria-3.jpeg",
-      "ambar-galeria-4.jpeg",
       "ambar-galeria-5.jpeg",
       "ambar-galeria-6.jpeg"
     ],
@@ -564,6 +564,8 @@
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 3,
+    "optionLabel": "Blend",
+    "optionLabelPlural": "Blends",
     "isKit": false,
     "tag": null,
     "priceTiers": [
@@ -715,6 +717,8 @@
     "minQty": 10,
     "hasFragrance": true,
     "fragranceMinQty": 10,
+    "optionLabel": "Estampa",
+    "optionLabelPlural": "Estampas",
     "isKit": false,
     "tag": null,
     "priceTiers": [

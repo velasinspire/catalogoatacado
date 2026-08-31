@@ -77,8 +77,10 @@ function setModalPurchaseType(type) {
 
   // Atualizar label de fragrância no modal
   if (p && p.hasFragrance && p.fragrances.length) {
+    const optionLabels = getOptionLabels(p);
+    document.getElementById('modal-option-label').textContent = optionLabels.singular;
     document.getElementById('modal-fragrance-min-label').textContent =
-      `· mín. ${formatProductQty(p, effectiveFragMin)} por fragrância`;
+      `· mín. ${formatProductQty(p, effectiveFragMin)} por ${optionLabels.singular.toLowerCase()}`;
   }
 
   // Atualizar botão adicionar
