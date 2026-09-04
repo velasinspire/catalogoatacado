@@ -11,17 +11,26 @@ function loadCart() {
     if (!savedCart || typeof savedCart !== 'object' || Array.isArray(savedCart)) return;
 
     Object.keys(cart).forEach(key => delete cart[key]);
-    Object.entries(savedCart).forEach(([key, entry]) => {
+    Object.values(savedCart).forEach(entry => {
       if (!entry?.product || !Number.isFinite(Number(entry.quantity))) return;
       const latestProduct = products.find(product =>
         product.id === entry.product.id &&
         product.catalog === entry.product.catalog
       );
-      cart[key] = {
+      const normalizedEntry = {
         ...entry,
         product: latestProduct || entry.product,
-        quantity: Number(entry.quantity)
+        quantity: Number(entry.quantity),
+        purchaseType: entry.purchaseType || 'inspire'
       };
+      const key = cartKey(
+        normalizedEntry.product.id,
+        normalizedEntry.fragrance,
+        normalizedEntry.purchaseType,
+        normalizedEntry.product.catalog
+      );
+      if (cart[key]) cart[key].quantity += normalizedEntry.quantity;
+      else cart[key] = normalizedEntry;
     });
     saveCart();
   } catch (error) {
@@ -37,15 +46,16 @@ function saveCart() {
   }
 }
 
-function cartKey(productId, fragrance) {
-  return fragrance ? `${productId}__${fragrance}` : `${productId}`;
+function cartKey(productId, fragrance, purchaseType = 'inspire', catalog = 'main') {
+  return `${catalog || 'main'}__${productId}__${purchaseType}__${fragrance || 'sem-opcao'}`;
 }
 
 function addToCart(productId, qty, fragrance, purchaseType) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
 
-  const key = cartKey(productId, fragrance);
+  const itemPurchaseType = purchaseType || modalPurchaseType || currentPurchaseType || 'inspire';
+  const key = cartKey(productId, fragrance, itemPurchaseType, product.catalog);
   if (cart[key]) {
     cart[key].quantity += qty;
   } else {
@@ -53,7 +63,7 @@ function addToCart(productId, qty, fragrance, purchaseType) {
       product,
       quantity: qty,
       fragrance: fragrance || null,
-      purchaseType: purchaseType || currentPurchaseType || 'inspire'
+      purchaseType: itemPurchaseType
     };
   }
 
@@ -105,21 +115,32 @@ function removeFromCart(key) {
   renderCart();
 }
 
-function getCartProductTotal(product) {
+function getCartProductTotal(product, purchaseType = 'inspire') {
   return Object.values(cart).reduce((total, entry) => {
     const isSameProduct = entry.product.id === product.id &&
-      (entry.product.catalog || 'main') === (product.catalog || 'main');
+      (entry.product.catalog || 'main') === (product.catalog || 'main') &&
+      (entry.purchaseType || 'inspire') === purchaseType;
     return isSameProduct ? total + entry.quantity : total;
   }, 0);
 }
 
-function getCartProductTier(product) {
-  return getActiveTier(product, getCartProductTotal(product));
+function getCartProductTier(product, purchaseType = 'inspire') {
+  return getActiveTier(product, getCartProductTotal(product, purchaseType));
+}
+
+function getCartPurchaseTypes() {
+  return new Set(Object.values(cart).map(entry => entry.purchaseType || 'inspire'));
+}
+
+function getCartOrderMinimum() {
+  return getCartPurchaseTypes().has('whitelabel')
+    ? PURCHASE_RULES.whitelabel.orderMin
+    : PURCHASE_RULES.inspire.orderMin;
 }
 
 function calcTotal() {
   return Object.values(cart).reduce((sum, entry) => {
-    const tier = getCartProductTier(entry.product);
+    const tier = getCartProductTier(entry.product, entry.purchaseType || 'inspire');
     return sum + tier.price * entry.quantity;
   }, 0);
 }
@@ -128,13 +149,12 @@ function calcTotal() {
 // VALIDAÇÃO FINAL DO CARRINHO — respeita tipo de compra
 // ================================================
 function validateCart() {
-  const rules = PURCHASE_RULES[currentPurchaseType] || PURCHASE_RULES.inspire;
-
   const byProduct = {};
   Object.values(cart).forEach(entry => {
-    const groupKey = `${entry.product.catalog || 'main'}__${entry.product.id}`;
+    const purchaseType = entry.purchaseType || 'inspire';
+    const groupKey = `${entry.product.catalog || 'main'}__${entry.product.id}__${purchaseType}`;
     if (!byProduct[groupKey]) {
-      byProduct[groupKey] = { product: entry.product, fragrances: {}, purchaseType: entry.purchaseType };
+      byProduct[groupKey] = { product: entry.product, fragrances: {}, purchaseType };
     }
     if (entry.fragrance) {
       byProduct[groupKey].fragrances[entry.fragrance] =
@@ -146,9 +166,10 @@ function validateCart() {
 
   const errors = [];
 
-  Object.values(byProduct).forEach(({ product, fragrances, totalDirect }) => {
+  Object.values(byProduct).forEach(({ product, fragrances, totalDirect, purchaseType }) => {
     const messages = [];
     const hasFragrances = product.hasFragrance && product.fragrances.length > 0;
+    const rules = PURCHASE_RULES[purchaseType] || PURCHASE_RULES.inspire;
 
     // Mínimos efetivos: White Label sobrescreve os padrões do produto
     const effectiveMinQty  = isWeightProduct(product) ? product.minQty : (rules.productMinQty || product.minQty);
@@ -185,6 +206,7 @@ function validateCart() {
       errors.push({
         productId: product.id,
         productCatalog: product.catalog || 'main',
+        purchaseType,
         productName: product.name,
         messages
       });
@@ -207,6 +229,8 @@ function renderCart() {
   const entries    = Object.entries(cart);
   const totalItems = Object.values(cart).reduce((s, e) => s + e.quantity, 0);
   badge.textContent = totalItems;
+  ORDER_MIN_VALUE = getCartOrderMinimum();
+  updateCartPurchaseTypeSummary();
 
   if (entries.length === 0) {
     container.innerHTML = '<p class="cart-empty">Nenhum produto adicionado ainda.</p>';
@@ -220,7 +244,7 @@ function renderCart() {
   const errorMap = {};
   if (!validation.valid) {
     validation.errors.forEach(e => {
-      errorMap[`${e.productCatalog || 'main'}__${e.productId}`] = e;
+      errorMap[`${e.productCatalog || 'main'}__${e.productId}__${e.purchaseType || 'inspire'}`] = e;
     });
   }
 
@@ -229,11 +253,12 @@ function renderCart() {
 
   entries.forEach(([key, entry]) => {
     const { product, quantity, fragrance } = entry;
-    const productTotal = getCartProductTotal(product);
+    const purchaseType = entry.purchaseType || 'inspire';
+    const productTotal = getCartProductTotal(product, purchaseType);
     const tier     = getActiveTier(product, productTotal);
     const subtotal = tier.price * quantity;
 
-    const productErrorObj = errorMap[`${product.catalog || 'main'}__${product.id}`];
+    const productErrorObj = errorMap[`${product.catalog || 'main'}__${product.id}__${purchaseType}`];
     const productErrors   = productErrorObj ? productErrorObj.messages : [];
     const itemErrors = fragrance
       ? productErrors.filter(msg =>
@@ -250,6 +275,7 @@ function renderCart() {
     item.innerHTML = `
       <div class="cart-item-header">
         <span class="cart-item-name">${product.name}</span>
+        <span class="cart-item-type cart-item-type--${purchaseType}">${PURCHASE_RULES[purchaseType]?.label || 'Inspire'}</span>
         <button class="cart-item-remove" onclick="removeFromCart('${key}')" aria-label="Remover">✕</button>
       </div>
       <div class="cart-item-sub">
@@ -269,7 +295,7 @@ function renderCart() {
       ${hasError ? `
         <div class="cart-item-errors">
           ${itemErrors.map(msg => `<span class="cart-item-error-msg">⚠ ${msg}</span>`).join('')}
-          <button class="cart-item-fix-btn" onclick="navigateToProduct(${product.id})">
+          <button class="cart-item-fix-btn" onclick="navigateToProduct(${product.id}, '${purchaseType}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
             Corrigir produto
           </button>

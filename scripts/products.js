@@ -25,7 +25,7 @@ function formatProductQty(product, qty) {
 }
 
 function getEffectiveMinimums(product) {
-  const rules = PURCHASE_RULES[currentPurchaseType] || PURCHASE_RULES.inspire;
+  const rules = PURCHASE_RULES[modalPurchaseType || currentPurchaseType] || PURCHASE_RULES.inspire;
   return {
     minQty: isWeightProduct(product) ? product.minQty : (rules.productMinQty || product.minQty),
     fragMin: isWeightProduct(product) ? product.fragranceMinQty : (rules.fragMinQty || product.fragranceMinQty)
@@ -390,7 +390,7 @@ function changeModalTotalQtyDirect(product, delta) {
 
 function setModalTotalQtyFromInput(product) {
   const qtyVal = document.getElementById('modal-qty-val');
-  const rules  = PURCHASE_RULES[currentPurchaseType] || PURCHASE_RULES.inspire;
+  const rules  = PURCHASE_RULES[modalPurchaseType || currentPurchaseType] || PURCHASE_RULES.inspire;
   const minQty = rules.productMinQty || product.minQty;
 
   let value = parseFloat(qtyVal.value);
@@ -575,15 +575,16 @@ function updateAddModalButton(product) {
   btn.disabled = !valid;
 
   if (valid) {
-    const typeName = PURCHASE_RULES[currentPurchaseType]?.label || '';
+    const selectedType = modalPurchaseType || currentPurchaseType || 'inspire';
+    const typeName = PURCHASE_RULES[selectedType]?.label || '';
     btn.innerHTML = `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       Adicionar ${formatProductQty(product, modalTotalQty)} — ${typeName}
     `;
     const hasFragrance = product.hasFragrance && product.fragrances.length > 0;
     btn.onclick = hasFragrance
-      ? () => addToCartMultiFragrance(modalProductId, modalTotalQty, { ...modalFragrances }, currentPurchaseType)
-      : () => addToCart(modalProductId, modalTotalQty, null, currentPurchaseType);
+      ? () => addToCartMultiFragrance(modalProductId, modalTotalQty, { ...modalFragrances }, selectedType)
+      : () => addToCart(modalProductId, modalTotalQty, null, selectedType);
   } else {
     btn.textContent = reason;
   }

@@ -1072,29 +1072,45 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .cpt-selector {
   display: flex; gap: 6px;
 }
-.cpt-btn {
+.cpt-tag {
   flex: 1; padding: 8px 10px;
-  background: var(--white); color: var(--ink-soft);
+  background: var(--white); color: var(--stone);
   border: 1.5px solid var(--linen-dark);
   border-radius: var(--radius-sm);
   font-size: 13px; font-weight: 500;
   font-family: 'Jost', sans-serif;
-  cursor: pointer; transition: var(--transition);
+  text-align: center;
+  opacity: 0.55;
+  transition: var(--transition);
 }
-.cpt-btn:hover { border-color: var(--sage); color: var(--ink); }
-.cpt-btn--active {
+.cpt-tag--active {
   background: var(--ink); color: var(--white);
   border-color: var(--ink);
+  opacity: 1;
+  box-shadow: 0 3px 10px rgba(35, 32, 26, 0.16);
 }
 .cpt-rules {
   display: flex; justify-content: space-between; align-items: center; gap: 8px;
   font-size: 11px; color: var(--ink-soft); line-height: 1.4;
 }
+.cpt-rule-line { display: block; }
 .cpt-rules-link {
   font-size: 11px; color: var(--sage-dark); font-weight: 600;
   white-space: nowrap; text-decoration: underline; text-underline-offset: 2px;
 }
 .cpt-rules-link:hover { color: var(--ink); }
+
+.cart-item-type {
+  flex-shrink: 0;
+  border-radius: 100px;
+  padding: 2px 7px;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.cart-item-type--inspire { background: rgba(158,72,32,0.12); color: var(--sage-dark); }
+.cart-item-type--whitelabel { background: var(--ink); color: var(--white); }
 
 /* ——— CART RULES CHECKBOX ——— */
 .cart-rules-check {

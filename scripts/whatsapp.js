@@ -42,7 +42,10 @@ function openWhatsApp(event) {
   }
 
   // ——— MONTAR MENSAGEM ———
-  const typeName = PURCHASE_RULES[currentPurchaseType]?.label || 'Inspire';
+  const purchaseTypes = getCartPurchaseTypes();
+  const typeName = purchaseTypes.size > 1
+    ? 'Misto — Inspire + White Label'
+    : PURCHASE_RULES[[...purchaseTypes][0] || 'inspire']?.label || 'Inspire';
   const catalogsInOrder = new Set(entries.map(({ product }) => product.catalog || 'main'));
   const orderCatalogName = catalogsInOrder.size > 1
     ? 'Linha regular + Expresso Polar'
@@ -53,14 +56,20 @@ function openWhatsApp(event) {
     `*${orderCatalogName} · ${typeName}*\n`,
   ];
 
-  entries.forEach(({ product, quantity, fragrance }) => {
-    const productTotal  = getCartProductTotal(product);
-    const tier          = getActiveTier(product, productTotal);
-    const subtotal      = tier.price * quantity;
-    const fragranceNote = fragrance ? ` · ${product.optionLabel || 'Fragrância'}: ${fragrance}` : '';
-    lines.push(
-      `• *${product.name}* (${formatProductQty(product, quantity)}${fragranceNote}) — ${formatCurrency(subtotal)} _(${tier.label} · ${formatCurrency(tier.price)}/${isWeightProduct(product) ? 'kg' : 'un'})_`
-    );
+  ['inspire', 'whitelabel'].forEach(purchaseType => {
+    const typeEntries = entries.filter(entry => (entry.purchaseType || 'inspire') === purchaseType);
+    if (!typeEntries.length) return;
+
+    lines.push(`\n*PRODUTOS ${PURCHASE_RULES[purchaseType].label.toUpperCase()}*`);
+    typeEntries.forEach(({ product, quantity, fragrance }) => {
+      const productTotal  = getCartProductTotal(product, purchaseType);
+      const tier          = getActiveTier(product, productTotal);
+      const subtotal      = tier.price * quantity;
+      const fragranceNote = fragrance ? ` · ${product.optionLabel || 'Fragrância'}: ${fragrance}` : '';
+      lines.push(
+        `• *${product.name}* (${formatProductQty(product, quantity)}${fragranceNote}) — ${formatCurrency(subtotal)} _(${tier.label} · ${formatCurrency(tier.price)}/${isWeightProduct(product) ? 'kg' : 'un'})_`
+      );
+    });
   });
 
   lines.push(`\n*Total estimado: ${formatCurrency(total)}*`);
@@ -95,11 +104,11 @@ function showCartValidationErrors(errors) {
     <ul class="cve-list">
       ${errors.map(e => `
         <li class="cve-product">
-          <strong>${e.productName}</strong>
+          <strong>${e.productName} · ${PURCHASE_RULES[e.purchaseType || 'inspire']?.label || 'Inspire'}</strong>
           <ul class="cve-msgs">
             ${e.messages.map(m => `<li>${m}</li>`).join('')}
           </ul>
-          <button class="cve-fix-btn" onclick="navigateToProduct(${e.productId})">
+          <button class="cve-fix-btn" onclick="navigateToProduct(${e.productId}, '${e.purchaseType || 'inspire'}')">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
             Corrigir produto
           </button>

@@ -20,46 +20,42 @@ let modalPurchaseType   = null;      // seleção no modal
 // Preenchido dinamicamente a partir de data/config.json (purchaseRules)
 let PURCHASE_RULES = {};
 
-// ——— DEFINIR TIPO DE COMPRA (carrinho) ———
-function setPurchaseType(type) {
-  currentPurchaseType = type;
-  ORDER_MIN_VALUE = PURCHASE_RULES[type].orderMin;
+// ——— RESUMO AUTOMÁTICO DAS MODALIDADES NO CARRINHO ———
+function updateCartPurchaseTypeSummary() {
+  const types = getCartPurchaseTypes();
+  const hasInspire = types.has('inspire');
+  const hasWhiteLabel = types.has('whitelabel');
 
-  // Atualizar botões
-  document.getElementById('cpt-inspire').classList.toggle('cpt-btn--active', type === 'inspire');
-  document.getElementById('cpt-whitelabel')?.classList.toggle('cpt-btn--active', type === 'whitelabel');
+  document.getElementById('cpt-inspire')?.classList.toggle('cpt-tag--active', hasInspire);
+  document.getElementById('cpt-whitelabel')?.classList.toggle('cpt-tag--active', hasWhiteLabel);
 
-  // Atualizar texto de regra
-  const rules = PURCHASE_RULES[type];
-  const ruleText = rules.productMinQty
-    ? `Pedido mínimo R$ ${rules.orderMin.toLocaleString('pt-BR')},00 · Mín. ${rules.productMinQty} un./produto · ${rules.fragMinQty} un./fragrância`
-    : `Pedido mínimo R$ ${rules.orderMin.toLocaleString('pt-BR')},00 · Mín. conforme cada produto`;
-  document.getElementById('cpt-rule-text').textContent = ruleText;
+  const ruleLines = [];
+  if (hasInspire || types.size === 0) {
+    ruleLines.push('Inspire: pedido mínimo R$ 1.000,00 · Mín. conforme cada produto');
+  }
+  if (hasWhiteLabel || types.size === 0) {
+    ruleLines.push('White Label: pedido mínimo R$ 2.000,00 · Mín. 20 un./produto · 10 un./fragrância');
+  }
+  document.getElementById('cpt-rule-text').innerHTML = ruleLines
+    .map(line => `<span class="cpt-rule-line">${line}</span>`).join('');
 
-  // Atualizar nota do rodapé do carrinho
+  const orderLabel = hasWhiteLabel
+    ? (hasInspire ? 'Pedido misto' : 'Pedido White Label')
+    : 'Pedido Inspire';
   document.getElementById('cart-note').textContent =
-    `Pedido mínimo ${rules.label}: R$ ${rules.orderMin.toLocaleString('pt-BR')},00 · Produção iniciada após confirmação.`;
-
-  // Atualizar barra de progresso e re-renderizar
-  renderCart();
+    `${orderLabel} · Mínimo final: ${formatCurrency(ORDER_MIN_VALUE)} · Produção iniciada após confirmação.`;
 }
 
-// ——— DEFINIR TIPO DE COMPRA NO MODAL ———
 function setModalPurchaseType(type) {
   modalPurchaseType = type;
-  currentPurchaseType = type; // sincroniza com o carrinho
+  currentPurchaseType = type; // memoriza a escolha para o próximo produto
 
   // Botões do modal
   document.getElementById('mpt-inspire').classList.toggle('mpt-btn--active', type === 'inspire');
   document.getElementById('mpt-whitelabel')?.classList.toggle('mpt-btn--active', type === 'whitelabel');
 
-  // Sincronizar botões do carrinho
-  document.getElementById('cpt-inspire').classList.toggle('cpt-btn--active', type === 'inspire');
-  document.getElementById('cpt-whitelabel')?.classList.toggle('cpt-btn--active', type === 'whitelabel');
-
   // Mostrar regras
   const rules = PURCHASE_RULES[type];
-  ORDER_MIN_VALUE = rules.orderMin;
 
   const rulesInfo = document.getElementById('mpt-rules-info');
   rulesInfo.style.display = 'flex';
@@ -88,9 +84,10 @@ function setModalPurchaseType(type) {
 }
 
 // ——— NAVEGAR PARA PRODUTO COM ERRO (botão "Corrigir produto") ———
-function navigateToProduct(productId) {
+function navigateToProduct(productId, purchaseType = 'inspire') {
   closeCart();
   setTimeout(() => {
+    currentPurchaseType = purchaseType;
     const p = products.find(x => x.id === productId);
     if (p) {
       openProductModal(p.id);
@@ -198,8 +195,8 @@ Promise.all([
     renderProducts();
     renderCart();
 
-    // Inicializar label de regras do tipo padrão
-    setPurchaseType('inspire');
+    // Inicializar indicadores automáticos das modalidades
+    updateCartPurchaseTypeSummary();
   })
   .catch((err) => {
     console.error('Erro ao carregar arquivos:', err);
