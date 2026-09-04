@@ -27,7 +27,7 @@ function setPurchaseType(type) {
 
   // Atualizar botões
   document.getElementById('cpt-inspire').classList.toggle('cpt-btn--active', type === 'inspire');
-  document.getElementById('cpt-whitelabel').classList.toggle('cpt-btn--active', type === 'whitelabel');
+  document.getElementById('cpt-whitelabel')?.classList.toggle('cpt-btn--active', type === 'whitelabel');
 
   // Atualizar texto de regra
   const rules = PURCHASE_RULES[type];
@@ -51,11 +51,11 @@ function setModalPurchaseType(type) {
 
   // Botões do modal
   document.getElementById('mpt-inspire').classList.toggle('mpt-btn--active', type === 'inspire');
-  document.getElementById('mpt-whitelabel').classList.toggle('mpt-btn--active', type === 'whitelabel');
+  document.getElementById('mpt-whitelabel')?.classList.toggle('mpt-btn--active', type === 'whitelabel');
 
   // Sincronizar botões do carrinho
   document.getElementById('cpt-inspire').classList.toggle('cpt-btn--active', type === 'inspire');
-  document.getElementById('cpt-whitelabel').classList.toggle('cpt-btn--active', type === 'whitelabel');
+  document.getElementById('cpt-whitelabel')?.classList.toggle('cpt-btn--active', type === 'whitelabel');
 
   // Mostrar regras
   const rules = PURCHASE_RULES[type];

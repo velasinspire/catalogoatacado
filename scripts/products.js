@@ -282,7 +282,7 @@ function openProductModal(productId, highlightField) {
 
   // Reset seletor de tipo no modal — pré-seleciona o tipo do carrinho
   document.getElementById('mpt-inspire').classList.toggle('mpt-btn--active', currentPurchaseType === 'inspire');
-  document.getElementById('mpt-whitelabel').classList.toggle('mpt-btn--active', currentPurchaseType === 'whitelabel');
+  document.getElementById('mpt-whitelabel')?.classList.toggle('mpt-btn--active', currentPurchaseType === 'whitelabel');
 
   // Mostrar regras se já há tipo selecionado
   if (currentPurchaseType) {
