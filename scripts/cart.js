@@ -105,9 +105,21 @@ function removeFromCart(key) {
   renderCart();
 }
 
+function getCartProductTotal(product) {
+  return Object.values(cart).reduce((total, entry) => {
+    const isSameProduct = entry.product.id === product.id &&
+      (entry.product.catalog || 'main') === (product.catalog || 'main');
+    return isSameProduct ? total + entry.quantity : total;
+  }, 0);
+}
+
+function getCartProductTier(product) {
+  return getActiveTier(product, getCartProductTotal(product));
+}
+
 function calcTotal() {
   return Object.values(cart).reduce((sum, entry) => {
-    const tier = getActiveTier(entry.product, entry.quantity);
+    const tier = getCartProductTier(entry.product);
     return sum + tier.price * entry.quantity;
   }, 0);
 }
@@ -120,14 +132,15 @@ function validateCart() {
 
   const byProduct = {};
   Object.values(cart).forEach(entry => {
-    const id = entry.product.id;
-    if (!byProduct[id]) {
-      byProduct[id] = { product: entry.product, fragrances: {}, purchaseType: entry.purchaseType };
+    const groupKey = `${entry.product.catalog || 'main'}__${entry.product.id}`;
+    if (!byProduct[groupKey]) {
+      byProduct[groupKey] = { product: entry.product, fragrances: {}, purchaseType: entry.purchaseType };
     }
     if (entry.fragrance) {
-      byProduct[id].fragrances[entry.fragrance] = entry.quantity;
+      byProduct[groupKey].fragrances[entry.fragrance] =
+        (byProduct[groupKey].fragrances[entry.fragrance] || 0) + entry.quantity;
     } else {
-      byProduct[id].totalDirect = (byProduct[id].totalDirect || 0) + entry.quantity;
+      byProduct[groupKey].totalDirect = (byProduct[groupKey].totalDirect || 0) + entry.quantity;
     }
   });
 
@@ -169,7 +182,12 @@ function validateCart() {
     }
 
     if (messages.length > 0) {
-      errors.push({ productId: product.id, productName: product.name, messages });
+      errors.push({
+        productId: product.id,
+        productCatalog: product.catalog || 'main',
+        productName: product.name,
+        messages
+      });
     }
   });
 
@@ -201,7 +219,9 @@ function renderCart() {
   const validation = validateCart();
   const errorMap = {};
   if (!validation.valid) {
-    validation.errors.forEach(e => { errorMap[e.productId] = e; });
+    validation.errors.forEach(e => {
+      errorMap[`${e.productCatalog || 'main'}__${e.productId}`] = e;
+    });
   }
 
   container.innerHTML = '';
@@ -209,10 +229,11 @@ function renderCart() {
 
   entries.forEach(([key, entry]) => {
     const { product, quantity, fragrance } = entry;
-    const tier     = getActiveTier(product, quantity);
+    const productTotal = getCartProductTotal(product);
+    const tier     = getActiveTier(product, productTotal);
     const subtotal = tier.price * quantity;
 
-    const productErrorObj = errorMap[product.id];
+    const productErrorObj = errorMap[`${product.catalog || 'main'}__${product.id}`];
     const productErrors   = productErrorObj ? productErrorObj.messages : [];
     const itemErrors = fragrance
       ? productErrors.filter(msg =>

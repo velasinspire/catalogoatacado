@@ -54,7 +54,8 @@ function openWhatsApp(event) {
   ];
 
   entries.forEach(({ product, quantity, fragrance }) => {
-    const tier          = getActiveTier(product, quantity);
+    const productTotal  = getCartProductTotal(product);
+    const tier          = getActiveTier(product, productTotal);
     const subtotal      = tier.price * quantity;
     const fragranceNote = fragrance ? ` · ${product.optionLabel || 'Fragrância'}: ${fragrance}` : '';
     lines.push(
