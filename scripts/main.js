@@ -9,8 +9,16 @@ let ORDER_MIN_VALUE = 0;
 let products = [];
 let productDetails = {};
 const cardQtys = {};
-const IS_CHRISTMAS_CATALOG = document.body.dataset.catalog === 'christmas';
-const CATALOG_NAME = IS_CHRISTMAS_CATALOG ? 'Expresso Polar' : 'Catálogo Atacado 2026';
+const CATALOG_ID = document.body.dataset.catalog || 'main';
+const IS_COLLECTION_CATALOG = CATALOG_ID !== 'main';
+const CATALOG_NAME = CATALOG_ID === 'natal-2026'
+  ? 'Natal 2026'
+  : CATALOG_ID === 'christmas' ? 'Expresso Polar' : 'Catálogo Atacado 2026';
+const CATALOG_FILES = {
+  main: ['data/products.json', 'data/product-details.json'],
+  christmas: ['data/expresso-polar-products.json', 'data/expresso-polar-details.json'],
+  'natal-2026': ['data/natal-2026-products.json', 'data/natal-2026-details.json']
+};
 
 // ——— TIPO DE COMPRA ———
 // 'inspire' | 'whitelabel' | null (não selecionado no modal)
@@ -98,7 +106,7 @@ function navigateToProduct(productId, purchaseType = 'inspire') {
     if (!savedEntry) return;
     const targetPage = savedEntry.product.catalog === 'christmas'
       ? 'expresso-polar.html'
-      : 'index.html';
+      : savedEntry.product.catalog === 'natal-2026' ? 'natal-2026.html' : 'index.html';
     window.location.href = `${targetPage}#catalogo`;
   }, 400);
 }
@@ -158,8 +166,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ——— CARREGAR DADOS E INICIALIZAR ———
 Promise.all([
   fetch('data/config.json').then(r => r.json()),
-  fetch(IS_CHRISTMAS_CATALOG ? 'data/expresso-polar-products.json' : 'data/products.json').then(r => r.json()),
-  fetch(IS_CHRISTMAS_CATALOG ? 'data/expresso-polar-details.json' : 'data/product-details.json').then(r => r.json()),
+  fetch(CATALOG_FILES[CATALOG_ID][0]).then(r => r.json()),
+  fetch(CATALOG_FILES[CATALOG_ID][1]).then(r => r.json()),
 ])
   .then(([config, data, details]) => {
     WHATSAPP_NUMBER = config.whatsappNumber;
@@ -168,7 +176,7 @@ Promise.all([
     ORDER_MIN_VALUE = PURCHASE_RULES.inspire.orderMin;
     productDetails = details;
 
-    if (config.heroDesc && !IS_CHRISTMAS_CATALOG) {
+    if (config.heroDesc && !IS_COLLECTION_CATALOG) {
       const el = document.getElementById('hero-desc');
       if (el) el.textContent = config.heroDesc;
     }
@@ -182,14 +190,14 @@ Promise.all([
     ];
 
     const orderIndex = new Map(requestedOrder.map((id, index) => [id, index]));
-    products = (IS_CHRISTMAS_CATALOG
+    products = (IS_COLLECTION_CATALOG
       ? data
       : data
           .filter(product => ![4, 5].includes(product.id))
           .sort((a, b) => (orderIndex.get(a.id) ?? 999) - (orderIndex.get(b.id) ?? 999)))
       .map(product => ({
         ...product,
-        catalog: IS_CHRISTMAS_CATALOG ? 'christmas' : 'main'
+        catalog: CATALOG_ID
       }));
     loadCart();
     renderProducts();

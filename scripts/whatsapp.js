@@ -47,8 +47,9 @@ function openWhatsApp(event) {
     ? 'Misto — Inspire + White Label'
     : PURCHASE_RULES[[...purchaseTypes][0] || 'inspire']?.label || 'Inspire';
   const catalogsInOrder = new Set(entries.map(({ product }) => product.catalog || 'main'));
+  const catalogLabels = { main: 'Linha regular', christmas: 'Expresso Polar', 'natal-2026': 'Natal 2026' };
   const orderCatalogName = catalogsInOrder.size > 1
-    ? 'Linha regular + Expresso Polar'
+    ? [...catalogsInOrder].map(id => catalogLabels[id] || id).join(' + ')
     : CATALOG_NAME;
 
   const lines = [

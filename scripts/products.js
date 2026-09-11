@@ -137,11 +137,16 @@ function openProductDetails(productId) {
     .map(paragraph => `<p>${paragraph}</p>`).join('');
   document.getElementById('details-modal-technical').textContent = product.detail;
 
+  const fragranceDescriptions = productDetails._fragrances || {};
+  const fragranceBenefits = (product.fragrances || [])
+    .filter(fragrance => fragranceDescriptions[fragrance])
+    .map(fragrance => `<strong>${fragrance}</strong> — ${fragranceDescriptions[fragrance]}`);
+  const benefitItems = [...(content.benefits || []), ...fragranceBenefits];
   const benefits = document.getElementById('details-modal-benefits');
-  benefits.innerHTML = content.benefits?.length
-    ? `<h4>${content.benefitsTitle || 'Benefícios'}</h4><ul>${content.benefits.map(item => `<li>${item}</li>`).join('')}</ul>`
+  benefits.innerHTML = benefitItems.length
+    ? `<h4>${content.benefitsTitle || (fragranceBenefits.length ? 'Aromas disponíveis' : 'Benefícios')}</h4><ul>${benefitItems.map(item => `<li>${item}</li>`).join('')}</ul>`
     : '';
-  benefits.hidden = !content.benefits?.length;
+  benefits.hidden = !benefitItems.length;
 
   const usage = document.getElementById('details-modal-usage');
   const usageContent = Array.isArray(content.usage)
@@ -163,10 +168,11 @@ function openProductDetails(productId) {
   const mainImage = document.getElementById('details-modal-main-image');
   mainImage.src = IMAGE_BASE_PATH + images[0];
   mainImage.alt = product.name;
+  mainImage.style.objectPosition = getDetailsImageFocus(product, images[0]);
   document.getElementById('details-modal-thumbs').innerHTML = images.length > 1
     ? images.map((image, index) => `
         <button type="button" class="details-thumb${index === 0 ? ' active' : ''}"
-                onclick="selectDetailsImage(this, '${IMAGE_BASE_PATH + image}', '${product.name}')">
+                onclick="selectDetailsImage(this, '${IMAGE_BASE_PATH + image}', '${product.name}', '${getDetailsImageFocus(product, image)}')">
           <img src="${IMAGE_BASE_PATH + image}" alt="${product.name} — foto ${index + 1}">
         </button>`).join('')
     : '';
@@ -181,11 +187,17 @@ function openProductDetails(productId) {
   document.body.style.overflow = 'hidden';
 }
 
-function selectDetailsImage(button, src, alt) {
-  document.getElementById('details-modal-main-image').src = src;
-  document.getElementById('details-modal-main-image').alt = alt;
+function selectDetailsImage(button, src, alt, focus = 'center center') {
+  const mainImage = document.getElementById('details-modal-main-image');
+  mainImage.src = src;
+  mainImage.alt = alt;
+  mainImage.style.objectPosition = focus;
   document.querySelectorAll('.details-thumb').forEach(thumb => thumb.classList.remove('active'));
   button.classList.add('active');
+}
+
+function getDetailsImageFocus(product, image) {
+  return product.imageFocus?.[image] || 'center center';
 }
 
 function closeProductDetails(event) {

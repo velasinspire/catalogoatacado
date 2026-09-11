@@ -1,0 +1,177 @@
+[
+  {
+    "id": 2001,
+    "name": "Vela Copo Fosco",
+    "detail": "Vela aromática · 180 g · Copo fosco",
+    "image": "Vela copo fosco 180gr1.jpg",
+    "images": [
+      "Vela copo fosco 180gr1.jpg",
+      "Vela copo fosco 180gr2.jpg",
+      "Vela copo fosco 180gr3.jpg",
+      "Vela copo fosco 180gr4.jpg"
+    ],
+    "minQty": 1,
+    "hasFragrance": true,
+    "fragranceMinQty": 1,
+    "isKit": false,
+    "tag": "Natal 2026",
+    "priceTiers": [
+      { "label": "1 a 9 un.", "min": 1, "max": 9, "price": 105.00 },
+      { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 73.20 },
+      { "label": "30 a 99 un.", "min": 30, "max": 99, "price": 71.70 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 69.50 }
+    ],
+    "extras": [],
+    "fragrances": ["Ginger Fresh", "Pacific Breeze"]
+  },
+  {
+    "id": 2002,
+    "name": "Vela Luminy",
+    "detail": "Vela aromática · 200 g · Edição especial de Natal",
+    "image": "Vela Luminy 200gr6.jpg",
+    "images": [
+      "Vela Luminy 200gr6.jpg",
+      "Vela Luminy 200gr2.jpg",
+      "Vela Luminy 200gr3.jpg",
+      "Vela Luminy 200gr4.jpg",
+      "Vela Luminy 200gr5.jpg",
+      "Vela Luminy 200gr1.jpg"
+    ],
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Natal 2026",
+    "priceTiers": [
+      { "label": "1 a 9 un.", "min": 1, "max": 9, "price": 139.90 },
+      { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 78.20 },
+      { "label": "30 a 99 un.", "min": 30, "max": 99, "price": 75.10 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 69.50 }
+    ],
+    "extras": [], "fragrances": ["Ginger Fresh", "Pacific Breeze", "Vinho"]
+  },
+  {
+    "id": 2003,
+    "name": "Difusor",
+    "detail": "Difusor de aromas · 150 ml · Edição especial de Natal",
+    "image": "Difusor 150ml 2.jpg",
+    "images": [
+      "Difusor 150ml 2.jpg",
+      "Difusor 150ml 1.jpg",
+      "Difusor 150ml 3.jpg",
+      "Difusor 150ml 4.jpg"
+    ],
+    "imageFocus": {
+      "Difusor 150ml 1.jpg": "center bottom",
+      "Difusor 150ml 2.jpg": "center center",
+      "Difusor 150ml 3.jpg": "center 72%",
+      "Difusor 150ml 4.jpg": "center 80%"
+    },
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Natal 2026",
+    "priceTiers": [
+      { "label": "1 a 9 un.", "min": 1, "max": 9, "price": 90.00 },
+      { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 68.20 },
+      { "label": "30 a 99 un.", "min": 30, "max": 99, "price": 65.50 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 61.40 }
+    ],
+    "extras": [], "fragrances": ["Ginger Fresh", "Pacific Breeze", "Vinho"]
+  },
+  {
+    "id": 2004,
+    "name": "Spray",
+    "detail": "Spray para ambientes · 250 ml · Edição especial de Natal",
+    "image": "natal-2026/placeholder.svg",
+    "images": ["natal-2026/placeholder.svg"],
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Natal 2026",
+    "priceTiers": [
+      { "label": "1 a 9 un.", "min": 1, "max": 9, "price": 105.00 },
+      { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 84.50 },
+      { "label": "30 a 99 un.", "min": 30, "max": 99, "price": 82.20 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 79.50 }
+    ],
+    "extras": [], "fragrances": ["Ginger Fresh", "Pacific Breeze", "Vinho"]
+  },
+  {
+    "id": 2005,
+    "name": "Mini Spray em Vidro",
+    "detail": "Mini spray · 10 ml · Frasco de vidro",
+    "image": "Mini spray 10ml vidro5.jpg",
+    "images": [
+      "Mini spray 10ml vidro5.jpg",
+      "Mini spray 10ml vidro1.jpg",
+      "Mini spray 10ml vidro2.jpg",
+      "Mini spray 10ml vidro3.jpg",
+      "Mini spray 10ml vidro4.jpg"
+    ],
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lembrança de Natal",
+    "priceTiers": [
+      { "label": "1 a 5 un.", "min": 1, "max": 5, "price": 19.90 },
+      { "label": "6 a 14 un.", "min": 6, "max": 14, "price": 18.00 },
+      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 16.90 },
+      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 15.90 },
+      { "label": "100 a 299 un.", "min": 100, "max": 299, "price": 14.50 },
+      { "label": "300+ un.", "min": 300, "max": null, "price": 13.10 }
+    ],
+    "extras": [], "fragrances": ["Ginger Fresh", "Pacific Breeze", "Vinho"]
+  },
+  {
+    "id": 2006,
+    "name": "Mini Latinha Dourada",
+    "detail": "Mini vela · Latinha dourada · Edição especial de Natal",
+    "image": "Mini latinha dourada5.jpg",
+    "images": [
+      "Mini latinha dourada5.jpg",
+      "Mini latinha dourada1.jpg",
+      "Mini latinha dourada2.jpg",
+      "Mini latinha dourada3.jpg",
+      "Mini latinha dourada4.jpg"
+    ],
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lembrança de Natal",
+    "priceTiers": [
+      { "label": "1 a 5 un.", "min": 1, "max": 5, "price": 13.50 },
+      { "label": "6 a 14 un.", "min": 6, "max": 14, "price": 13.00 },
+      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 10.90 },
+      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 9.95 },
+      { "label": "100 a 299 un.", "min": 100, "max": 299, "price": 8.80 },
+      { "label": "300+ un.", "min": 300, "max": null, "price": 8.40 }
+    ],
+    "extras": [], "fragrances": ["Ginger Fresh", "Pacific Breeze", "Vinho"]
+  },
+  {
+    "id": 2007,
+    "name": "Saquinho de Algodão com 3 Latinhas",
+    "detail": "Kit com 3 mini latinhas · Saquinho de algodão",
+    "image": "Saquinho algodão 3 latinhas1.jpg",
+    "images": [
+      "Saquinho algodão 3 latinhas1.jpg",
+      "Saquinho algodão 3 latinhas2.jpg",
+      "Saquinho algodão 3 latinhas3.jpg"
+    ],
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": true, "tag": "Kit de Natal",
+    "priceTiers": [
+      { "label": "1 a 14 kits", "min": 1, "max": 14, "price": 39.90 },
+      { "label": "15 a 49 kits", "min": 15, "max": 49, "price": 37.80 },
+      { "label": "50 a 99 kits", "min": 50, "max": 99, "price": 37.20 },
+      { "label": "100 a 299 kits", "min": 100, "max": 299, "price": 36.50 },
+      { "label": "300+ kits", "min": 300, "max": null, "price": 34.80 }
+    ],
+    "extras": [], "fragrances": ["Ginger Fresh", "Pacific Breeze", "Vinho"]
+  },
+  {
+    "id": 2008,
+    "name": "Mini Vela com Tampa Branca",
+    "detail": "Mini vela · Tampa branca · Edição especial de Natal",
+    "image": "Mini vela tampa branca1.jpg",
+    "images": [
+      "Mini vela tampa branca1.jpg",
+      "Mini vela tampa branca2.jpg",
+      "Mini vela tampa branca3.jpg"
+    ],
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lembrança de Natal",
+    "priceTiers": [
+      { "label": "1 a 5 un.", "min": 1, "max": 5, "price": 21.90 },
+      { "label": "6 a 14 un.", "min": 6, "max": 14, "price": 19.90 },
+      { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 18.50 },
+      { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 16.80 },
+      { "label": "100 a 299 un.", "min": 100, "max": 299, "price": 14.20 },
+      { "label": "300+ un.", "min": 300, "max": null, "price": 12.60 }
+    ],
+    "extras": [], "fragrances": ["Ginger Fresh", "Pacific Breeze", "Vinho"]
+  }
+]

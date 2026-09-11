@@ -40,3 +40,42 @@ function closeImgModal() {
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeImgModal(); closeCart(); closeProductModal(); closeProductDetails(); }
 });
+
+// ——— CARROSSEL DE COLEÇÕES DA PÁGINA PRINCIPAL ———
+document.addEventListener('DOMContentLoaded', () => {
+  const carousel = document.querySelector('.collection-carousel');
+  if (!carousel) return;
+
+  const slides = [...carousel.querySelectorAll('.collection-banner')];
+  const dots = [...carousel.querySelectorAll('.collection-carousel__dot')];
+  let activeIndex = 0;
+  let timer;
+
+  const showSlide = index => {
+    activeIndex = index;
+    slides.forEach((slide, i) => {
+      const active = i === activeIndex;
+      slide.classList.toggle('is-active', active);
+      slide.setAttribute('aria-hidden', String(!active));
+      slide.tabIndex = active ? 0 : -1;
+      dots[i].classList.toggle('is-active', active);
+      dots[i].setAttribute('aria-current', String(active));
+    });
+  };
+
+  const startRotation = () => {
+    clearInterval(timer);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    timer = setInterval(() => showSlide((activeIndex + 1) % slides.length), 6500);
+  };
+
+  dots.forEach((dot, index) => dot.addEventListener('click', () => {
+    showSlide(index);
+    startRotation();
+  }));
+  carousel.addEventListener('mouseenter', () => clearInterval(timer));
+  carousel.addEventListener('mouseleave', startRotation);
+  carousel.addEventListener('focusin', () => clearInterval(timer));
+  carousel.addEventListener('focusout', startRotation);
+  startRotation();
+});

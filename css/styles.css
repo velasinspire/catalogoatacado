@@ -566,7 +566,8 @@ button:focus-visible, a:focus-visible, input:focus-visible {
   .details-modal-overlay { padding: 0; align-items: flex-end; }
   .details-modal { display: block; width: 100%; height: auto; max-height: 94dvh; overflow-y: auto; border-radius: 18px 18px 0 0; }
   .details-modal-gallery { padding: 0; overflow: visible; }
-  .details-modal-main-image { aspect-ratio: 4 / 3; border-radius: 0; }
+  .details-modal-main-image { aspect-ratio: 4 / 3 !important; border-radius: 0; }
+  .details-modal-main-image img { object-fit: cover; }
   .details-modal-thumbs { display: flex; overflow-x: auto; padding: 0 14px 12px; margin-top: 10px; }
   .details-thumb { flex: 0 0 58px; }
   .details-modal-content { padding: 26px 20px 30px; overflow: visible; scrollbar-gutter: auto; }
@@ -1437,6 +1438,36 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .footer-sub { font-size: 11.5px; margin-top: 4px; opacity: 0.7; }
 
 /* ——— EXPRESSO POLAR ——— */
+.collection-carousel {
+  position: relative; max-width: 1180px; min-height: 370px; margin: 42px auto 18px;
+}
+.collection-banner {
+  position: absolute; inset: 0 0 40px; margin: 0; min-height: 330px;
+  opacity: 0; visibility: hidden; transform: translateX(22px);
+  transition: opacity .55s ease, transform .55s ease, visibility .55s;
+}
+.collection-banner.is-active { opacity: 1; visibility: visible; transform: translateX(0); z-index: 1; }
+.collection-carousel .polar-banner { position: absolute; margin: 0; }
+.collection-carousel__nav { position: absolute; z-index: 3; bottom: 10px; left: 50%; display: flex; gap: 9px; transform: translateX(-50%); }
+.collection-carousel__dot { width: 8px; height: 8px; padding: 0; border: 0; border-radius: 50%; background: #c7bca9; cursor: pointer; transition: width .25s, background .25s; }
+.collection-carousel__dot.is-active { width: 27px; border-radius: 10px; background: #8b2830; }
+.collection-banner--natal {
+  isolation: isolate; display: grid; grid-template-columns: 1.12fr .88fr; overflow: hidden;
+  color: #fff8e9; text-decoration: none; border-radius: 28px;
+  background: radial-gradient(circle at 76% 25%, rgba(232,199,134,.24), transparent 26%), linear-gradient(120deg,#681d28,#9c3038 52%,#3a1821);
+  box-shadow: 0 22px 55px rgba(78,25,31,.2);
+}
+.collection-banner--natal .polar-banner__eyebrow,.collection-banner--natal .polar-banner__cta { color: #f0d69d; }
+.natal-banner__scene { position: relative; height: 100%; overflow: hidden; }
+.natal-banner__halo { position: absolute; width: 245px; height: 245px; top: 33px; right: 64px; border-radius: 50%; border: 1px solid rgba(240,214,157,.42); box-shadow: 0 0 70px rgba(240,214,157,.16), inset 0 0 60px rgba(240,214,157,.08); }
+.natal-banner__tree { position: absolute; bottom: 0; width: 0; height: 0; border-left: 105px solid transparent; border-right: 105px solid transparent; border-bottom: 280px solid #173d34; filter: drop-shadow(0 12px 10px rgba(0,0,0,.18)); }
+.natal-banner__tree--front { right: 35px; }.natal-banner__tree--back { right: 180px; bottom: -35px; transform: scale(.72); border-bottom-color: #315c4d; }
+.natal-banner__ornament { position: absolute; border-radius: 50%; background: #e9cb8c; box-shadow: 0 0 18px rgba(233,203,140,.45); }
+.natal-banner__ornament::before { content: ''; position: absolute; left: 50%; bottom: 100%; height: 120px; border-left: 1px solid rgba(240,214,157,.5); }
+.natal-banner__ornament--one { width: 34px; height: 34px; top: 150px; right: 115px; }.natal-banner__ornament--two { width: 22px; height: 22px; top: 105px; right: 205px; }
+.natal-banner__gift { position: absolute; right: 185px; bottom: 15px; width: 82px; height: 62px; border: 2px solid #e9cb8c; background: #b93b43; box-shadow: inset 36px 0 #8b2830; }
+.natal-banner__gift::before { content: ''; position: absolute; left: -7px; right: -7px; top: -12px; height: 12px; background: #e9cb8c; }
+.natal-banner__spark { position: absolute; z-index: 2; color: #f0d69d; }.natal-banner__spark--one { left: 49%; top: 38px; font-size: 22px; }.natal-banner__spark--two { left: 56%; top: 92px; font-size: 15px; }
 .polar-banner {
   position: relative; isolation: isolate; display: grid; grid-template-columns: 1.12fr .88fr;
   min-height: 330px; max-width: 1180px; margin: 42px auto 18px; overflow: hidden;
@@ -1482,6 +1513,10 @@ body[data-catalog="christmas"] .hero { background: var(--ink); }
 body[data-catalog="christmas"] .btn-hero { background: #a93932; }
 body[data-catalog="christmas"] .brand-eyebrow,
 body[data-catalog="christmas"] .brand-name { color: var(--brand-gold); }
+body[data-catalog="natal-2026"] .hero { background: linear-gradient(125deg, #551923, #8b2830 58%, #263e35); }
+body[data-catalog="natal-2026"] .btn-hero { background: #173d34; }
+body[data-catalog="natal-2026"] .brand-eyebrow,
+body[data-catalog="natal-2026"] .brand-name { color: #e9cb8c; }
 .christmas-hero-title {
   margin: 8px 0 12px;
   color: var(--brand-gold);
@@ -1585,7 +1620,15 @@ body[data-catalog="christmas"] .brand-name { color: var(--brand-gold); }
 }
 
 @media (max-width: 760px) {
+  .collection-carousel { min-height: 560px; margin: 24px 16px 8px; }
+  .collection-banner { inset: 0 0 40px; min-height: 520px; }
+  .collection-banner--natal { grid-template-columns: 1fr; }
+  .collection-banner--natal .polar-banner__copy { padding: 40px 30px 230px; }
+  .natal-banner__scene { position: absolute; inset: auto 0 0; height: 250px; }
+  .natal-banner__halo { width: 190px; height: 190px; top: 15px; right: 38px; }
+  .natal-banner__tree { border-left-width: 82px; border-right-width: 82px; border-bottom-width: 220px; }
   .polar-banner { margin: 24px 16px 8px; grid-template-columns: 1fr; min-height: 520px; }
+  .collection-carousel .polar-banner { margin: 0; }
   .polar-banner__copy { padding: 40px 30px 230px; }.polar-banner__scene { position: absolute; inset: auto 0 0; height: 240px; }.polar-banner__scene svg { width: 100%; }.polar-banner__moon { top: 12px; }
   .polar-header { grid-template-columns: 1fr auto; }.polar-rules { display: none; }.polar-back span { display: none; }
   .polar-hero { grid-template-columns: 1fr; min-height: 820px; }.polar-hero__content { padding: 75px 28px 330px; }.polar-hero h1 { font-size: clamp(72px,24vw,110px); }.polar-hero__art { position: absolute; inset: auto 0 0; width: 100%; min-height: 390px; }.polar-hero__art svg { width: 115%; right: -8%; }.polar-hero__moon { width: 120px; height: 120px; top: 5%; }
