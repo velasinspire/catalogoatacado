@@ -75,6 +75,7 @@
   {
     "id": 2004,
     "name": "Spray",
+    "hidden": true,
     "detail": "Spray para ambientes · 250 ml · Edição especial de Natal",
     "image": "natal-2026/placeholder.svg",
     "images": ["natal-2026/placeholder.svg"],

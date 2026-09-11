@@ -13,13 +13,17 @@ function loadCart() {
     Object.keys(cart).forEach(key => delete cart[key]);
     Object.values(savedCart).forEach(entry => {
       if (!entry?.product || !Number.isFinite(Number(entry.quantity))) return;
+      const savedCatalog = entry.product.catalog || 'main';
+      const normalizedCatalog = typeof CATALOG_ID !== 'undefined' && CATALOG_ID === 'natal-2026' && savedCatalog === 'christmas'
+        ? 'natal-2026'
+        : savedCatalog;
       const latestProduct = products.find(product =>
         product.id === entry.product.id &&
-        product.catalog === entry.product.catalog
+        (product.catalog || 'main') === normalizedCatalog
       );
       const normalizedEntry = {
         ...entry,
-        product: latestProduct || entry.product,
+        product: latestProduct || { ...entry.product, catalog: normalizedCatalog },
         quantity: Number(entry.quantity),
         purchaseType: entry.purchaseType || 'inspire'
       };

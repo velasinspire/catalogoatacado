@@ -212,6 +212,7 @@ Promise.all([
       : data
           .filter(product => ![4, 5].includes(product.id))
           .sort((a, b) => (orderIndex.get(a.id) ?? 999) - (orderIndex.get(b.id) ?? 999)))
+      .filter(product => !product.hidden)
       .map(product => ({
         ...product,
         catalog: CATALOG_ID
