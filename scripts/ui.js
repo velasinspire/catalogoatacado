@@ -79,3 +79,37 @@ document.addEventListener('DOMContentLoaded', () => {
   carousel.addEventListener('focusout', startRotation);
   startRotation();
 });
+
+// ——— FOTOS DO BANNER NATAL 2026 ———
+document.addEventListener('DOMContentLoaded', () => {
+  const banner = document.querySelector('.home-christmas-banner');
+  if (!banner) return;
+
+  const slides = [...banner.querySelectorAll('.home-christmas-banner__slide')];
+  const indicators = [...banner.querySelectorAll('.home-christmas-banner__progress i')];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobile = window.matchMedia('(max-width: 760px)').matches;
+  if (slides.length < 2 || reducedMotion || mobile) return;
+
+  let activeIndex = 0;
+  let rotationTimer;
+
+  const showNext = () => {
+    slides[activeIndex].classList.remove('is-active');
+    indicators[activeIndex]?.classList.remove('is-active');
+    activeIndex = (activeIndex + 1) % slides.length;
+    slides[activeIndex].classList.add('is-active');
+    indicators[activeIndex]?.classList.add('is-active');
+  };
+
+  const startRotation = () => {
+    clearInterval(rotationTimer);
+    rotationTimer = setInterval(showNext, 6000);
+  };
+
+  banner.addEventListener('mouseenter', () => clearInterval(rotationTimer));
+  banner.addEventListener('mouseleave', startRotation);
+  banner.addEventListener('focusin', () => clearInterval(rotationTimer));
+  banner.addEventListener('focusout', startRotation);
+  startRotation();
+});

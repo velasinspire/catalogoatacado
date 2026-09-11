@@ -1448,14 +1448,14 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .home-christmas-banner .polar-banner__copy { position: relative; z-index: 2; padding-left: 64px; }
 .home-christmas-banner .polar-banner__eyebrow,.home-christmas-banner .polar-banner__cta { color: #f0d69d; }
 .home-christmas-banner .polar-banner__copy strong { font-size: clamp(54px,6vw,82px); }
-.home-christmas-banner__gallery { position: relative; min-height: 380px; }
-.home-christmas-banner__photo { position: absolute; display: block; object-fit: cover; border: 5px solid rgba(255,248,233,.92); box-shadow: 0 18px 40px rgba(20,8,10,.35); transition: transform .5s ease; }
-.home-christmas-banner__photo--main { width: 48%; height: 77%; left: 8%; top: 11%; z-index: 2; border-radius: 48% 48% 16px 16px; }
-.home-christmas-banner__photo--top { width: 38%; height: 48%; right: 4%; top: -5%; border-radius: 0 0 90px 90px; }
-.home-christmas-banner__photo--bottom { width: 41%; height: 48%; right: 1%; bottom: -5%; border-radius: 90px 90px 0 0; }
-.home-christmas-banner__seal { position: absolute; z-index: 4; right: 37%; top: 44%; width: 78px; height: 78px; display: grid; place-items: center; text-align: center; border-radius: 50%; color: #64202a; background: #efd69f; border: 3px double #8b2830; font: 600 11px/1.15 'Jost',sans-serif; letter-spacing: .08em; text-transform: uppercase; transform: rotate(-8deg); }
-.home-christmas-banner:hover .home-christmas-banner__photo--main { transform: translateY(-5px) rotate(-1deg); }
-.home-christmas-banner:hover .home-christmas-banner__photo--top { transform: translateX(-4px); }
+.home-christmas-banner__gallery { position: relative; min-height: 380px; overflow: hidden; background: #281317; }
+.home-christmas-banner__gallery::after { content: ''; position: absolute; z-index: 2; inset: 0; background: linear-gradient(90deg, rgba(91,25,34,.52), transparent 38%); pointer-events: none; }
+.home-christmas-banner__slide { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; object-position: center; opacity: 0; transform: scale(1.015); transition: opacity .9s ease, transform 6.5s ease; }
+.home-christmas-banner__slide.is-active { opacity: 1; transform: scale(1.045); }
+.home-christmas-banner__slide--portrait { object-position: center 66%; }
+.home-christmas-banner__progress { position: absolute; z-index: 4; right: 25px; bottom: 22px; display: flex; gap: 7px; }
+.home-christmas-banner__progress i { width: 6px; height: 6px; display: block; border-radius: 50%; background: rgba(255,255,255,.42); transition: width .25s ease, background .25s ease; }
+.home-christmas-banner__progress i.is-active { width: 22px; border-radius: 8px; background: #f0d69d; }
 .christmas-secondary-section { padding-top: 84px; border-top: 1px solid var(--linen-dark); }
 .christmas-secondary-header { position: relative; }
 .christmas-secondary-eyebrow { display: block; margin-bottom: 8px; color: #a93932; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
@@ -1661,19 +1661,17 @@ body[data-catalog="natal-2026"] .brand-name { color: #e9cb8c; }
 
 @media (max-width: 760px) {
   .natal-collection-hero { grid-template-columns: 1fr; min-height: auto; }
-  .natal-collection-hero .hero-content { margin: 0; padding: 58px 28px 48px; text-align: center; }
+  .natal-collection-hero .hero-content { margin: 0; max-width: none; padding: 55px 20px 45px; text-align: center; }
   .natal-collection-hero .hero-brandmark { margin: 0 auto 14px; }
   .natal-collection-hero .hero-desc { margin: 0 auto 26px; }
-  .natal-collection-hero__visual { min-height: 390px; }
-  .natal-collection-hero__frame { inset: 16px; }
-  .natal-collection-hero__caption { right: 28px; bottom: 28px; }
+  .natal-collection-hero .christmas-hero-title { font-size: 36px; }
+  .natal-collection-hero__visual { display: none; }
   .home-christmas-banner { grid-template-columns: 1fr; min-height: 600px; margin: 24px 16px 8px; }
   .home-christmas-banner .polar-banner__copy { padding: 42px 30px 330px; }
   .home-christmas-banner__gallery { position: absolute; inset: auto 0 0; min-height: 330px; width: 100%; }
-  .home-christmas-banner__photo--main { left: 5%; width: 50%; height: 82%; }
-  .home-christmas-banner__photo--top { right: 3%; width: 42%; }
-  .home-christmas-banner__photo--bottom { right: 2%; width: 44%; }
-  .home-christmas-banner__seal { right: 37%; top: 42%; width: 66px; height: 66px; font-size: 9px; }
+  .home-christmas-banner__slide { display: none; transition: none; transform: none; }
+  .home-christmas-banner__slide:first-child { display: block; opacity: 1; }
+  .home-christmas-banner__progress { display: none; }
   .collection-carousel { min-height: 560px; margin: 24px 16px 8px; }
   .collection-banner { inset: 0 0 40px; min-height: 520px; }
   .collection-banner--natal { grid-template-columns: 1fr; }
