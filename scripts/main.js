@@ -123,7 +123,7 @@ function navigateToProduct(productId, purchaseType = 'inspire') {
     if (!savedEntry) return;
     const targetPage = savedEntry.product.catalog === 'christmas'
       ? 'expresso-polar.html'
-      : savedEntry.product.catalog === 'natal-2026' ? 'natal-2026.html' : 'index.html';
+      : savedEntry.product.catalog === 'natal-2026' ? 'natal-2026.html' : './';
     window.location.href = `${targetPage}#catalogo`;
   }, 400);
 }
