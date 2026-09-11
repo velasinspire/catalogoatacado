@@ -1557,6 +1557,19 @@ body[data-catalog="natal-2026"] .brand-name { color: #e9cb8c; }
 .natal-collection-hero__caption { position: absolute; z-index: 3; right: 45px; bottom: 43px; padding: 10px 14px; color: #3f1820; background: rgba(240,214,157,.92); font-size: 10px; font-weight: 600; letter-spacing: .15em; text-transform: uppercase; }
 @keyframes natalHeroDrift { from { transform: scale(1.01); } to { transform: scale(1.055); } }
 @media (prefers-reduced-motion: reduce) { .natal-collection-hero__visual img { animation: none; } }
+@media (max-width: 900px) {
+  .natal-collection-hero {
+    grid-template-columns: 1fr; min-height: auto;
+    background:
+      radial-gradient(circle at 92% 8%, rgba(233,203,140,.13), transparent 32%),
+      radial-gradient(circle at 5% 92%, rgba(49,83,70,.22), transparent 34%),
+      linear-gradient(125deg, #551923, #8b2830 62%, #263e35);
+  }
+  .natal-collection-hero .hero-content { width: 100%; max-width: 620px; margin: 0 auto; padding: 58px 24px 50px; text-align: center; }
+  .natal-collection-hero .hero-brandmark { margin: 0 auto 14px; }
+  .natal-collection-hero .hero-desc { margin: 0 auto 26px; }
+  .natal-collection-hero__visual { display: none; }
+}
 .christmas-hero-title {
   margin: 8px 0 12px;
   color: var(--brand-gold);
