@@ -47,7 +47,9 @@ function getProductImages(product) {
 
 function renderProducts() {
   const grid = document.getElementById('products-grid');
+  const polarGrid = document.getElementById('expresso-polar-products-grid');
   grid.innerHTML = '';
+  if (polarGrid) polarGrid.innerHTML = '';
 
   if (!products.length) {
     grid.innerHTML = `
@@ -114,7 +116,8 @@ function renderProducts() {
         </div>
       </div>
     `;
-    grid.appendChild(card);
+    const targetGrid = polarGrid && p.collection === 'expresso-polar' ? polarGrid : grid;
+    targetGrid.appendChild(card);
   });
 }
 

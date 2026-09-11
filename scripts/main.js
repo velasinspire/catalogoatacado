@@ -20,6 +20,23 @@ const CATALOG_FILES = {
   'natal-2026': ['data/natal-2026-products.json', 'data/natal-2026-details.json']
 };
 
+const catalogProductsRequest = CATALOG_ID === 'natal-2026'
+  ? Promise.all([
+      fetch('data/natal-2026-products.json').then(r => r.json()),
+      fetch('data/expresso-polar-products.json').then(r => r.json())
+    ]).then(([launches, polar]) => [
+      ...launches.map(product => ({ ...product, collection: 'natal-2026' })),
+      ...polar.map(product => ({ ...product, collection: 'expresso-polar' }))
+    ])
+  : fetch(CATALOG_FILES[CATALOG_ID][0]).then(r => r.json());
+
+const catalogDetailsRequest = CATALOG_ID === 'natal-2026'
+  ? Promise.all([
+      fetch('data/expresso-polar-details.json').then(r => r.json()),
+      fetch('data/natal-2026-details.json').then(r => r.json())
+    ]).then(([polar, launches]) => ({ ...polar, ...launches }))
+  : fetch(CATALOG_FILES[CATALOG_ID][1]).then(r => r.json());
+
 // ——— TIPO DE COMPRA ———
 // 'inspire' | 'whitelabel' | null (não selecionado no modal)
 let currentPurchaseType = 'inspire'; // padrão global (carrinho)
@@ -166,8 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
 // ——— CARREGAR DADOS E INICIALIZAR ———
 Promise.all([
   fetch('data/config.json').then(r => r.json()),
-  fetch(CATALOG_FILES[CATALOG_ID][0]).then(r => r.json()),
-  fetch(CATALOG_FILES[CATALOG_ID][1]).then(r => r.json()),
+  catalogProductsRequest,
+  catalogDetailsRequest,
 ])
   .then(([config, data, details]) => {
     WHATSAPP_NUMBER = config.whatsappNumber;

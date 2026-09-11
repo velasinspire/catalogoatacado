@@ -14,7 +14,7 @@
     "hasFragrance": true,
     "fragranceMinQty": 1,
     "isKit": false,
-    "tag": "Natal 2026",
+    "tag": "Lançamento 2026",
     "priceTiers": [
       { "label": "1 a 9 un.", "min": 1, "max": 9, "price": 105.00 },
       { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 73.20 },
@@ -37,7 +37,7 @@
       "Vela Luminy 200gr5.jpg",
       "Vela Luminy 200gr1.jpg"
     ],
-    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Natal 2026",
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lançamento 2026",
     "priceTiers": [
       { "label": "1 a 9 un.", "min": 1, "max": 9, "price": 139.90 },
       { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 78.20 },
@@ -63,7 +63,7 @@
       "Difusor 150ml 3.jpg": "center 72%",
       "Difusor 150ml 4.jpg": "center 80%"
     },
-    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Natal 2026",
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lançamento 2026",
     "priceTiers": [
       { "label": "1 a 9 un.", "min": 1, "max": 9, "price": 90.00 },
       { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 68.20 },
@@ -78,7 +78,7 @@
     "detail": "Spray para ambientes · 250 ml · Edição especial de Natal",
     "image": "natal-2026/placeholder.svg",
     "images": ["natal-2026/placeholder.svg"],
-    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Natal 2026",
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lançamento 2026",
     "priceTiers": [
       { "label": "1 a 9 un.", "min": 1, "max": 9, "price": 105.00 },
       { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 84.50 },
@@ -99,7 +99,7 @@
       "Mini spray 10ml vidro3.jpg",
       "Mini spray 10ml vidro4.jpg"
     ],
-    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lembrança de Natal",
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lançamento 2026",
     "priceTiers": [
       { "label": "1 a 5 un.", "min": 1, "max": 5, "price": 19.90 },
       { "label": "6 a 14 un.", "min": 6, "max": 14, "price": 18.00 },
@@ -122,7 +122,7 @@
       "Mini latinha dourada3.jpg",
       "Mini latinha dourada4.jpg"
     ],
-    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lembrança de Natal",
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lançamento 2026",
     "priceTiers": [
       { "label": "1 a 5 un.", "min": 1, "max": 5, "price": 13.50 },
       { "label": "6 a 14 un.", "min": 6, "max": 14, "price": 13.00 },
@@ -143,7 +143,7 @@
       "Saquinho algodão 3 latinhas2.jpg",
       "Saquinho algodão 3 latinhas3.jpg"
     ],
-    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": true, "tag": "Kit de Natal",
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": true, "tag": "Lançamento 2026",
     "priceTiers": [
       { "label": "1 a 14 kits", "min": 1, "max": 14, "price": 39.90 },
       { "label": "15 a 49 kits", "min": 15, "max": 49, "price": 37.80 },
@@ -163,7 +163,7 @@
       "Mini vela tampa branca2.jpg",
       "Mini vela tampa branca3.jpg"
     ],
-    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lembrança de Natal",
+    "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lançamento 2026",
     "priceTiers": [
       { "label": "1 a 5 un.", "min": 1, "max": 5, "price": 21.90 },
       { "label": "6 a 14 un.", "min": 6, "max": 14, "price": 19.90 },
