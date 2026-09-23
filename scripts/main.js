@@ -38,9 +38,10 @@ const catalogDetailsRequest = CATALOG_ID === 'natal-2026'
   : fetch(CATALOG_FILES[CATALOG_ID][1]).then(r => r.json());
 
 // ——— TIPO DE COMPRA ———
-// 'inspire' | 'whitelabel' | null (não selecionado no modal)
+// 'inspire' | 'whitelabel' | 'corporate' | null (não selecionado no modal)
 let currentPurchaseType = 'inspire'; // padrão global (carrinho)
 let modalPurchaseType   = null;      // seleção no modal
+let modalCustomization  = {};
 
 // Preenchido dinamicamente a partir de data/config.json (purchaseRules)
 let PURCHASE_RULES = {};
@@ -50,9 +51,11 @@ function updateCartPurchaseTypeSummary() {
   const types = getCartPurchaseTypes();
   const hasInspire = types.has('inspire');
   const hasWhiteLabel = types.has('whitelabel');
+  const hasCorporate = types.has('corporate');
 
   document.getElementById('cpt-inspire')?.classList.toggle('cpt-tag--active', hasInspire);
   document.getElementById('cpt-whitelabel')?.classList.toggle('cpt-tag--active', hasWhiteLabel);
+  document.getElementById('cpt-corporate')?.classList.toggle('cpt-tag--active', hasCorporate);
 
   const ruleLines = [];
   if (hasInspire || types.size === 0) {
@@ -61,14 +64,20 @@ function updateCartPurchaseTypeSummary() {
   if (hasWhiteLabel || types.size === 0) {
     ruleLines.push('White Label: pedido mínimo R$ 2.000,00 · Mín. 20 un./produto · 10 un./fragrância');
   }
+  if (hasCorporate || types.size === 0) {
+    ruleLines.push('Corporativo: mín. 5 un./produto e 5 un./fragrância · valores a partir de');
+  }
   document.getElementById('cpt-rule-text').innerHTML = ruleLines
     .map(line => `<span class="cpt-rule-line">${line}</span>`).join('');
 
-  const orderLabel = hasWhiteLabel
-    ? (hasInspire ? 'Pedido misto' : 'Pedido White Label')
+  const orderLabel = types.size > 1
+    ? 'Pedido misto'
+    : hasCorporate ? 'Pedido Corporativo'
+    : hasWhiteLabel ? 'Pedido White Label'
     : 'Pedido Inspire';
-  document.getElementById('cart-note').textContent =
-    `${orderLabel} · Mínimo final: ${formatCurrency(ORDER_MIN_VALUE)} · Produção iniciada após confirmação.`;
+  document.getElementById('cart-note').textContent = hasCorporate && types.size === 1
+    ? 'Pedido Corporativo · Valores a partir de · Personalizações confirmadas pela consultora.'
+    : `${orderLabel} · Mínimo final: ${formatCurrency(ORDER_MIN_VALUE)} · Produção iniciada após confirmação.`;
 }
 
 function setModalPurchaseType(type) {
@@ -203,7 +212,8 @@ Promise.all([
 
     const requestedOrder = [
       9, 11, 12, 13, 23, 10, 30, 29, 16, 15, 31, 32, 3, 1, 2,
-      14, 34, 19, 22, 21, 20, 35, 18, 17, 33, 6, 7, 8, 25, 26, 27, 28, 24
+      14, 34, 19, 22, 21, 20, 35, 18, 17, 33, 6, 7, 8, 36, 37, 25, 26, 27, 28, 24,
+      38, 39, 40, 41
     ];
 
     const orderIndex = new Map(requestedOrder.map((id, index) => [id, index]));

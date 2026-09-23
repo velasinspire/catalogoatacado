@@ -107,7 +107,8 @@
     </div>
   </div>
 
-  <a class="home-christmas-banner" href="natal-2026.html" aria-label="Conhecer a coleção Natal 2026">
+  <div class="collection-carousel promo-carousel" aria-label="Destaques do catálogo">
+  <a class="home-christmas-banner collection-banner is-active" href="natal-2026.html" aria-label="Conhecer a coleção Natal 2026" aria-hidden="false">
     <span class="polar-banner__copy">
       <span class="polar-banner__eyebrow">Lançamento</span>
       <strong>Natal 2026</strong>
@@ -127,6 +128,21 @@
     </span>
   </a>
 
+  <a class="corporate-callout collection-banner" href="#presentes-corporativos" aria-label="Conhecer os presentes corporativos personalizados" aria-hidden="true" tabindex="-1">
+    <span class="corporate-callout__copy">
+      <span class="corporate-callout__eyebrow">Presentes corporativos personalizados</span>
+      <strong>Sua marca presente em cada detalhe.</strong>
+      <span>Caixas artesanais para clientes, equipes, eventos e momentos importantes.</span>
+      <span class="corporate-callout__cta">Conhecer as opções <span aria-hidden="true">→</span></span>
+    </span>
+    <img src="assets/images/products/Corporativo Aurea aberta bege.jpeg" alt="Caixa corporativa Áurea personalizada">
+  </a>
+    <div class="collection-carousel__nav" aria-label="Escolher destaque">
+      <button class="collection-carousel__dot is-active" type="button" aria-label="Ver Natal 2026" aria-current="true"></button>
+      <button class="collection-carousel__dot" type="button" aria-label="Ver presentes corporativos" aria-current="false"></button>
+    </div>
+  </div>
+
   <main class="catalog-section" id="catalogo">
     <div class="catalog-header">
       <h2 class="section-title">Produtos</h2>
@@ -134,6 +150,16 @@
     </div>
     <div class="products-grid" id="products-grid"></div>
   </main>
+
+  <section class="corporate-section" id="presentes-corporativos">
+    <div class="corporate-section__intro">
+      <span>Presentes corporativos</span>
+      <h2>Sua marca transformada em uma experiência.</h2>
+      <p>Escolha a caixa, distribua as fragrâncias e defina os principais detalhes da personalização. Solicitações especiais serão alinhadas com nossa consultora pelo WhatsApp.</p>
+      <div class="corporate-section__rules">Mínimo de 5 unidades por produto e 5 unidades por fragrância · Valores a partir de</div>
+    </div>
+    <div class="products-grid corporate-products-grid" id="corporate-products-grid"></div>
+  </section>
 
   <!-- CARRINHO -->
   <aside class="cart-panel" id="cart-panel" aria-label="Carrinho">
@@ -150,6 +176,7 @@
       <div class="cpt-selector">
         <span class="cpt-tag" id="cpt-inspire">Inspire</span>
         <span class="cpt-tag" id="cpt-whitelabel">White Label</span>
+        <span class="cpt-tag" id="cpt-corporate">Corporativo</span>
       </div>
       <div class="cpt-rules" id="cpt-rules">
         <span id="cpt-rule-text"></span>
@@ -278,6 +305,14 @@
         <div class="modal-fragrance-wrap" id="modal-fragrance-wrap">
           <label class="modal-label"><span id="modal-option-label">Fragrância</span> <span class="modal-label-min" id="modal-fragrance-min-label"></span></label>
           <div class="fragrance-grid" id="modal-fragrances"></div>
+        </div>
+
+        <div class="corporate-config" id="corporate-config" hidden>
+          <div class="corporate-config__heading">
+            <span>Personalize seu presente</span>
+            <small>As escolhas abaixo compõem o briefing inicial. Itens especiais serão confirmados pela consultora.</small>
+          </div>
+          <div class="corporate-config__fields" id="corporate-config-fields"></div>
         </div>
 
         <div class="modal-qty-wrap">

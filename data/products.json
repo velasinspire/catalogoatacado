@@ -210,6 +210,44 @@
     ]
   },
   {
+    "id": 36,
+    "name": "Mini spray vidro - quadrado",
+    "detail": "Frasco vidro + válvula luxo · 30ml",
+    "image": "Mini Spray Vidro Quadrado.jpg",
+    "images": [
+      "Mini Spray Vidro Quadrado.jpg",
+      "Mini Spray Vidro Quadrado galeria 1.jpg"
+    ],
+    "minQty": 20,
+    "hasFragrance": false,
+    "fragranceMinQty": null,
+    "isKit": false,
+    "tag": null,
+    "priceTiers": [
+      { "label": "20 a 99 un.", "min": 20, "max": 99, "price": 22.20 },
+      { "label": "100+ un.",   "min": 100, "max": null, "price": 20.20 }
+    ],
+    "extras": [],
+    "fragrances": []
+  },
+  {
+    "id": 37,
+    "name": "Mini spray vidro - arredondado",
+    "detail": "Frasco vidro + válvula luxo · 30ml",
+    "image": "Mini Spray Vidro Arredondado.jpeg",
+    "minQty": 20,
+    "hasFragrance": false,
+    "fragranceMinQty": null,
+    "isKit": false,
+    "tag": null,
+    "priceTiers": [
+      { "label": "20 a 99 un.", "min": 20, "max": 99, "price": 25.90 },
+      { "label": "100+ un.",   "min": 100, "max": null, "price": 23.90 }
+    ],
+    "extras": [],
+    "fragrances": []
+  },
+  {
     "id": 9,
     "name": "Nature",
     "detail": "Pavio e tampa de madeira · 200gr · Queima: 48 a 52h · A 9,5cm × D 8,5cm · Artes exclusivas da artista Shenay Walls · Campeã de vendas",
@@ -869,6 +907,112 @@
       "Limão Siciliano", "Flor de Cerejeira", "Flor de Figo", "Chá Branco",
       "Canela", "Baunilha", "Alecrim"
     ]
+  },
+  {
+    "id": 38,
+    "name": "Áurea",
+    "subtitle": "Vela + Home Spray + Bandeja",
+    "description": "Uma composição de impacto, criada para traduzir cuidado e sofisticação.",
+    "detail": "Vela aromática 180g · Home spray 120ml · Bandeja em madeira · Caixa livro 29 × 21,5 × 9cm",
+    "image": "Corporativo Aurea aberta bege.jpeg",
+    "images": ["Corporativo Aurea aberta bege.jpeg", "Corporativo Aurea aberta preta.jpeg", "Corporativo Aurea fechada bege.jpeg", "Corporativo Aurea fechada preta.jpeg"],
+    "minQty": 5,
+    "hasFragrance": true,
+    "fragranceMinQty": 5,
+    "isKit": true,
+    "tag": "Corporativo",
+    "purchaseTypeOnly": "corporate",
+    "estimatedPrice": true,
+    "priceTiers": [{ "label": "A partir de 5 un.", "min": 5, "max": null, "price": 287.90 }],
+    "extras": [],
+    "fragrances": ["Alecrim", "Algas Marinhas", "Baunilha", "Café", "Canela", "Capim Limão", "Cedro", "Chá Branco", "Ervas Mediterrâneas", "Flor de Cerejeira", "Flor de Figo", "Ginger Bread", "Jasmim", "Lavanda Francesa", "Limão Siciliano", "Lírio Ambarado", "Pimenta Rosa", "Pitanga Preta", "Pêssego", "Verbena", "Vinho"],
+    "corporateOptions": {
+      "boxColor": ["Branco", "Creme", "Preto"],
+      "brandPlacement": ["Topo", "Parte interna", "Topo e parte interna"],
+      "closure": ["Fita", "Elástico"],
+      "candleColor": ["Transparente", "Fosco", "Branco", "Âmbar", "Verde", "Preto", "Dourado"],
+      "lidColor": ["Dourado", "Prata", "Preto", "Branco", "Azul", "Verde", "Rosa"],
+      "labelType": ["Transparente", "Fundo branco", "Aplique alto relevo"]
+    }
+  },
+  {
+    "id": 39,
+    "name": "Essenza",
+    "subtitle": "Vela + Difusor",
+    "description": "Uma experiência completa de perfumação para permanecer na rotina de quem recebe.",
+    "detail": "Vela aromática 180g · Difusor 250ml · Varetas · Caixa livro 28,5 × 15 × 9,5cm",
+    "image": "Corporativo Essenza aberta.jpeg",
+    "images": ["Corporativo Essenza aberta.jpeg", "Corporativo Essenza fechada.jpeg"],
+    "minQty": 5,
+    "hasFragrance": true,
+    "fragranceMinQty": 5,
+    "isKit": true,
+    "tag": "Corporativo",
+    "purchaseTypeOnly": "corporate",
+    "estimatedPrice": true,
+    "priceTiers": [{ "label": "A partir de 5 un.", "min": 5, "max": null, "price": 265.00 }],
+    "extras": [],
+    "fragrances": ["Alecrim", "Algas Marinhas", "Baunilha", "Café", "Canela", "Capim Limão", "Cedro", "Chá Branco", "Ervas Mediterrâneas", "Flor de Cerejeira", "Flor de Figo", "Ginger Bread", "Jasmim", "Lavanda Francesa", "Limão Siciliano", "Lírio Ambarado", "Pimenta Rosa", "Pitanga Preta", "Pêssego", "Verbena", "Vinho"],
+    "corporateOptions": {
+      "boxColor": ["Branco", "Creme", "Preto"],
+      "brandPlacement": ["Topo", "Parte interna", "Topo e parte interna"],
+      "closure": ["Fita", "Elástico"],
+      "candleColor": ["Transparente", "Fosco", "Branco", "Âmbar", "Verde", "Preto", "Dourado"],
+      "lidColor": ["Dourado", "Prata", "Preto", "Branco", "Azul", "Verde", "Rosa"],
+      "labelType": ["Transparente", "Fundo branco", "Aplique alto relevo"]
+    }
+  },
+  {
+    "id": 40,
+    "name": "Lume",
+    "subtitle": "Vela em Lata",
+    "description": "Compacta e marcante, feita para deixar boas memórias.",
+    "detail": "Vela em lata 310g · 3 pavios de algodão · Caixa livro 16 × 16 × 5,5cm · Fechamento com fita",
+    "image": "Corporativo Lume principal.jpeg",
+    "images": ["Corporativo Lume principal.jpeg", "Corporativo Lume galeria.jpeg"],
+    "minQty": 5,
+    "hasFragrance": true,
+    "fragranceMinQty": 5,
+    "isKit": true,
+    "tag": "Corporativo",
+    "purchaseTypeOnly": "corporate",
+    "estimatedPrice": true,
+    "priceTiers": [{ "label": "A partir de 5 un.", "min": 5, "max": null, "price": 202.50 }],
+    "extras": [],
+    "fragrances": ["Alecrim", "Algas Marinhas", "Baunilha", "Café", "Canela", "Capim Limão", "Cedro", "Chá Branco", "Ervas Mediterrâneas", "Flor de Cerejeira", "Flor de Figo", "Ginger Bread", "Jasmim", "Lavanda Francesa", "Limão Siciliano", "Lírio Ambarado", "Pimenta Rosa", "Pitanga Preta", "Pêssego", "Verbena", "Vinho"],
+    "corporateOptions": {
+      "boxColor": ["Branco", "Creme", "Preto"],
+      "brandPlacement": ["Topo", "Parte interna", "Topo e parte interna"],
+      "closure": ["Fita"],
+      "tinColor": ["Branca", "Vermelha", "Verde"],
+      "labelType": ["Transparente", "Fundo branco", "Aplique alto relevo"]
+    }
+  },
+  {
+    "id": 41,
+    "name": "Vivace",
+    "subtitle": "Vela em Caixa Articulada",
+    "description": "Uma apresentação minimalista que valoriza a vela e a identidade da marca.",
+    "detail": "Vela aromática 180g · Pavio de madeira · Tampa metálica · Caixa articulada 12 × 12,5 × 13,5cm",
+    "image": "Corporativo Vivace aberta.jpeg",
+    "images": ["Corporativo Vivace aberta.jpeg", "Corporativo Vivace fechada.jpeg"],
+    "minQty": 5,
+    "hasFragrance": true,
+    "fragranceMinQty": 5,
+    "isKit": true,
+    "tag": "Corporativo",
+    "purchaseTypeOnly": "corporate",
+    "estimatedPrice": true,
+    "priceTiers": [{ "label": "A partir de 5 un.", "min": 5, "max": null, "price": 155.90 }],
+    "extras": [],
+    "fragrances": ["Alecrim", "Algas Marinhas", "Baunilha", "Café", "Canela", "Capim Limão", "Cedro", "Chá Branco", "Ervas Mediterrâneas", "Flor de Cerejeira", "Flor de Figo", "Ginger Bread", "Jasmim", "Lavanda Francesa", "Limão Siciliano", "Lírio Ambarado", "Pimenta Rosa", "Pitanga Preta", "Pêssego", "Verbena", "Vinho"],
+    "corporateOptions": {
+      "boxColor": ["Branco", "Creme", "Preto"],
+      "brandPlacement": ["Topo", "Parte interna", "Topo e parte interna"],
+      "candleColor": ["Transparente", "Fosco", "Branco", "Âmbar", "Verde", "Preto", "Dourado"],
+      "lidColor": ["Dourado", "Prata", "Preto", "Branco", "Azul", "Verde", "Rosa"],
+      "labelType": ["Transparente", "Fundo branco", "Aplique alto relevo"]
+    }
   }
  
 

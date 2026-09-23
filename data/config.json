@@ -17,6 +17,12 @@
       "orderMin": 2000,
       "productMinQty": 20,
       "fragMinQty": 10
+    },
+    "corporate": {
+      "label": "Corporativo",
+      "orderMin": 0,
+      "productMinQty": 5,
+      "fragMinQty": 5
     }
   }
 }

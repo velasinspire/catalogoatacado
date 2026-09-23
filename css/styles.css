@@ -1112,6 +1112,11 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 }
 .cart-item-type--inspire { background: rgba(158,72,32,0.12); color: var(--sage-dark); }
 .cart-item-type--whitelabel { background: var(--ink); color: var(--white); }
+.cart-item-type--corporate { background: #c5985e; color: #211d17; }
+
+.cart-customization { padding: 7px 9px; border-radius: 8px; background: rgba(197,152,94,.11); color: var(--ink-soft); font-size: 11px; }
+.cart-customization summary { cursor: pointer; color: var(--ink); font-weight: 600; }
+.cart-customization div { display: flex; flex-direction: column; gap: 3px; margin-top: 7px; line-height: 1.45; }
 
 /* ——— CART RULES CHECKBOX ——— */
 .cart-rules-check {
@@ -1456,6 +1461,53 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 .home-christmas-banner__progress { position: absolute; z-index: 4; right: 25px; bottom: 22px; display: flex; gap: 7px; }
 .home-christmas-banner__progress i { width: 6px; height: 6px; display: block; border-radius: 50%; background: rgba(255,255,255,.42); transition: width .25s ease, background .25s ease; }
 .home-christmas-banner__progress i.is-active { width: 22px; border-radius: 8px; background: #f0d69d; }
+
+/* ——— PRESENTES CORPORATIVOS ——— */
+.corporate-callout {
+  max-width: 1180px; min-height: 310px; margin: 28px auto 18px;
+  display: grid; grid-template-columns: .9fr 1.1fr; overflow: hidden;
+  border-radius: 28px; color: #f8f2e8; text-decoration: none;
+  background: linear-gradient(125deg, #211d17, #43382c); box-shadow: 0 22px 55px rgba(40,31,23,.2);
+}
+.corporate-callout__copy { padding: 48px 42px 48px 60px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: 12px; }
+.corporate-callout__eyebrow { color: #d8b77e; font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.corporate-callout strong { max-width: 470px; font: 400 clamp(38px,4.4vw,62px)/.95 'Cormorant Garamond',serif; }
+.corporate-callout__copy > span:not(.corporate-callout__eyebrow):not(.corporate-callout__cta) { max-width: 480px; color: rgba(255,255,255,.7); font-size: 14px; line-height: 1.65; }
+.corporate-callout__cta { margin-top: 8px; padding-bottom: 4px; border-bottom: 1px solid #d8b77e; color: #d8b77e; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.corporate-callout img { width: 100%; height: 100%; min-height: 310px; object-fit: cover; }
+
+.corporate-section { padding: 92px 20px 110px; background: linear-gradient(180deg, #211d17, #302920); }
+.corporate-section__intro { max-width: 850px; margin: 0 auto 44px; text-align: center; color: #fff; }
+.corporate-section__intro > span { color: #d8b77e; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; }
+.corporate-section__intro h2 { margin: 10px 0 14px; font: 400 clamp(38px,5vw,58px)/1 'Cormorant Garamond',serif; }
+.corporate-section__intro p { max-width: 720px; margin: 0 auto; color: rgba(255,255,255,.68); line-height: 1.7; font-size: 14px; }
+.corporate-section__rules { display: inline-flex; margin-top: 20px; padding: 8px 14px; border: 1px solid rgba(216,183,126,.4); border-radius: 100px; color: #d8b77e; font-size: 11px; }
+.corporate-products-grid { max-width: 1100px; margin: 0 auto; }
+.product-card--corporate { border-color: rgba(197,152,94,.32); }
+.product-card--corporate .card-badge { background: #c5985e; color: #211d17; }
+
+.corporate-config { padding: 16px; border: 1px solid rgba(197,152,94,.35); border-radius: 12px; background: rgba(197,152,94,.08); }
+.corporate-config__heading { display: flex; flex-direction: column; gap: 4px; margin-bottom: 13px; }
+.corporate-config__heading > span { font-size: 13px; font-weight: 600; color: var(--ink); }
+.corporate-config__heading small { color: var(--ink-soft); font-size: 11px; line-height: 1.45; }
+.corporate-config__fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 11px; }
+.corporate-field { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.corporate-field--wide { grid-column: 1 / -1; }
+.corporate-field > span { color: var(--stone-dark); font-size: 10px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.corporate-field small { color: var(--stone); font-weight: 400; letter-spacing: 0; text-transform: none; }
+.corporate-field select,.corporate-field input,.corporate-field textarea { width: 100%; padding: 10px 11px; border: 1px solid var(--linen-dark); border-radius: 8px; background: var(--white); color: var(--ink); font: 12px 'Jost',sans-serif; }
+.corporate-field textarea { resize: vertical; min-height: 72px; }
+.corporate-field select:focus,.corporate-field input:focus,.corporate-field textarea:focus { outline: 2px solid rgba(197,152,94,.35); border-color: #c5985e; }
+
+@media (max-width: 760px) {
+  .corporate-callout { grid-template-columns: 1fr; min-height: 0; margin: 20px 16px 8px; }
+  .corporate-callout__copy { padding: 36px 26px; }
+  .corporate-callout img { min-height: 260px; max-height: 340px; }
+  .corporate-section { padding: 68px 16px 82px; }
+  .corporate-section__rules { border-radius: 14px; line-height: 1.5; }
+  .corporate-config__fields { grid-template-columns: 1fr; }
+  .corporate-field--wide { grid-column: auto; }
+}
 .christmas-secondary-section { padding-top: 84px; border-top: 1px solid var(--linen-dark); }
 .christmas-secondary-header { position: relative; }
 .christmas-secondary-eyebrow { display: block; margin-bottom: 8px; color: #a93932; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; }
@@ -1698,4 +1750,23 @@ body[data-catalog="natal-2026"] .brand-name { color: #e9cb8c; }
   .polar-header { grid-template-columns: 1fr auto; }.polar-rules { display: none; }.polar-back span { display: none; }
   .polar-hero { grid-template-columns: 1fr; min-height: 820px; }.polar-hero__content { padding: 75px 28px 330px; }.polar-hero h1 { font-size: clamp(72px,24vw,110px); }.polar-hero__art { position: absolute; inset: auto 0 0; width: 100%; min-height: 390px; }.polar-hero__art svg { width: 115%; right: -8%; }.polar-hero__moon { width: 120px; height: 120px; top: 5%; }
   .polar-intro { padding: 80px 22px 90px; }.polar-footer { flex-direction: column; align-items: center; gap: 4px; }
+}
+
+/* Deve permanecer no fim: sobrescreve os banners individuais dentro do carrossel principal. */
+.promo-carousel { min-height: 438px; }
+.promo-carousel .collection-banner { inset: 0 0 40px; width: 100%; height: 380px; min-height: 380px; max-width: none; margin: 0; }
+.promo-carousel .home-christmas-banner__gallery { min-height: 0; height: 380px; }
+.promo-carousel .corporate-callout img { min-width: 0; min-height: 0; height: 380px; object-fit: cover; }
+.promo-carousel .collection-carousel__dot.is-active { background: #c5985e; }
+
+@media (max-width: 760px) {
+  .promo-carousel { min-height: 600px; margin: 24px 16px 8px; }
+  .promo-carousel .collection-banner { inset: 0 0 40px; width: 100%; height: 560px; min-height: 560px; margin: 0; }
+  .promo-carousel .home-christmas-banner { grid-template-columns: 1fr; }
+  .promo-carousel .home-christmas-banner .polar-banner__copy { padding: 42px 30px 330px; }
+  .promo-carousel .home-christmas-banner__gallery { position: absolute; inset: auto 0 0; width: 100%; height: 330px; min-height: 330px; }
+  .promo-carousel .corporate-callout { grid-template-columns: 1fr; }
+  .promo-carousel .corporate-callout__copy { padding: 38px 28px 300px; }
+  .promo-carousel .corporate-callout strong { font-size: clamp(38px,12vw,54px); }
+  .promo-carousel .corporate-callout img { position: absolute; inset: auto 0 0; width: 100%; height: 280px; min-height: 280px; object-position: center 48%; }
 }

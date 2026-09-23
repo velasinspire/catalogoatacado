@@ -8,6 +8,8 @@ const natal = JSON.parse(fs.readFileSync('data/natal-2026-products.json', 'utf8'
   .map(product => ({ ...product, catalog: 'natal-2026' }));
 const polar = JSON.parse(fs.readFileSync('data/expresso-polar-products.json', 'utf8'))
   .map(product => ({ ...product, catalog: 'natal-2026' }));
+const mainProducts = JSON.parse(fs.readFileSync('data/products.json', 'utf8'))
+  .map(product => ({ ...product, catalog: 'main' }));
 
 const tests = String.raw`
 const assert = (condition, message) => { if (!condition) throw new Error(message); };
@@ -81,16 +83,32 @@ clearCart();
 put(luminy, 20, 'Pacific Breeze', 'whitelabel');
 assert(getCartOrderMinimum() === 2000, 'Mínimo White Label incorreto');
 
+// Corporativo: 5 unidades por produto e por fragrância, sem mínimo financeiro global.
+const aurea = products.find(product => product.id === 38);
+clearCart();
+put(aurea, 4, 'Chá Branco', 'corporate');
+assert(!validateCart().valid, 'Corporativo deveria rejeitar fragrância abaixo de 5');
+clearCart();
+put(aurea, 5, 'Chá Branco', 'corporate');
+assert(validateCart().valid, 'Corporativo deveria aceitar 5 un. de uma fragrância');
+assert(getCartOrderMinimum() === 0, 'Corporativo não deveria exigir mínimo financeiro global');
+assert(
+  cartKey(aurea.id, 'Chá Branco', 'corporate', 'main', { boxColor: 'Creme' }) !==
+  cartKey(aurea.id, 'Chá Branco', 'corporate', 'main', { boxColor: 'Preto' }),
+  'Configurações corporativas diferentes não podem ser agrupadas no mesmo item'
+);
+
 console.log('OK — ' + products.length + ' produtos auditados');
 console.log('OK — limites de todas as faixas');
 console.log('OK — soma de aromas para definição de preço');
 console.log('OK — mínimos Inspire, Expresso Polar e White Label');
 console.log('OK — mínimos financeiros de R$ 1.000 e R$ 2.000');
+console.log('OK — mínimos corporativos de 5 un. por produto e fragrância');
 `;
 
 const context = {
   console,
-  products: [...natal, ...polar],
+  products: [...mainProducts, ...natal, ...polar],
   PURCHASE_RULES: config.purchaseRules,
   currentPurchaseType: 'inspire',
   modalPurchaseType: null,

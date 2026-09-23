@@ -31,7 +31,8 @@ function loadCart() {
         normalizedEntry.product.id,
         normalizedEntry.fragrance,
         normalizedEntry.purchaseType,
-        normalizedEntry.product.catalog
+        normalizedEntry.product.catalog,
+        normalizedEntry.customization
       );
       if (cart[key]) cart[key].quantity += normalizedEntry.quantity;
       else cart[key] = normalizedEntry;
@@ -50,16 +51,25 @@ function saveCart() {
   }
 }
 
-function cartKey(productId, fragrance, purchaseType = 'inspire', catalog = 'main') {
-  return `${catalog || 'main'}__${productId}__${purchaseType}__${fragrance || 'sem-opcao'}`;
+function customizationKey(customization) {
+  if (!customization || !Object.keys(customization).length) return 'padrao';
+  const normalized = Object.keys(customization).sort()
+    .map(key => `${key}:${customization[key] || ''}`).join('|');
+  let hash = 5381;
+  for (let i = 0; i < normalized.length; i += 1) hash = ((hash << 5) + hash) ^ normalized.charCodeAt(i);
+  return (hash >>> 0).toString(36);
 }
 
-function addToCart(productId, qty, fragrance, purchaseType) {
+function cartKey(productId, fragrance, purchaseType = 'inspire', catalog = 'main', customization = null) {
+  return `${catalog || 'main'}__${productId}__${purchaseType}__${fragrance || 'sem-opcao'}__${customizationKey(customization)}`;
+}
+
+function addToCart(productId, qty, fragrance, purchaseType, customization = null) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
 
   const itemPurchaseType = purchaseType || modalPurchaseType || currentPurchaseType || 'inspire';
-  const key = cartKey(productId, fragrance, itemPurchaseType, product.catalog);
+  const key = cartKey(productId, fragrance, itemPurchaseType, product.catalog, customization);
   if (cart[key]) {
     cart[key].quantity += qty;
   } else {
@@ -67,7 +77,8 @@ function addToCart(productId, qty, fragrance, purchaseType) {
       product,
       quantity: qty,
       fragrance: fragrance || null,
-      purchaseType: itemPurchaseType
+      purchaseType: itemPurchaseType,
+      customization: customization && Object.keys(customization).length ? customization : null
     };
   }
 
@@ -137,9 +148,11 @@ function getCartPurchaseTypes() {
 }
 
 function getCartOrderMinimum() {
-  return getCartPurchaseTypes().has('whitelabel')
-    ? PURCHASE_RULES.whitelabel.orderMin
-    : PURCHASE_RULES.inspire.orderMin;
+  const types = getCartPurchaseTypes();
+  if (types.size === 0) return PURCHASE_RULES.inspire.orderMin;
+  if (types.has('whitelabel')) return PURCHASE_RULES.whitelabel.orderMin;
+  if (types.has('inspire')) return PURCHASE_RULES.inspire.orderMin;
+  return PURCHASE_RULES.corporate?.orderMin || 0;
 }
 
 function calcTotal() {
@@ -222,6 +235,32 @@ function validateCart() {
     : { valid: false, errors };
 }
 
+const CUSTOMIZATION_LABELS = {
+  boxColor: 'Caixa',
+  brandPlacement: 'Aplicação da marca',
+  closure: 'Fechamento',
+  candleColor: 'Copo da vela',
+  lidColor: 'Tampa',
+  tinColor: 'Lata',
+  labelType: 'Rótulo',
+  logoStatus: 'Identidade visual',
+  companyName: 'Empresa',
+  specialRequest: 'Pedido especial'
+};
+
+function escapeCartText(value) {
+  return String(value || '').replace(/[&<>"']/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[char]);
+}
+
+function formatCustomizationHtml(customization) {
+  return Object.entries(customization)
+    .filter(([, value]) => String(value || '').trim())
+    .map(([key, value]) => `<span><strong>${CUSTOMIZATION_LABELS[key] || key}:</strong> ${escapeCartText(value)}</span>`)
+    .join('');
+}
+
 // ——— RENDERIZAR CARRINHO ———
 function renderCart() {
   const container = document.getElementById('cart-items');
@@ -256,7 +295,7 @@ function renderCart() {
   const grandTotal = calcTotal();
 
   entries.forEach(([key, entry]) => {
-    const { product, quantity, fragrance } = entry;
+    const { product, quantity, fragrance, customization } = entry;
     const purchaseType = entry.purchaseType || 'inspire';
     const productTotal = getCartProductTotal(product, purchaseType);
     const tier     = getActiveTier(product, productTotal);
@@ -286,6 +325,11 @@ function renderCart() {
         ${fragrance ? `🌿 ${fragrance}` : ''}
         <span class="badge-tier">${tier.label} · ${formatCurrency(tier.price)}/${isWeightProduct(product) ? 'kg' : 'un'}</span>
       </div>
+      ${customization ? `
+        <details class="cart-customization">
+          <summary>Ver personalização</summary>
+          <div>${formatCustomizationHtml(customization)}</div>
+        </details>` : ''}
       <div class="cart-item-footer">
         <div class="cart-item-qty-ctrl">
           <button class="cart-item-qty-btn" onclick="changeCartQty('${key}', -${getQuantityStep(product)})">−</button>
@@ -333,6 +377,13 @@ function updateOrderProgress(total) {
   const barEl      = document.getElementById('order-progress-bar');
   const missingEl  = document.getElementById('order-missing');
   const minEl      = document.getElementById('order-progress-min');
+
+  if (ORDER_MIN_VALUE <= 0) {
+    progressEl.classList.add('hidden');
+    barEl.style.width = '100%';
+    minEl.textContent = '';
+    return;
+  }
 
   const pct = Math.min((total / ORDER_MIN_VALUE) * 100, 100);
   barEl.style.width = `${pct}%`;

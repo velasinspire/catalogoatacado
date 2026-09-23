@@ -47,8 +47,10 @@ function getProductImages(product) {
 
 function renderProducts() {
   const grid = document.getElementById('products-grid');
+  const corporateGrid = document.getElementById('corporate-products-grid');
   const polarGrid = document.getElementById('expresso-polar-products-grid');
   grid.innerHTML = '';
+  if (corporateGrid) corporateGrid.innerHTML = '';
   if (polarGrid) polarGrid.innerHTML = '';
 
   if (!products.length) {
@@ -63,7 +65,7 @@ function renderProducts() {
 
   products.forEach((p, i) => {
     const card = document.createElement('div');
-    card.className = 'product-card';
+    card.className = `product-card${p.purchaseTypeOnly === 'corporate' ? ' product-card--corporate' : ''}`;
     card.style.animationDelay = `${i * 0.05}s`;
 
     const productImages = getProductImages(p);
@@ -72,7 +74,7 @@ function renderProducts() {
       .map(item => `<span>${item}</span>`).join('');
     const tiersHTML = p.priceTiers.map((t, tierIndex) => `
       <div class="card-tier${tierIndex === p.priceTiers.length - 1 && p.priceTiers.length > 1 ? ' card-tier--best' : ''}">
-        <span>${t.label}</span>
+          <span>${p.estimatedPrice ? 'A partir de' : t.label}</span>
         <span class="card-tier-price">${formatCurrency(t.price)}</span>
       </div>
     `).join('');
@@ -111,12 +113,14 @@ function renderProducts() {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14">
               <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
             </svg>
-            Adicionar ao pedido
+            ${p.purchaseTypeOnly === 'corporate' ? 'Personalizar e adicionar' : 'Adicionar ao pedido'}
           </button>
         </div>
       </div>
     `;
-    const targetGrid = polarGrid && p.collection === 'expresso-polar' ? polarGrid : grid;
+    const targetGrid = p.purchaseTypeOnly === 'corporate' && corporateGrid
+      ? corporateGrid
+      : polarGrid && p.collection === 'expresso-polar' ? polarGrid : grid;
     targetGrid.appendChild(card);
   });
 }
@@ -285,7 +289,10 @@ function openProductModal(productId, highlightField) {
 
   modalProductId  = productId;
   modalFragrances = {};
-  modalPurchaseType = currentPurchaseType; // herda o tipo atual
+  modalCustomization = {};
+  const isCorporate = p.purchaseTypeOnly === 'corporate';
+  if (!isCorporate && currentPurchaseType === 'corporate') currentPurchaseType = 'inspire';
+  modalPurchaseType = isCorporate ? 'corporate' : currentPurchaseType;
   modalTotalQty   = p.hasFragrance && p.fragrances.length > 0 ? 0 : p.minQty;
 
   renderModalGallery(p);
@@ -295,13 +302,20 @@ function openProductModal(productId, highlightField) {
   document.getElementById('modal-minqty').textContent =
     `📦 Mínimo de ${formatProductQty(p, p.minQty)} no total`;
 
+  const purchaseTypeSelector = document.getElementById('modal-purchase-type');
+  purchaseTypeSelector.style.display = isCorporate ? 'none' : '';
+
   // Reset seletor de tipo no modal — pré-seleciona o tipo do carrinho
   document.getElementById('mpt-inspire').classList.toggle('mpt-btn--active', currentPurchaseType === 'inspire');
   document.getElementById('mpt-whitelabel')?.classList.toggle('mpt-btn--active', currentPurchaseType === 'whitelabel');
 
   // Mostrar regras se já há tipo selecionado
-  if (currentPurchaseType) {
-    setModalPurchaseType(currentPurchaseType);
+  if (modalPurchaseType) {
+    if (isCorporate) {
+      document.getElementById('mpt-rules-info').style.display = 'none';
+    } else {
+      setModalPurchaseType(modalPurchaseType);
+    }
   } else {
     document.getElementById('mpt-rules-info').style.display = 'none';
   }
@@ -330,6 +344,7 @@ function openProductModal(productId, highlightField) {
   if (oldBalance) oldBalance.remove();
 
   renderModalFragrances(p);
+  renderCorporateConfiguration(p);
   updateModalActivePrice(p);
   updateAddModalButton(p);
 
@@ -340,6 +355,63 @@ function openProductModal(productId, highlightField) {
   if (highlightField) {
     setTimeout(() => highlightModalField(highlightField), 350);
   }
+}
+
+const CORPORATE_OPTION_LABELS = {
+  boxColor: 'Cor da caixa',
+  brandPlacement: 'Aplicação da marca',
+  closure: 'Fechamento',
+  candleColor: 'Cor do copo da vela',
+  lidColor: 'Cor da tampa',
+  tinColor: 'Cor da lata',
+  labelType: 'Tipo de rótulo'
+};
+
+function renderCorporateConfiguration(product) {
+  const wrap = document.getElementById('corporate-config');
+  const fields = document.getElementById('corporate-config-fields');
+  if (product.purchaseTypeOnly !== 'corporate') {
+    wrap.hidden = true;
+    fields.innerHTML = '';
+    return;
+  }
+
+  wrap.hidden = false;
+  const options = product.corporateOptions || {};
+  Object.entries(options).forEach(([key, values]) => {
+    modalCustomization[key] = values[0];
+  });
+  modalCustomization.logoStatus = 'Já tenho a arte ou logotipo';
+
+  fields.innerHTML = `
+    ${Object.entries(options).map(([key, values]) => `
+      <label class="corporate-field">
+        <span>${CORPORATE_OPTION_LABELS[key] || key}</span>
+        <select onchange="setCorporateCustomization('${key}', this.value)">
+          ${values.map(value => `<option value="${value}">${value}</option>`).join('')}
+        </select>
+      </label>
+    `).join('')}
+    <label class="corporate-field">
+      <span>Identidade visual</span>
+      <select onchange="setCorporateCustomization('logoStatus', this.value)">
+        <option>Já tenho a arte ou logotipo</option>
+        <option>Preciso de ajuda com a aplicação</option>
+      </select>
+    </label>
+    <label class="corporate-field corporate-field--wide">
+      <span>Nome da empresa</span>
+      <input type="text" maxlength="80" placeholder="Informe o nome da empresa" onchange="setCorporateCustomization('companyName', this.value)">
+    </label>
+    <label class="corporate-field corporate-field--wide">
+      <span>Personalização especial <small>opcional · sob consulta</small></span>
+      <textarea rows="3" maxlength="400" placeholder="Ex.: hot stamping, fita personalizada, gravação na tampa ou inclusão de outro item" onchange="setCorporateCustomization('specialRequest', this.value)"></textarea>
+    </label>
+  `;
+}
+
+function setCorporateCustomization(key, value) {
+  modalCustomization[key] = String(value || '').trim();
 }
 
 function highlightModalField(field) {
@@ -590,7 +662,7 @@ function updateAddModalButton(product) {
   btn.disabled = !valid;
 
   if (valid) {
-    const selectedType = modalPurchaseType || currentPurchaseType || 'inspire';
+    const selectedType = product.purchaseTypeOnly || modalPurchaseType || currentPurchaseType || 'inspire';
     const typeName = PURCHASE_RULES[selectedType]?.label || '';
     btn.innerHTML = `
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -598,15 +670,15 @@ function updateAddModalButton(product) {
     `;
     const hasFragrance = product.hasFragrance && product.fragrances.length > 0;
     btn.onclick = hasFragrance
-      ? () => addToCartMultiFragrance(modalProductId, modalTotalQty, { ...modalFragrances }, selectedType)
-      : () => addToCart(modalProductId, modalTotalQty, null, selectedType);
+      ? () => addToCartMultiFragrance(modalProductId, modalTotalQty, { ...modalFragrances }, selectedType, { ...modalCustomization })
+      : () => addToCart(modalProductId, modalTotalQty, null, selectedType, { ...modalCustomization });
   } else {
     btn.textContent = reason;
   }
 }
 
-function addToCartMultiFragrance(productId, totalQty, fragranceMap, purchaseType) {
+function addToCartMultiFragrance(productId, totalQty, fragranceMap, purchaseType, customization) {
   Object.entries(fragranceMap).forEach(([fragrance, qty]) => {
-    addToCart(productId, qty, fragrance, purchaseType);
+    addToCart(productId, qty, fragrance, purchaseType, customization);
   });
 }

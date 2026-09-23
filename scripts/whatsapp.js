@@ -44,7 +44,7 @@ function openWhatsApp(event) {
   // ——— MONTAR MENSAGEM ———
   const purchaseTypes = getCartPurchaseTypes();
   const typeName = purchaseTypes.size > 1
-    ? 'Misto — Inspire + White Label'
+    ? `Misto — ${[...purchaseTypes].map(type => PURCHASE_RULES[type]?.label || type).join(' + ')}`
     : PURCHASE_RULES[[...purchaseTypes][0] || 'inspire']?.label || 'Inspire';
   const catalogsInOrder = new Set(entries.map(({ product }) => product.catalog || 'main'));
   const catalogLabels = { main: 'Linha regular', christmas: 'Expresso Polar', 'natal-2026': 'Natal 2026' };
@@ -57,23 +57,31 @@ function openWhatsApp(event) {
     `*${orderCatalogName} · ${typeName}*\n`,
   ];
 
-  ['inspire', 'whitelabel'].forEach(purchaseType => {
+  ['inspire', 'whitelabel', 'corporate'].forEach(purchaseType => {
     const typeEntries = entries.filter(entry => (entry.purchaseType || 'inspire') === purchaseType);
     if (!typeEntries.length) return;
 
     lines.push(`\n*PRODUTOS ${PURCHASE_RULES[purchaseType].label.toUpperCase()}*`);
-    typeEntries.forEach(({ product, quantity, fragrance }) => {
+    typeEntries.forEach(({ product, quantity, fragrance, customization }) => {
       const productTotal  = getCartProductTotal(product, purchaseType);
       const tier          = getActiveTier(product, productTotal);
       const subtotal      = tier.price * quantity;
       const fragranceNote = fragrance ? ` · ${product.optionLabel || 'Fragrância'}: ${fragrance}` : '';
       lines.push(
-        `• *${product.name}* (${formatProductQty(product, quantity)}${fragranceNote}) — ${formatCurrency(subtotal)} _(${tier.label} · ${formatCurrency(tier.price)}/${isWeightProduct(product) ? 'kg' : 'un'})_`
+        `• *${product.name}* (${formatProductQty(product, quantity)}${fragranceNote}) — ${product.estimatedPrice ? 'a partir de ' : ''}${formatCurrency(subtotal)} _(${tier.label} · ${formatCurrency(tier.price)}/${isWeightProduct(product) ? 'kg' : 'un'})_`
       );
+      if (customization) {
+        Object.entries(customization)
+          .filter(([, value]) => String(value || '').trim())
+          .forEach(([key, value]) => lines.push(`  - ${CUSTOMIZATION_LABELS[key] || key}: ${value}`));
+      }
     });
   });
 
   lines.push(`\n*Total estimado: ${formatCurrency(total)}*`);
+  if (purchaseTypes.has('corporate')) {
+    lines.push('_Os valores corporativos são estimados a partir da configuração padrão. Personalizações especiais serão confirmadas pela consultora._');
+  }
   lines.push(`*Tipo de compra: ${typeName}*`);
   lines.push('\nPode confirmar disponibilidade, prazo de produção e forma de pagamento?');
 
