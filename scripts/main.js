@@ -203,7 +203,7 @@ Promise.all([
 
     const requestedOrder = [
       9, 11, 12, 13, 23, 10, 30, 29, 16, 15, 31, 32, 3, 1, 2,
-      14, 34, 19, 22, 21, 20, 18, 17, 33, 6, 7, 8, 25, 26, 27, 28, 24
+      14, 34, 19, 22, 21, 20, 35, 18, 17, 33, 6, 7, 8, 25, 26, 27, 28, 24
     ];
 
     const orderIndex = new Map(requestedOrder.map((id, index) => [id, index]));
