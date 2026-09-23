@@ -915,7 +915,7 @@
     "description": "Uma composição de impacto, criada para traduzir cuidado e sofisticação.",
     "detail": "Vela aromática 180g · Home spray 120ml · Bandeja em madeira · Caixa livro 29 × 21,5 × 9cm",
     "image": "Corporativo Aurea aberta bege.jpeg",
-    "images": ["Corporativo Aurea aberta bege.jpeg", "Corporativo Aurea aberta preta.jpeg", "Corporativo Aurea fechada bege.jpeg", "Corporativo Aurea fechada preta.jpeg"],
+    "images": ["Corporativo Aurea aberta bege.jpeg", "Corporativo Aurea fechada bege.jpeg", "Corporativo Aurea aberta preta.jpeg", "Corporativo Aurea fechada preta.jpeg"],
     "minQty": 5,
     "hasFragrance": true,
     "fragranceMinQty": 5,
