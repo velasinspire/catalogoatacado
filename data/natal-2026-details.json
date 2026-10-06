@@ -42,5 +42,26 @@
       "Não movimente o frasco enquanto a vela estiver acesa ou com a cera líquida."
     ],
     "tip": "Depois que a vela terminar, higienize o frasco e dê a ele um novo uso na decoração. Seu vidro texturizado foi pensado para permanecer e guardar novas histórias."
+  },
+  "2009": {
+    "title": "Casinha de Wax Melt",
+    "description": [
+      "Uma caixinha natalina encantadora, recheada com pequenos wax melts em formatos festivos para perfumar e decorar os momentos especiais da temporada.",
+      "Os aromas são enviados de forma sortida, criando uma experiência perfumada cheia de surpresa e afeto."
+    ],
+    "benefitsTitle": "Características",
+    "benefits": [
+      "Wax melts em formatos natalinos variados.",
+      "Aromas sortidos.",
+      "Embalagem em formato de casinha, pronta para presentear."
+    ],
+    "usage": "Coloque um wax melt no recipiente superior de um difusor elétrico ou rechaud próprio para cera aromática. Ligue ou acenda o aparelho e aguarde a cera derreter para liberar a fragrância. Ao finalizar, desligue ou apague o aparelho e espere a cera esfriar e solidificar antes de manusear.",
+    "care": [
+      "Não adicione água à cera e não ingira o produto.",
+      "Use somente em aparelhos próprios para derretimento de cera e siga as orientações do fabricante.",
+      "Não toque na cera ou no recipiente enquanto estiverem quentes.",
+      "Mantenha longe de crianças, animais, materiais inflamáveis e correntes de ar.",
+      "Não deixe o aparelho ligado ou o rechaud aceso sem supervisão."
+    ]
   }
 }

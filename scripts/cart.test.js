@@ -42,6 +42,11 @@ closeTo(getActiveTier(luminy, 30).price, 75.10, 'Luminy 30 un.');
 closeTo(getActiveTier(luminy, 99).price, 75.10, 'Luminy 99 un.');
 closeTo(getActiveTier(luminy, 100).price, 69.50, 'Luminy 100 un.');
 
+const waxMeltHouse = products.find(product => product.id === 2009);
+[[1,35.00],[9,35.00],[10,27.40],[29,27.40],[30,25.20],[49,25.20],[50,20.30]]
+  .forEach(([qty, price]) => closeTo(getActiveTier(waxMeltHouse, qty).price, price, 'Casinha de Wax Melt ' + qty + ' un.'));
+assert(!waxMeltHouse.hasFragrance && waxMeltHouse.fragrances.length === 0, 'Casinha de Wax Melt deve usar aromas sortidos');
+
 const tin = products.find(product => product.id === 2006);
 [[5,13.50],[6,13.00],[14,13.00],[15,10.90],[49,10.90],[50,9.95],[99,9.95],[100,8.80],[299,8.80],[300,8.40]]
   .forEach(([qty, price]) => closeTo(getActiveTier(tin, qty).price, price, 'Mini Latinha ' + qty + ' un.'));

@@ -174,5 +174,28 @@
       { "label": "300+ un.", "min": 300, "max": null, "price": 12.60 }
     ],
     "extras": [], "fragrances": ["Ginger Fresh", "Pacific Breeze", "Vinho"]
+  },
+  {
+    "id": 2009,
+    "name": "Casinha de Wax Melt",
+    "detail": "Caixinha com wax melts natalinos · Aromas sortidos",
+    "image": "Casinha wax melt2.jpg",
+    "images": [
+      "Casinha wax melt2.jpg",
+      "Casinha wax melt1.jpg"
+    ],
+    "minQty": 1,
+    "hasFragrance": false,
+    "fragranceMinQty": 1,
+    "isKit": false,
+    "tag": "Lançamento 2026",
+    "priceTiers": [
+      { "label": "1 a 9 un.", "min": 1, "max": 9, "price": 35.00 },
+      { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 27.40 },
+      { "label": "30 a 49 un.", "min": 30, "max": 49, "price": 25.20 },
+      { "label": "50+ un.", "min": 50, "max": null, "price": 20.30 }
+    ],
+    "extras": [],
+    "fragrances": []
   }
 ]
