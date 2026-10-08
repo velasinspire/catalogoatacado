@@ -197,5 +197,23 @@
     ],
     "extras": [],
     "fragrances": []
+  },
+  {
+    "id": 2010,
+    "name": "Sabonete Luminy",
+    "detail": "Sabonete líquido · Aromas da coleção de Natal",
+    "image": "Sabonete Luminy.jpg",
+    "images": ["Sabonete Luminy.jpg"],
+    "minQty": 10,
+    "hasFragrance": true,
+    "fragranceMinQty": 1,
+    "isKit": false,
+    "tag": "Lançamento 2026",
+    "priceTiers": [
+      { "label": "10 a 99 un.", "min": 10, "max": 99, "price": 51.20 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 48.40 }
+    ],
+    "extras": [],
+    "fragrances": ["Ginger Fresh", "Pacific Breeze", "Vinho"]
   }
 ]

@@ -63,5 +63,25 @@
       "Mantenha longe de crianças, animais, materiais inflamáveis e correntes de ar.",
       "Não deixe o aparelho ligado ou o rechaud aceso sem supervisão."
     ]
+  },
+  "2010": {
+    "title": "Sabonete Luminy",
+    "description": [
+      "Um sabonete líquido de apresentação elegante, criado para perfumar e cuidar das mãos com os três aromas da coleção de Natal.",
+      "O frasco de vidro transparente e a válvula dourada transformam o produto em uma peça especial para presentear ou compor lavabos e kits natalinos."
+    ],
+    "benefitsTitle": "Características e aromas",
+    "benefits": [
+      "Sabonete líquido em frasco de vidro transparente.",
+      "Válvula dourada.",
+      "Disponível nos aromas Ginger Fresh, Pacific Breeze e Vinho."
+    ],
+    "usage": "Aplique uma pequena quantidade nas mãos úmidas, massageie até formar espuma e enxágue completamente.",
+    "care": [
+      "Uso externo. Não ingerir.",
+      "Evite contato com os olhos. Em caso de contato, enxágue abundantemente com água.",
+      "Em caso de irritação, suspenda o uso.",
+      "Mantenha fora do alcance de crianças e animais."
+    ]
   }
 }
