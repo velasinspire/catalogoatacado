@@ -370,6 +370,10 @@ const CORPORATE_OPTION_LABELS = {
 function renderCorporateConfiguration(product) {
   const wrap = document.getElementById('corporate-config');
   const fields = document.getElementById('corporate-config-fields');
+  // Catálogos de coleção (como Natal) não exibem a área corporativa.
+  // Nesse caso, abrir o modal deve continuar normalmente.
+  if (!wrap || !fields) return;
+
   if (product.purchaseTypeOnly !== 'corporate') {
     wrap.hidden = true;
     fields.innerHTML = '';
