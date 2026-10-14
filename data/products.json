@@ -68,6 +68,30 @@
       "Sweet Hugs"
     ]
   },
+  {
+    "id": 42,
+    "name": "Mini Latinha Dopamina",
+    "detail": "Vela latinha 15gr · A 1cm × D 5cm · Coleção Dopamina",
+    "image": "Mini Latinha Dopamina.jpg",
+    "minQty": 20,
+    "hasFragrance": true,
+    "fragranceMinQty": 10,
+    "isKit": false,
+    "tag": "✨ Lançamento",
+    "priceTiers": [
+      { "label": "20 a 99 un.", "min": 20, "max": 99, "price": 8.80 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 7.90 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Berry & Cream",
+      "Lemonberry Twist",
+      "Moo Moo Magic",
+      "Sunny Mood",
+      "Sweet But Sour",
+      "Sweet Hugs"
+    ]
+  },
 
   {
     "id": 3,
