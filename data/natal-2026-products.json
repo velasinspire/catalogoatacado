@@ -175,6 +175,32 @@
     "extras": [], "fragrances": ["Ginger Fresh", "Pacific Breeze", "Vinho"]
   },
   {
+    "id": 2011,
+    "name": "Wax Melt em Barra",
+    "detail": "Wax melt em barra · 60 g · Para rechaud ou difusor elétrico",
+    "image": "Wax Melt em Barra 1.jpg",
+    "images": [
+      "Wax Melt em Barra 1.jpg",
+      "Wax Melt em Barra 2.jpg",
+      "Wax Melt em Barra 3.jpg",
+      "Wax Melt em Barra 4.jpg",
+      "Wax Melt em Barra 5.jpg",
+      "Wax Melt em Barra 6.jpg",
+      "Wax Melt em Barra 7.jpg",
+      "Wax Melt em Barra 8.jpg"
+    ],
+    "minQty": 10,
+    "hasFragrance": true,
+    "fragranceMinQty": 3,
+    "isKit": false,
+    "tag": "Lançamento 2026",
+    "priceTiers": [
+      { "label": "Acima de 10 un.", "min": 10, "max": null, "price": 25.90 }
+    ],
+    "extras": [],
+    "fragrances": ["Ginger Fresh", "Pacific Breeze"]
+  },
+  {
     "id": 2009,
     "name": "Casinha de Wax Melt",
     "detail": "Caixinha com wax melts natalinos · Aromas sortidos",
