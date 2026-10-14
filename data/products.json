@@ -152,6 +152,27 @@
     "fragrances": []
   },
   {
+    "id": 43,
+    "name": "Mini Latinha Giardino",
+    "detail": "Vela latinha 15gr · A 1cm × D 5cm · Coleção Giardino",
+    "image": "Mini latinha.jpg",
+    "minQty": 20,
+    "hasFragrance": true,
+    "fragranceMinQty": 10,
+    "isKit": false,
+    "tag": "✨ Lançamento",
+    "priceTiers": [
+      { "label": "20 a 99 un.", "min": 20, "max": 99, "price": 8.80 },
+      { "label": "100+ un.", "min": 100, "max": null, "price": 7.90 }
+    ],
+    "extras": [],
+    "fragrances": [
+      "Manga e Laranja Doce",
+      "Lima e Flor de Lotus",
+      "Pêssego e Baunilha"
+    ]
+  },
+  {
     "id": 5,
     "name": "Kit Nature",
     "detail": "3 velas 60gr · Pavio de algodão · Queima: 8 a 12h cada · A 5,5cm × L 20cm × C 9,5cm · Fragrâncias: Baunilha, Limão Siciliano e Vinho",
