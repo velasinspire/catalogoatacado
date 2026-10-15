@@ -583,6 +583,22 @@
     ]
   },
   {
+    "id": 44,
+    "name": "Vela de Massagem — Gerânio & Damasco",
+    "detail": "90g · Cera vegetal e óleos hidratantes · Jarra de porcelana branca · Saquinho de algodão + cartão com QR Code",
+    "image": "Vela de Massagem Geranio e Damasco.jpg",
+    "minQty": 10,
+    "hasFragrance": false,
+    "fragranceMinQty": null,
+    "isKit": false,
+    "tag": "💛 Autocuidado",
+    "priceTiers": [
+      { "label": "10+ un.", "min": 10, "max": null, "price": 72.90 }
+    ],
+    "extras": [],
+    "fragrances": []
+  },
+  {
     "id": 17,
     "name": "Sais · Escalda Pés",
     "detail": "Produzidos com óleo essencial · Não produz espuma · A 14cm × L 9cm · 60gr",
@@ -961,14 +977,17 @@
     "detail": "Vela aromática 180g · Home spray 120ml · Bandeja em madeira · Caixa livro 29 × 21,5 × 9cm",
     "image": "Corporativo Aurea aberta bege.jpeg",
     "images": ["Corporativo Aurea aberta bege.jpeg", "Corporativo Aurea fechada bege.jpeg", "Corporativo Aurea aberta preta.jpeg", "Corporativo Aurea fechada preta.jpeg"],
-    "minQty": 5,
+    "minQty": 1,
     "hasFragrance": true,
-    "fragranceMinQty": 5,
+    "fragranceMinQty": 1,
     "isKit": true,
     "tag": "Corporativo",
     "purchaseTypeOnly": "corporate",
-    "estimatedPrice": true,
-    "priceTiers": [{ "label": "A partir de 5 un.", "min": 5, "max": null, "price": 287.90 }],
+    "estimatedPrice": false,
+    "priceTiers": [
+      { "label": "1 a 4 un.", "min": 1, "max": 4, "price": 295.00 },
+      { "label": "5+ un.", "min": 5, "max": null, "price": 287.90 }
+    ],
     "extras": [],
     "fragrances": ["Alecrim", "Algas Marinhas", "Baunilha", "Café", "Canela", "Capim Limão", "Cedro", "Chá Branco", "Ervas Mediterrâneas", "Flor de Cerejeira", "Flor de Figo", "Ginger Bread", "Jasmim", "Lavanda Francesa", "Limão Siciliano", "Lírio Ambarado", "Pimenta Rosa", "Pitanga Preta", "Pêssego", "Verbena", "Vinho"],
     "corporateOptions": {
@@ -988,14 +1007,17 @@
     "detail": "Vela aromática 180g · Difusor 250ml · Varetas · Caixa livro 28,5 × 15 × 9,5cm",
     "image": "Corporativo Essenza aberta.jpeg",
     "images": ["Corporativo Essenza aberta.jpeg", "Corporativo Essenza fechada.jpeg"],
-    "minQty": 5,
+    "minQty": 1,
     "hasFragrance": true,
-    "fragranceMinQty": 5,
+    "fragranceMinQty": 1,
     "isKit": true,
     "tag": "Corporativo",
     "purchaseTypeOnly": "corporate",
-    "estimatedPrice": true,
-    "priceTiers": [{ "label": "A partir de 5 un.", "min": 5, "max": null, "price": 265.00 }],
+    "estimatedPrice": false,
+    "priceTiers": [
+      { "label": "1 a 4 un.", "min": 1, "max": 4, "price": 269.90 },
+      { "label": "5+ un.", "min": 5, "max": null, "price": 265.00 }
+    ],
     "extras": [],
     "fragrances": ["Alecrim", "Algas Marinhas", "Baunilha", "Café", "Canela", "Capim Limão", "Cedro", "Chá Branco", "Ervas Mediterrâneas", "Flor de Cerejeira", "Flor de Figo", "Ginger Bread", "Jasmim", "Lavanda Francesa", "Limão Siciliano", "Lírio Ambarado", "Pimenta Rosa", "Pitanga Preta", "Pêssego", "Verbena", "Vinho"],
     "corporateOptions": {
@@ -1015,14 +1037,17 @@
     "detail": "Vela em lata 310g · 3 pavios de algodão · Caixa livro 16 × 16 × 5,5cm · Fechamento com fita",
     "image": "Corporativo Lume principal.jpeg",
     "images": ["Corporativo Lume principal.jpeg", "Corporativo Lume galeria.jpeg"],
-    "minQty": 5,
+    "minQty": 1,
     "hasFragrance": true,
-    "fragranceMinQty": 5,
+    "fragranceMinQty": 1,
     "isKit": true,
     "tag": "Corporativo",
     "purchaseTypeOnly": "corporate",
-    "estimatedPrice": true,
-    "priceTiers": [{ "label": "A partir de 5 un.", "min": 5, "max": null, "price": 202.50 }],
+    "estimatedPrice": false,
+    "priceTiers": [
+      { "label": "1 a 4 un.", "min": 1, "max": 4, "price": 215.00 },
+      { "label": "5+ un.", "min": 5, "max": null, "price": 202.50 }
+    ],
     "extras": [],
     "fragrances": ["Alecrim", "Algas Marinhas", "Baunilha", "Café", "Canela", "Capim Limão", "Cedro", "Chá Branco", "Ervas Mediterrâneas", "Flor de Cerejeira", "Flor de Figo", "Ginger Bread", "Jasmim", "Lavanda Francesa", "Limão Siciliano", "Lírio Ambarado", "Pimenta Rosa", "Pitanga Preta", "Pêssego", "Verbena", "Vinho"],
     "corporateOptions": {
@@ -1041,14 +1066,17 @@
     "detail": "Vela aromática 180g · Pavio de madeira · Tampa metálica · Caixa articulada 12 × 12,5 × 13,5cm",
     "image": "Corporativo Vivace aberta.jpeg",
     "images": ["Corporativo Vivace aberta.jpeg", "Corporativo Vivace fechada.jpeg"],
-    "minQty": 5,
+    "minQty": 1,
     "hasFragrance": true,
-    "fragranceMinQty": 5,
+    "fragranceMinQty": 1,
     "isKit": true,
     "tag": "Corporativo",
     "purchaseTypeOnly": "corporate",
-    "estimatedPrice": true,
-    "priceTiers": [{ "label": "A partir de 5 un.", "min": 5, "max": null, "price": 155.90 }],
+    "estimatedPrice": false,
+    "priceTiers": [
+      { "label": "1 a 4 un.", "min": 1, "max": 4, "price": 160.00 },
+      { "label": "5+ un.", "min": 5, "max": null, "price": 155.90 }
+    ],
     "extras": [],
     "fragrances": ["Alecrim", "Algas Marinhas", "Baunilha", "Café", "Canela", "Capim Limão", "Cedro", "Chá Branco", "Ervas Mediterrâneas", "Flor de Cerejeira", "Flor de Figo", "Ginger Bread", "Jasmim", "Lavanda Francesa", "Limão Siciliano", "Lírio Ambarado", "Pimenta Rosa", "Pitanga Preta", "Pêssego", "Verbena", "Vinho"],
     "corporateOptions": {

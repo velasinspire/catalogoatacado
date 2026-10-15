@@ -51,6 +51,16 @@ const tin = products.find(product => product.id === 2006);
 [[5,13.50],[6,13.00],[14,13.00],[15,10.90],[49,10.90],[50,9.95],[99,9.95],[100,8.80],[299,8.80],[300,8.40]]
   .forEach(([qty, price]) => closeTo(getActiveTier(tin, qty).price, price, 'Mini Latinha ' + qty + ' un.'));
 
+// Vela de Massagem: preço único e pedido mínimo de 10 unidades.
+const massageCandle = products.find(product => product.id === 44);
+closeTo(getActiveTier(massageCandle, 10).price, 72.90, 'Vela de Massagem 10 un.');
+clearCart();
+put(massageCandle, 9);
+assert(!validateCart().valid, 'Vela de Massagem deveria rejeitar menos de 10 un.');
+clearCart();
+put(massageCandle, 10);
+assert(validateCart().valid, 'Vela de Massagem deveria aceitar 10 un.');
+
 // A faixa considera a soma das fragrâncias do mesmo produto.
 clearCart();
 put(luminy, 5, 'Ginger Fresh');
@@ -88,14 +98,23 @@ clearCart();
 put(luminy, 20, 'Pacific Breeze', 'whitelabel');
 assert(getCartOrderMinimum() === 2000, 'Mínimo White Label incorreto');
 
-// Corporativo: 5 unidades por produto e por fragrância, sem mínimo financeiro global.
+// Presentes corporativos no varejo: 1 unidade por produto e fragrância, sem mínimo financeiro global.
 const aurea = products.find(product => product.id === 38);
 clearCart();
-put(aurea, 4, 'Chá Branco', 'corporate');
-assert(!validateCart().valid, 'Corporativo deveria rejeitar fragrância abaixo de 5');
-clearCart();
-put(aurea, 5, 'Chá Branco', 'corporate');
-assert(validateCart().valid, 'Corporativo deveria aceitar 5 un. de uma fragrância');
+put(aurea, 1, 'Chá Branco', 'corporate');
+assert(validateCart().valid, 'Corporativo deveria aceitar 1 un. de uma fragrância');
+closeTo(getCartProductTier(aurea, 'corporate').price, 295, 'Áurea varejo');
+[
+  [38, 295, 287.90, 'Áurea'],
+  [39, 269.90, 265, 'Essenza'],
+  [40, 215, 202.50, 'Lume'],
+  [41, 160, 155.90, 'Vivace']
+].forEach(([id, retailPrice, bulkPrice, name]) => {
+  const product = products.find(item => item.id === id);
+  closeTo(getActiveTier(product, 1).price, retailPrice, name + ' varejo');
+  closeTo(getActiveTier(product, 4).price, retailPrice, name + ' 4 un.');
+  closeTo(getActiveTier(product, 5).price, bulkPrice, name + ' 5+ un.');
+});
 assert(getCartOrderMinimum() === 0, 'Corporativo não deveria exigir mínimo financeiro global');
 assert(
   cartKey(aurea.id, 'Chá Branco', 'corporate', 'main', { boxColor: 'Creme' }) !==
@@ -108,7 +127,7 @@ console.log('OK — limites de todas as faixas');
 console.log('OK — soma de aromas para definição de preço');
 console.log('OK — mínimos Inspire, Expresso Polar e White Label');
 console.log('OK — mínimos financeiros de R$ 1.000 e R$ 2.000');
-console.log('OK — mínimos corporativos de 5 un. por produto e fragrância');
+console.log('OK — presentes corporativos liberados a partir de 1 un.');
 `;
 
 const context = {

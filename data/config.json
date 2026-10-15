@@ -21,8 +21,8 @@
     "corporate": {
       "label": "Corporativo",
       "orderMin": 0,
-      "productMinQty": 5,
-      "fragMinQty": 5
+      "productMinQty": 1,
+      "fragMinQty": 1
     }
   }
 }
