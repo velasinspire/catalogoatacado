@@ -32,7 +32,8 @@ function loadCart() {
         normalizedEntry.fragrance,
         normalizedEntry.purchaseType,
         normalizedEntry.product.catalog,
-        normalizedEntry.customization
+        normalizedEntry.customization,
+        normalizedEntry.extras
       );
       if (cart[key]) cart[key].quantity += normalizedEntry.quantity;
       else cart[key] = normalizedEntry;
@@ -60,16 +61,20 @@ function customizationKey(customization) {
   return (hash >>> 0).toString(36);
 }
 
-function cartKey(productId, fragrance, purchaseType = 'inspire', catalog = 'main', customization = null) {
-  return `${catalog || 'main'}__${productId}__${purchaseType}__${fragrance || 'sem-opcao'}__${customizationKey(customization)}`;
+function extrasKey(extras) {
+  return (extras || []).map(extra => `${extra.name}:${extra.price}`).sort().join('|') || 'sem-adicional';
 }
 
-function addToCart(productId, qty, fragrance, purchaseType, customization = null) {
+function cartKey(productId, fragrance, purchaseType = 'inspire', catalog = 'main', customization = null, extras = []) {
+  return `${catalog || 'main'}__${productId}__${purchaseType}__${fragrance || 'sem-opcao'}__${customizationKey(customization)}__${extrasKey(extras)}`;
+}
+
+function addToCart(productId, qty, fragrance, purchaseType, customization = null, extras = []) {
   const product = products.find(p => p.id === productId);
   if (!product) return;
 
   const itemPurchaseType = purchaseType || modalPurchaseType || currentPurchaseType || 'inspire';
-  const key = cartKey(productId, fragrance, itemPurchaseType, product.catalog, customization);
+  const key = cartKey(productId, fragrance, itemPurchaseType, product.catalog, customization, extras);
   if (cart[key]) {
     cart[key].quantity += qty;
   } else {
@@ -78,7 +83,8 @@ function addToCart(productId, qty, fragrance, purchaseType, customization = null
       quantity: qty,
       fragrance: fragrance || null,
       purchaseType: itemPurchaseType,
-      customization: customization && Object.keys(customization).length ? customization : null
+      customization: customization && Object.keys(customization).length ? customization : null,
+      extras: extras.length ? extras : null
     };
   }
 
@@ -158,7 +164,8 @@ function getCartOrderMinimum() {
 function calcTotal() {
   return Object.values(cart).reduce((sum, entry) => {
     const tier = getCartProductTier(entry.product, entry.purchaseType || 'inspire');
-    return sum + tier.price * entry.quantity;
+    const extrasPrice = (entry.extras || []).reduce((total, extra) => total + Number(extra.price || 0), 0);
+    return sum + (tier.price + extrasPrice) * entry.quantity;
   }, 0);
 }
 
@@ -295,11 +302,12 @@ function renderCart() {
   const grandTotal = calcTotal();
 
   entries.forEach(([key, entry]) => {
-    const { product, quantity, fragrance, customization } = entry;
+    const { product, quantity, fragrance, customization, extras } = entry;
     const purchaseType = entry.purchaseType || 'inspire';
     const productTotal = getCartProductTotal(product, purchaseType);
     const tier     = getActiveTier(product, productTotal);
-    const subtotal = tier.price * quantity;
+    const extrasPrice = (extras || []).reduce((total, extra) => total + Number(extra.price || 0), 0);
+    const subtotal = (tier.price + extrasPrice) * quantity;
 
     const productErrorObj = errorMap[`${product.catalog || 'main'}__${product.id}__${purchaseType}`];
     const productErrors   = productErrorObj ? productErrorObj.messages : [];
@@ -330,6 +338,7 @@ function renderCart() {
           <summary>Ver personalização</summary>
           <div>${formatCustomizationHtml(customization)}</div>
         </details>` : ''}
+      ${extras?.length ? `<div class="cart-item-sub">+ ${extras.map(extra => `${escapeCartText(extra.name)} (${formatCurrency(extra.price)}/un.)`).join(', ')}</div>` : ''}
       <div class="cart-item-footer">
         <div class="cart-item-qty-ctrl">
           <button class="cart-item-qty-btn" onclick="changeCartQty('${key}', -${getQuantityStep(product)})">−</button>

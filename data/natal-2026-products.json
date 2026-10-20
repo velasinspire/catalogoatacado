@@ -42,7 +42,7 @@
       { "label": "1 a 9 un.", "min": 1, "max": 9, "price": 139.90 },
       { "label": "10 a 29 un.", "min": 10, "max": 29, "price": 78.20 },
       { "label": "30 a 99 un.", "min": 30, "max": 99, "price": 75.10 },
-      { "label": "100+ un.", "min": 100, "max": null, "price": 69.50 }
+      { "label": "100+ un.", "min": 100, "max": null, "price": 71.80 }
     ],
     "extras": [], "fragrances": ["Ginger Fresh", "Pacific Breeze", "Vinho"]
   },
@@ -101,8 +101,7 @@
     ],
     "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lançamento 2026",
     "priceTiers": [
-      { "label": "1 a 5 un.", "min": 1, "max": 5, "price": 19.90 },
-      { "label": "6 a 14 un.", "min": 6, "max": 14, "price": 18.00 },
+      { "label": "1 a 14 un.", "min": 1, "max": 14, "price": 19.90 },
       { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 16.90 },
       { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 15.90 },
       { "label": "100 a 299 un.", "min": 100, "max": 299, "price": 14.50 },
@@ -124,8 +123,7 @@
     ],
     "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lançamento 2026",
     "priceTiers": [
-      { "label": "1 a 5 un.", "min": 1, "max": 5, "price": 13.50 },
-      { "label": "6 a 14 un.", "min": 6, "max": 14, "price": 13.00 },
+      { "label": "1 a 14 un.", "min": 1, "max": 14, "price": 13.50 },
       { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 10.90 },
       { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 9.95 },
       { "label": "100 a 299 un.", "min": 100, "max": 299, "price": 8.80 },
@@ -165,8 +163,7 @@
     ],
     "minQty": 1, "hasFragrance": true, "fragranceMinQty": 1, "isKit": false, "tag": "Lançamento 2026",
     "priceTiers": [
-      { "label": "1 a 5 un.", "min": 1, "max": 5, "price": 21.90 },
-      { "label": "6 a 14 un.", "min": 6, "max": 14, "price": 19.90 },
+      { "label": "1 a 14 un.", "min": 1, "max": 14, "price": 21.90 },
       { "label": "15 a 49 un.", "min": 15, "max": 49, "price": 18.50 },
       { "label": "50 a 99 un.", "min": 50, "max": 99, "price": 16.80 },
       { "label": "100 a 299 un.", "min": 100, "max": 299, "price": 14.20 },

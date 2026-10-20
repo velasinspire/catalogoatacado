@@ -219,6 +219,7 @@ function closeProductDetails(event) {
 let modalProductId  = null;
 let modalTotalQty   = 0;
 let modalFragrances = {};
+let modalExtras = [];
 let modalGalleryImages = [];
 let modalGalleryIndex  = 0;
 let modalGalleryTouchX = null;
@@ -289,6 +290,7 @@ function openProductModal(productId, highlightField) {
 
   modalProductId  = productId;
   modalFragrances = {};
+  modalExtras = [];
   modalCustomization = {};
   const isCorporate = p.purchaseTypeOnly === 'corporate';
   if (!isCorporate && currentPurchaseType === 'corporate') currentPurchaseType = 'inspire';
@@ -344,6 +346,7 @@ function openProductModal(productId, highlightField) {
   if (oldBalance) oldBalance.remove();
 
   renderModalFragrances(p);
+  renderModalExtras(p);
   renderCorporateConfiguration(p);
   updateModalActivePrice(p);
   updateAddModalButton(p);
@@ -416,6 +419,33 @@ function renderCorporateConfiguration(product) {
 
 function setCorporateCustomization(key, value) {
   modalCustomization[key] = String(value || '').trim();
+}
+
+function renderModalExtras(product) {
+  const wrap = document.getElementById('modal-extras');
+  if (!wrap) return;
+  const extras = product.extras || [];
+  wrap.hidden = extras.length === 0;
+  wrap.innerHTML = extras.length ? `
+    <span class="modal-label">Adicionais por unidade</span>
+    ${extras.map((extra, index) => `
+      <label class="modal-extra-option">
+        <input type="checkbox" onchange="toggleModalExtra(${index}, this.checked)">
+        <span>${extra.name}</span>
+        <span class="modal-extra-price">+ ${formatCurrency(extra.price)}/un.</span>
+      </label>
+    `).join('')}
+  ` : '';
+}
+
+function toggleModalExtra(index, checked) {
+  const product = products.find(item => item.id === modalProductId);
+  const extra = product?.extras?.[index];
+  if (!extra) return;
+  modalExtras = checked
+    ? [...modalExtras.filter(item => item.name !== extra.name), extra]
+    : modalExtras.filter(item => item.name !== extra.name);
+  updateModalActivePrice(product);
 }
 
 function highlightModalField(field) {
@@ -517,8 +547,10 @@ function updateModalActivePrice(product) {
   const el   = document.getElementById('modal-active-price');
   if (qty === 0) { el.textContent = ''; return; }
   const tier     = getActiveTier(product, qty);
-  const subtotal = tier.price * qty;
-  el.textContent = `${formatCurrency(tier.price)}/${isWeightProduct(product) ? 'kg' : 'un'} · Subtotal: ${formatCurrency(subtotal)}`;
+  const extrasPrice = modalExtras.reduce((sum, extra) => sum + Number(extra.price || 0), 0);
+  const unitPrice = tier.price + extrasPrice;
+  const subtotal = unitPrice * qty;
+  el.textContent = `${formatCurrency(unitPrice)}/${isWeightProduct(product) ? 'kg' : 'un'} · Subtotal: ${formatCurrency(subtotal)}`;
 }
 
 function renderModalFragrances(product) {
@@ -674,15 +706,15 @@ function updateAddModalButton(product) {
     `;
     const hasFragrance = product.hasFragrance && product.fragrances.length > 0;
     btn.onclick = hasFragrance
-      ? () => addToCartMultiFragrance(modalProductId, modalTotalQty, { ...modalFragrances }, selectedType, { ...modalCustomization })
-      : () => addToCart(modalProductId, modalTotalQty, null, selectedType, { ...modalCustomization });
+      ? () => addToCartMultiFragrance(modalProductId, modalTotalQty, { ...modalFragrances }, selectedType, { ...modalCustomization }, [...modalExtras])
+      : () => addToCart(modalProductId, modalTotalQty, null, selectedType, { ...modalCustomization }, [...modalExtras]);
   } else {
     btn.textContent = reason;
   }
 }
 
-function addToCartMultiFragrance(productId, totalQty, fragranceMap, purchaseType, customization) {
+function addToCartMultiFragrance(productId, totalQty, fragranceMap, purchaseType, customization, extras = []) {
   Object.entries(fragranceMap).forEach(([fragrance, qty]) => {
-    addToCart(productId, qty, fragrance, purchaseType, customization);
+    addToCart(productId, qty, fragrance, purchaseType, customization, extras);
   });
 }

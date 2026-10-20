@@ -62,10 +62,11 @@ function openWhatsApp(event) {
     if (!typeEntries.length) return;
 
     lines.push(`\n*PRODUTOS ${PURCHASE_RULES[purchaseType].label.toUpperCase()}*`);
-    typeEntries.forEach(({ product, quantity, fragrance, customization }) => {
+    typeEntries.forEach(({ product, quantity, fragrance, customization, extras }) => {
       const productTotal  = getCartProductTotal(product, purchaseType);
       const tier          = getActiveTier(product, productTotal);
-      const subtotal      = tier.price * quantity;
+      const extrasPrice   = (extras || []).reduce((sum, extra) => sum + Number(extra.price || 0), 0);
+      const subtotal      = (tier.price + extrasPrice) * quantity;
       const fragranceNote = fragrance ? ` · ${product.optionLabel || 'Fragrância'}: ${fragrance}` : '';
       lines.push(
         `• *${product.name}* (${formatProductQty(product, quantity)}${fragranceNote}) — ${product.estimatedPrice ? 'a partir de ' : ''}${formatCurrency(subtotal)} _(${tier.label} · ${formatCurrency(tier.price)}/${isWeightProduct(product) ? 'kg' : 'un'})_`
@@ -75,6 +76,7 @@ function openWhatsApp(event) {
           .filter(([, value]) => String(value || '').trim())
           .forEach(([key, value]) => lines.push(`  - ${CUSTOMIZATION_LABELS[key] || key}: ${value}`));
       }
+      (extras || []).forEach(extra => lines.push(`  - Adicional: ${extra.name} (+ ${formatCurrency(extra.price)}/un.)`));
     });
   });
 

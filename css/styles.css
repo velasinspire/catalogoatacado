@@ -666,6 +666,10 @@ button:focus-visible, a:focus-visible, input:focus-visible {
 
 /* Fragrâncias */
 .modal-fragrance-wrap { display: flex; flex-direction: column; gap: 8px; }
+.modal-extras { display: flex; flex-direction: column; gap: 8px; padding: 13px 14px; border: 1px solid var(--sand); border-radius: 10px; background: var(--cream); }
+.modal-extra-option { display: flex; align-items: center; gap: 9px; color: var(--ink); font-size: 13px; cursor: pointer; }
+.modal-extra-option input { accent-color: var(--terracotta); }
+.modal-extra-price { margin-left: auto; font-weight: 600; white-space: nowrap; }
 .modal-label { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--stone-dark); }
 .modal-label-min { font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--stone); font-size: 11px; }
 .fragrance-grid { display: flex; flex-wrap: wrap; gap: 6px; }

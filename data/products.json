@@ -272,7 +272,7 @@
       { "label": "20 a 99 un.", "min": 20, "max": 99, "price": 22.20 },
       { "label": "100+ un.",   "min": 100, "max": null, "price": 20.20 }
     ],
-    "extras": [],
+    "extras": [{ "name": "Saquinho de algodão", "price": 5.50 }],
     "fragrances": []
   },
   {
@@ -289,7 +289,7 @@
       { "label": "20 a 99 un.", "min": 20, "max": 99, "price": 25.90 },
       { "label": "100+ un.",   "min": 100, "max": null, "price": 23.90 }
     ],
-    "extras": [],
+    "extras": [{ "name": "Saquinho de algodão", "price": 5.50 }],
     "fragrances": []
   },
   {

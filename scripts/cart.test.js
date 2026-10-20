@@ -17,9 +17,9 @@ const closeTo = (actual, expected, message) => {
   assert(Math.abs(actual - expected) < 0.001, message + ': esperado ' + expected + ', recebido ' + actual);
 };
 const clearCart = () => Object.keys(cart).forEach(key => delete cart[key]);
-const put = (product, quantity, fragrance = null, purchaseType = 'inspire') => {
-  const key = cartKey(product.id, fragrance, purchaseType, product.catalog);
-  cart[key] = { product, quantity, fragrance, purchaseType };
+const put = (product, quantity, fragrance = null, purchaseType = 'inspire', extras = []) => {
+  const key = cartKey(product.id, fragrance, purchaseType, product.catalog, null, extras);
+  cart[key] = { product, quantity, fragrance, purchaseType, extras };
 };
 
 // Todas as faixas devem estar em ordem e ativar exatamente no limite inicial.
@@ -40,7 +40,7 @@ closeTo(getActiveTier(luminy, 10).price, 78.20, 'Luminy 10 un.');
 closeTo(getActiveTier(luminy, 29).price, 78.20, 'Luminy 29 un.');
 closeTo(getActiveTier(luminy, 30).price, 75.10, 'Luminy 30 un.');
 closeTo(getActiveTier(luminy, 99).price, 75.10, 'Luminy 99 un.');
-closeTo(getActiveTier(luminy, 100).price, 69.50, 'Luminy 100 un.');
+closeTo(getActiveTier(luminy, 100).price, 71.80, 'Luminy 100 un.');
 
 const waxMeltHouse = products.find(product => product.id === 2009);
 [[1,35.00],[9,35.00],[10,27.40],[29,27.40],[30,25.20],[49,25.20],[50,20.30]]
@@ -48,8 +48,27 @@ const waxMeltHouse = products.find(product => product.id === 2009);
 assert(!waxMeltHouse.hasFragrance && waxMeltHouse.fragrances.length === 0, 'Casinha de Wax Melt deve usar aromas sortidos');
 
 const tin = products.find(product => product.id === 2006);
-[[5,13.50],[6,13.00],[14,13.00],[15,10.90],[49,10.90],[50,9.95],[99,9.95],[100,8.80],[299,8.80],[300,8.40]]
+[[1,13.50],[14,13.50],[15,10.90],[49,10.90],[50,9.95],[99,9.95],[100,8.80],[299,8.80],[300,8.40]]
   .forEach(([qty, price]) => closeTo(getActiveTier(tin, qty).price, price, 'Mini Latinha ' + qty + ' un.'));
+
+const miniSpray = products.find(product => product.id === 2005);
+[[1,19.90],[14,19.90],[15,16.90],[49,16.90],[50,15.90],[99,15.90],[100,14.50],[299,14.50],[300,13.10]]
+  .forEach(([qty, price]) => closeTo(getActiveTier(miniSpray, qty).price, price, 'Mini Spray ' + qty + ' un.'));
+
+const whiteLidCandle = products.find(product => product.id === 2008);
+[[1,21.90],[14,21.90],[15,18.50],[49,18.50],[50,16.80],[99,16.80],[100,14.20],[299,14.20],[300,12.60]]
+  .forEach(([qty, price]) => closeTo(getActiveTier(whiteLidCandle, qty).price, price, 'Mini Vela Tampa Branca ' + qty + ' un.'));
+
+// Os dois minis sprays aceitam saquinho de algodão por unidade.
+[36, 37].forEach(id => {
+  const spray = products.find(product => product.id === id);
+  assert(spray.extras[0].name === 'Saquinho de algodão', spray.name + ': adicional ausente');
+  closeTo(spray.extras[0].price, 5.50, spray.name + ': valor do adicional');
+});
+clearCart();
+const squareSpray = products.find(product => product.id === 36);
+put(squareSpray, 20, null, 'inspire', squareSpray.extras);
+closeTo(calcTotal(), (22.20 + 5.50) * 20, 'Mini spray quadrado com saquinho');
 
 // Vela de Massagem: preço único e pedido mínimo de 10 unidades.
 const massageCandle = products.find(product => product.id === 44);
